@@ -1,0 +1,12 @@
+.project
+.settings/
+cronmanagement-service/.classpath
+cronmanagement-service/.gitignore
+cronmanagement-service/.project
+cronmanagement-service/.settings/
+cronmanagement/.classpath
+cronmanagement/.gitignore
+cronmanagement/.project
+cronmanagement/.settings/
+**/target*
+**/bin/*
