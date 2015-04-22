@@ -15,12 +15,12 @@
 	
 	<!-- Core business service Context-->
 	<import resource="classpath:cronmanagement-context.xml" />	
-	<context:component-scan base-package="cronmanagement" />
+	<context:component-scan base-package="cronmanagement.webservices" />
 	
 	
 	<jaxrs:server id="cronmanagement-service-rest" address="/">
 		<jaxrs:serviceBeans>
-			<ref bean="cronManagementResource"/>
+			<ref bean="serverDetailsResource"/>
 		</jaxrs:serviceBeans>
 		<jaxrs:providers>
 			<ref bean="jacksonProvider" />
@@ -53,5 +53,6 @@
 	<bean id="jacksonProvider" class="org.codehaus.jackson.jaxrs.JacksonJsonProvider">
 		<property name="mapper" ref="jacksonMapper"></property>
 	</bean>
+	<bean id="serverDetailsResource" class="cronmanagement.webservices.ServerDetailsResource"/>
 	
 </beans>

@@ -11,11 +11,11 @@
 	http://www.springframework.org/schema/tx 
 	http://www.springframework.org/schema/tx/spring-tx.xsd">	
 	
-	<!-- <bean id="adFlexDataSource" class="org.apache.commons.dbcp.BasicDataSource"
+	 <bean id="cronManagementDataSource" class="org.apache.commons.dbcp.BasicDataSource"
 		destroy-method="close">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
 		<property name="url"
-			value="jdbc:mysql://${db.AdFlex.ConnectionUrl}/AdFlex?useUnicode=true&amp;characterEncoding=UTF-8&amp;autoReconnect=true" />
+			value="jdbc:mysql://${db.cronManagement.ConnectionUrl}/cronManagement?useUnicode=true&amp;characterEncoding=UTF-8&amp;autoReconnect=true" />
 		<property name="username" value="kdbuser" />
 		<property name="password" value="KdBuSeR12!" />
 		<property name="initialSize" value="5" />
@@ -27,18 +27,18 @@
 		<property name="testOnReturn" value="false" />
 	</bean>
 	
-	<bean id="adFlexTransactionManager"
+	<bean id="cronManagementTransactionManager"
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-		<property name="dataSource" ref="adFlexDataSource" />
+		<property name="dataSource" ref="cronManagementDataSource" />
 	</bean>
-	define the SqlSessionFactory
-	<bean id="adFlexSqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-		<property name="dataSource" ref="adFlexDataSource" />
+	
+	<bean id="cronManagementSqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="cronManagementDataSource" />
 		<property name="typeAliasesPackage" value="com.pubmatic.demand.thrift.reporting.bean" />
 	</bean>
 
 	<context:annotation-config/>
-	<tx:annotation-driven transaction-manager="adFlexTransactionManager" /> -->
+	<tx:annotation-driven transaction-manager="cronManagementTransactionManager" /> 
 
 
 

@@ -3,24 +3,16 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
 	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd ">
 
-	<!-- <bean id="premiumProposalDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
-		<property name="mapperInterface" value="com.pubmatic.premiumproposal.dao.PremiumProposalDao" />
-		<property name="sqlSessionFactory" ref="adFlexSqlSessionFactory" />
+	<bean id="premiumProposalDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="cronmanagement.dao.ServerDetailsDAO" />
+		<property name="sqlSessionFactory" ref="cronManagementSqlSessionFactory" />
 	</bean>
-	
+
 	<bean id="mediaPlanDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
-		<property name="mapperInterface" value="com.pubmatic.premiumproposal.dao.MediaPlanDao" />
-		<property name="sqlSessionFactory" ref="adFlexSqlSessionFactory" />
+		<property name="mapperInterface" value="cronmanagement.dao.CronDetailsDAO" />
+		<property name="sqlSessionFactory" ref="cronManagementSqlSessionFactory" />
 	</bean>
-	
-	<bean id="lineItemDetailsDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
-		<property name="mapperInterface" value="com.pubmatic.premiumproposal.dao.LineItemDetailsDao"/>
-		<property name="sqlSessionFactory" ref="adFlexSqlSessionFactory"/>
-	</bean>	
-	
-	<bean id="premiumDemandSourceDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
-		<property name="mapperInterface" value="com.pubmatic.premiumproposal.dao.PremiumDemandSourceDao"/>
-		<property name="sqlSessionFactory" ref="adFlexSqlSessionFactory"/>
-	</bean> -->
+
+
 
 </beans>

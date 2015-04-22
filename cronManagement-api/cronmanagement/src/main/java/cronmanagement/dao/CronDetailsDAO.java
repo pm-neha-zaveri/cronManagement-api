@@ -4,7 +4,7 @@ import java.util.List;
 import cronmanagement.bean.CronManagement;
 
 
-public interface CronManagementDao {
+public interface CronDetailsDAO {
 
     List<CronManagement> getCronManagement();        
 }
