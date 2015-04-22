@@ -4,6 +4,6 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cronmanagement.dao.ServerDetailsDAO">
 	<select id="getServerDetails" resultType="cronmanagement.bean.ServerDetails">
-		SELECT serverIP,longitude,latitude,description FROM ServerDetails;
+		SELECT serverIP,longitude,latitude,description,countryName FROM ServerDetails;
 	</select>
 </mapper>

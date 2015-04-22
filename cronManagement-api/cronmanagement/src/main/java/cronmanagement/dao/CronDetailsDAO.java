@@ -1,10 +1,13 @@
 package cronmanagement.dao;
 
 import java.util.List;
-import cronmanagement.bean.CronManagement;
 
+import org.springframework.stereotype.Service;
 
+import cronmanagement.bean.CronDetails;
+
+@Service
 public interface CronDetailsDAO {
 
-    List<CronManagement> getCronManagement();        
+	public List<CronDetails> getCronDetails();
 }

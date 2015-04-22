@@ -10,7 +10,16 @@ public class ServerDetails implements PubmaticEntity<Long>, Serializable {
 	private String serverIP;
 	private String longitude;
 	private String latitude;
-	private String serverDescription;
+	private String description;
+	private String countryName;
+
+	public String getCountryName() {
+		return countryName;
+	}
+
+	public void setCountryName(String countryName) {
+		this.countryName = countryName;
+	}
 
 	public String getServerIP() {
 		return serverIP;
@@ -36,12 +45,13 @@ public class ServerDetails implements PubmaticEntity<Long>, Serializable {
 		this.latitude = latitude;
 	}
 
-	public String getServerDescription() {
-		return serverDescription;
+	
+	public String getDescription() {
+		return description;
 	}
 
-	public void setServerDescription(String serverDescription) {
-		this.serverDescription = serverDescription;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	@Override

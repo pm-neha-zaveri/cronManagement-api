@@ -14,13 +14,13 @@ import com.pubmatic.apiutils.bean.PageSupporter;
 import com.pubmatic.apiutils.exception.DataValidationException;
 import com.pubmatic.apiutils.exception.ServiceException;
 import cronmanagement.bean.CronManagement;
-import cronmanagement.services.CronManagementService;
+import cronmanagement.services.CronDetailsService;
 
 
 @Service
-public class CronManagementServiceImpl implements CronManagementService{
+public class CronDetailsServiceImpl implements CronDetailsService{
 
-    public final static Log LOGGER = LogFactory.getLog(CronManagementServiceImpl.class);
+    public final static Log LOGGER = LogFactory.getLog(CronDetailsServiceImpl.class);
 
     @Resource
     MessageSource  cronmanagementMessageSource;   

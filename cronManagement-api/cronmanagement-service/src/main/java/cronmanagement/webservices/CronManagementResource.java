@@ -18,7 +18,7 @@ import org.apache.cxf.phase.PhaseInterceptorChain;
 import com.pubmatic.apiutils.exception.ServiceException;
 import com.pubmatic.apiutils.exception.DataValidationException;
 import com.pubmatic.common.constant.ServiceConstants;
-import cronmanagement.services.CronManagementService;
+import cronmanagement.services.CronDetailsService;
 import  cronmanagement.bean.*;
 
 @Component
@@ -31,7 +31,7 @@ public class CronManagementResource {
 */
 
     @Autowired
-    CronManagementService changeTheServiceName;
+    CronDetailsService changeTheServiceName;
     
     @POST
     @Consumes("application/json")
