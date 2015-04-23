@@ -29,20 +29,16 @@
 	<!-- Cron Scheduler and Parsing reltaed beans -->
 	<context:component-scan base-package="cronmanagement.schedulers" />
 
-	<util:properties id="cronProperties" location="cron.properties" />
-	<context:property-placeholder
-		properties-ref="cronProperties" />
-
 	<context:property-placeholder location="classpath:file-config.properties"
 		order="-1" ignore-unresolvable="true" ignore-resource-not-found="true" />
 
 	<task:scheduled-tasks>
 		<task:scheduled ref="cronJobSchedulerTask" method="fetchAndSaveCronDetails"
-			cron="#{cronProperties['cron.job.expression']}" />
+			cron="*/20 * * * * ?" />
 	</task:scheduled-tasks>
-	
+
 	<task:scheduled-tasks>
 		<task:scheduled ref="cronLogSchedulerTask" method="fetchAndSaveCronLogs"
-			cron="#{cronProperties['cron.log.expression']}" />
+			cron="*/20 * * * * ?" />
 	</task:scheduled-tasks>
 </beans>
