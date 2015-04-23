@@ -10,11 +10,15 @@ import org.springframework.stereotype.Service;
 import cronmanagement.bean.ServerBean;
 import cronmanagement.dao.ServerDetailsDAO;
 import cronmanagement.services.ServerDetailsService;
+import cronmanagement.utility.CacheUtil;
 
 @Service
 public class ServerDetailsServiceImpl implements ServerDetailsService {
 
     public final static Log LOGGER = LogFactory.getLog(ServerDetailsServiceImpl.class);
+
+    public static final String serverDetailCache = "serverDetailCache";
+    public static final String serverDetailCacheKey = "serverDetailCacheKey";
 
     @Autowired
     ServerDetailsDAO serverDetailsDAO;
@@ -38,6 +42,12 @@ public class ServerDetailsServiceImpl implements ServerDetailsService {
 
     @Override
     public List<ServerBean> getServerDetails() {
+        @SuppressWarnings("unchecked")
+        List<ServerBean> serverDetails = (List<ServerBean>) CacheUtil.get(serverDetailCache, serverDetailCacheKey);
+        if (serverDetails == null || serverDetails.size() == 0) {
+            serverDetails = serverDetailsDAO.getServerDetails();
+            CacheUtil.put(serverDetailCache, serverDetailCacheKey, serverDetails);
+        }
         return serverDetailsDAO.getServerDetails();
     }
 

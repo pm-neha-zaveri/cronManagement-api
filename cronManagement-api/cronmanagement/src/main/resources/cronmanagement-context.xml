@@ -24,6 +24,7 @@
 
 	<import resource="cronmanagement-spring-mybatis.xml" />
 	<import resource="cronmanagement-dao-context.xml" />
+	<import resource="cronmanagement-ehcache-context.xml" />
 	<context:component-scan base-package="cronmanagement" />
 
 	<!-- Cron Scheduler and Parsing reltaed beans -->
