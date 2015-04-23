@@ -10,6 +10,7 @@ import java.util.Map;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import cronmanagement.bean.CronJob;
@@ -26,15 +27,16 @@ public class CronJobSchedulerTask {
 	
 	@Autowired
 	CronJobDetailsService cronDetailsService;
+	
+	@Value("${cron.job.script.path}")
+    private String cronjobfilepath;
 
 	public void fetchAndSaveCronDetails() {
 		executeCommand();
 	}
 
 	public void executeCommand() {
-	    LOGGER.info("Executing...");
-	    LOGGER.debug("Executing...");
-	    LOGGER.error("Executing...");
+	    LOGGER.error("Executing..."+cronjobfilepath);
 //		readFile(null);
 	}
 

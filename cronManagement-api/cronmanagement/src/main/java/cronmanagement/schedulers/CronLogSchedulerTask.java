@@ -18,7 +18,7 @@ public class CronLogSchedulerTask {
 
     public final static Log LOGGER = LogFactory.getLog(CronLogSchedulerTask.class);
 
-    @Value("${cronlogfilepath}")
+    @Value("${cron.log.script.path}")
     private String cronlogfilepath;
 
     @Autowired
@@ -32,11 +32,7 @@ public class CronLogSchedulerTask {
     }
 
     public void executeCommand() {
-        // readFile();
-        LOGGER.info("Executing  || ...");
-        LOGGER.debug("Executing  || ...");
-        LOGGER.error("Executing  || ...");
-        // readFile(null);
+        LOGGER.error("Executing  || ..."+cronlogfilepath);
     }
 
     public void readFile(InputStream inputStream) {
