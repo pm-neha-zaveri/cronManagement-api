@@ -20,18 +20,23 @@ public class CronLogHistoryServiceImpl implements CronLogHistoryService {
     CronLogHistoryDAO cronLogHistoryDAO;
 
     @Override
-    public List<CronLogBean> getCronLog() {
+    public List<CronLogBean> getCronLogHistory() {
         return cronLogHistoryDAO.getCronLogHistory();
     }
 
     @Override
-    public void saveCronLog(List<CronLogBean> cronLogBeans) {
-        cronLogHistoryDAO.insertCronLogHistory(cronLogBeans);
+    public List<CronLogBean> getCronLogHistoryByCronId(Integer cronId) {
+        return cronLogHistoryDAO.getCronLogHistoryByCronId(cronId);
     }
 
     @Override
-    public void updateCronLog(List<CronLogBean> cronLogBeans) {
-        cronLogHistoryDAO.updateCronLogHistory(cronLogBeans);
+    public List<CronLogBean> getCronLogHistoryByServerId(Integer serverId) {
+        return cronLogHistoryDAO.getCronLogHistoryByServerId(serverId);
+    }
+
+    @Override
+    public void saveCronLogHistory(List<CronLogBean> cronLogs) {
+        cronLogHistoryDAO.saveCronLogHistory(cronLogs);
     }
 
 }

@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import cronmanagement.bean.CronJob;
-import cronmanagement.bean.ServerDetails;
+import cronmanagement.bean.ServerBean;
 import cronmanagement.services.CronJobParserService;
 import cronmanagement.services.ServerDetailsService;
 
@@ -28,6 +28,7 @@ public class CronJobParserServiceImpl implements CronJobParserService {
     @Autowired
     ServerDetailsService serverDetailsService;
     
+    @Override
     public List<CronJob> parse(InputStream inputStream) {
         List<CronJob> cronJobList = new ArrayList<CronJob>();
         BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
@@ -37,7 +38,7 @@ public class CronJobParserServiceImpl implements CronJobParserService {
             while (comment != null) {
                 if (comment.indexOf(CRONTAB_START) != -1) {
                     String tokens[] = comment.split(":");
-                    ServerDetails serverDetails = serverDetailsService.getServerDetailByIp(tokens[1]);
+                    ServerBean serverDetails = serverDetailsService.getServerDetailByIp(tokens[1]);
                     Integer serverId = (serverDetails != null ? serverDetails.getId().intValue() : 0);
                     LOGGER.info("CRONTAB_START : " + comment);
                     while ((comment = reader.readLine()) != null && comment.trim().length() == 0)
@@ -75,9 +76,11 @@ public class CronJobParserServiceImpl implements CronJobParserService {
                 }
             }
         }
+        
         return cronJobList;
     }
 
+    @Override
     public CronJob getCronJob(String cronComment, String cronJobInfo, Integer serverId) {
         CronJob cronJob = null;
         if (cronJobInfo == null || cronJobInfo.trim().length() == 0) {
@@ -95,11 +98,10 @@ public class CronJobParserServiceImpl implements CronJobParserService {
                 index--;
             }
             String cronExpression = null;
-            if (index != -1) {
-                cronExpression = cronJobInfo.substring(0, index + 1);
-                if (cronJobInfo.startsWith(HASH)) {
-                    cronExpression = cronJobInfo.substring(1, index + 1);
-                }
+            if (index != -1)
+                cronExpression = cronJobInfo.substring(0, index+1);
+            while(cronExpression.charAt(0) == '#'){
+                cronExpression = cronExpression.substring(1,cronExpression.length());
             }
             cronJob.setCronExpression(cronExpression);
             cronJob.setCronCommand(cronJobInfo.substring(index + 1, cronJobInfo.length()));
@@ -113,6 +115,7 @@ public class CronJobParserServiceImpl implements CronJobParserService {
      * @param line
      * @return
      */
+    @Override
     public boolean isComment(String line) {
         boolean isComment = false;
         if (line != null) {
@@ -152,6 +155,7 @@ public class CronJobParserServiceImpl implements CronJobParserService {
      * @param completeCron2
      * @return
      */
+    @Override
     public boolean isEqual(String completeCron1, String completeCron2) {
         if (completeCron1 != null && completeCron2 != null) {
             completeCron1 = completeCron1.replaceAll("\\s+", "");

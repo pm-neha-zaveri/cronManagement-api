@@ -6,10 +6,13 @@ import cronmanagement.bean.CronLogBean;
 
 public interface CronLogHistoryService {
     
-    public List<CronLogBean> getCronLog();
-    
-    public void saveCronLog(List<CronLogBean> cronLogBeans);
-    
-    public void updateCronLog(List<CronLogBean> cronLogBeans);
+    public List<CronLogBean> getCronLogHistory();
+
+    public List<CronLogBean> getCronLogHistoryByCronId(Integer cronId);
+
+    public List<CronLogBean> getCronLogHistoryByServerId(Integer serverId);
+
+    public void saveCronLogHistory(List<CronLogBean> cronLogs);
+
 
 }

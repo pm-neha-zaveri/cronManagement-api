@@ -3,12 +3,28 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cronmanagement.dao.ServerDetailsDAO">
-	<select id="getServerDetails" resultType="cronmanagement.bean.ServerDetails">
-		SELECT id,serverIP,longitude,latitude,description,countryName FROM server_details;
+	<select id="getServerDetails" resultType="cronmanagement.bean.ServerBean">
+		SELECT 
+		id as id,
+		serverIp as serverIP,
+		dcId as dcId,
+		description as description FROM server;
 	</select>
 	
-	<select id="getServerDetailsByServerId" resultType="cronmanagement.bean.ServerDetails">
-		SELECT id,serverIP,longitude,latitude,description,countryName FROM server_details where id=#serverId;
+	<select id="getServerDetailsByServerId" resultType="cronmanagement.bean.ServerBean">
+		SELECT 
+		id as id,
+		serverIp as serverIP,
+		dcId as dcId,
+		description as description where id=#{serverId};
+	</select>
+	
+	<select id="getServerDetailsByDCId" resultType="cronmanagement.bean.ServerBean">
+		SELECT 
+		id as id,
+		serverIp as serverIP,
+		dcId as dcId,
+		description as description where dcId=#{dcId};
 	</select>
 	
 </mapper>

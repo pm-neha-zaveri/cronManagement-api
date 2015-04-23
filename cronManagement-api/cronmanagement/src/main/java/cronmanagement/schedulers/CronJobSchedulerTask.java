@@ -1,9 +1,7 @@
 package cronmanagement.schedulers;
 
-import java.io.File;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -12,11 +10,10 @@ import java.util.Map;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import cronmanagement.bean.CronJob;
-import cronmanagement.services.CronDetailsService;
+import cronmanagement.services.CronJobDetailsService;
 import cronmanagement.services.CronJobParserService;
 
 @Service
@@ -24,14 +21,11 @@ public class CronJobSchedulerTask {
     
     public final static Log LOGGER = LogFactory.getLog(CronJobSchedulerTask.class);
 
-	@Value("${cronjobfilepath}")
-	private String cronjobfilepath;
-
 	@Autowired
 	CronJobParserService cronJobParserService;
 	
 	@Autowired
-	CronDetailsService cronDetailsService;
+	CronJobDetailsService cronDetailsService;
 
 	public void fetchAndSaveCronDetails() {
 		executeCommand();
@@ -47,7 +41,6 @@ public class CronJobSchedulerTask {
 	public void readFile(InputStream inputStream) {
 		List<CronJob> cronJobs = cronJobParserService.parse(inputStream);
         updateCronDetails(createServerCronJobMap(cronJobs));
-        renameFile();
 	}
 
 	public Map<Integer, List<CronJob>> createServerCronJobMap(
@@ -84,15 +77,4 @@ public class CronJobSchedulerTask {
 		}
 	}
 
-	private void renameFile() {
-		File oldfile = new File(cronjobfilepath);
-		File newfile = new File(Calendar.getInstance().getTimeInMillis()+cronjobfilepath);
-
-		if (oldfile.renameTo(newfile)) {
-			System.out.println("Rename succesful");
-			oldfile.delete();
-		} else {
-			System.out.println("Rename failed");
-		}
-	}
 }

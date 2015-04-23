@@ -7,19 +7,28 @@ public class CronLogBean implements Serializable {
 
     private static final long serialVersionUID = 1L;
     private Integer id;
-    private Date startTime;
-    private Date endTime;
     private Integer cronId;
     private Integer serverId;
+    private Date startTime;
+    private Date endTime;
     private Integer processId;
-    private String status;
+    private Integer threshold;
+    private Long runTime = -1l;
 
-    public String getStatus() {
-        return status;
+    public Integer getThreshold() {
+        return threshold;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setThreshold(Integer threshold) {
+        this.threshold = threshold;
+    }
+
+    public Long getRunTime() {
+        return runTime;
+    }
+
+    public void setRunTime(Long runTime) {
+        this.runTime = runTime;
     }
 
     public Integer getId() {
@@ -72,8 +81,9 @@ public class CronLogBean implements Serializable {
 
     @Override
     public String toString() {
-        return "CronLogBean [id=" + id + ", startTime=" + startTime + ", endTime=" + endTime + ", cronId=" + cronId
-                + ", serverId=" + serverId + ", processId=" + processId + ", status=" + status + "]\n";
+        return "CronLogBean [id=" + id + ", cronId=" + cronId + ", serverId=" + serverId + ", startTime=" + startTime
+                + ", endTime=" + endTime + ", processId=" + processId + ", threshold=" + threshold + ", runTime="
+                + runTime + "]";
     }
 
 }

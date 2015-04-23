@@ -43,7 +43,7 @@ public class CronLogSchedulerTask {
         List<CronLogBean> cronJobs = cronLogParserService.getCronLogs(inputStream);
         LOGGER.info("cronJobs : "+cronJobs);
         // TODO save to DB
-        cronLogHistoryService.saveCronLog(cronJobs);
+        cronLogHistoryService.saveCronLogHistory(cronJobs);
     }
 
 }

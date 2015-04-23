@@ -2,16 +2,17 @@ package cronmanagement.services;
 
 import java.util.List;
 
-import org.springframework.stereotype.Service;
-
-import cronmanagement.bean.ServerDetails;
+import cronmanagement.bean.ServerBean;
 
 
-@Service
 public interface ServerDetailsService {
 
-    public List<ServerDetails> getServerList();
+    public List<ServerBean> getServerDetails();
 
-    public ServerDetails getServerDetailByIp(String ipAddress);
+    public ServerBean getServerDetailsByServerId(Integer serverId);
+
+    public ServerBean getServerDetailsByDCId(Integer dcId);
+    
+    public ServerBean getServerDetailByIp(String ipAddress);
 
 }

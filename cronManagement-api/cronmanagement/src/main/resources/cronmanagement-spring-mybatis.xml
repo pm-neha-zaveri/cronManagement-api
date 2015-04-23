@@ -9,7 +9,7 @@
 	</bean>
 
 	<bean id="cronDetailsDAO" class="org.mybatis.spring.mapper.MapperFactoryBean">
-		<property name="mapperInterface" value="cronmanagement.dao.CronDetailsDAO" />
+		<property name="mapperInterface" value="cronmanagement.dao.CronJobDetailsDAO" />
 		<property name="sqlSessionFactory" ref="cronManagementSqlSessionFactory" />
 	</bean>
 	<bean id="cronRunHistoryDAO" class="org.mybatis.spring.mapper.MapperFactoryBean">

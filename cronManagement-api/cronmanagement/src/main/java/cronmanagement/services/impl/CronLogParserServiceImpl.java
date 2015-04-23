@@ -19,8 +19,8 @@ import org.springframework.stereotype.Component;
 
 import cronmanagement.bean.CronJob;
 import cronmanagement.bean.CronLogBean;
-import cronmanagement.bean.ServerDetails;
-import cronmanagement.services.CronDetailsService;
+import cronmanagement.bean.ServerBean;
+import cronmanagement.services.CronJobDetailsService;
 import cronmanagement.services.CronLogParserService;
 import cronmanagement.services.ServerDetailsService;
 
@@ -29,11 +29,10 @@ public class CronLogParserServiceImpl implements CronLogParserService {
 
     public final static Log LOGGER = LogFactory.getLog(CronLogParserServiceImpl.class);
 
-    private final static String CRON_JOB_NAME = "Cron_Job_Name";
     private final static String CRONJOB_LOG = "CRONJOB LOG";
 
     @Autowired
-    CronDetailsService cronDetailsService;
+    CronJobDetailsService cronDetailsService;
 
     @Autowired
     ServerDetailsService serverDetailsService;
@@ -94,7 +93,7 @@ public class CronLogParserServiceImpl implements CronLogParserService {
     }
 
     private Integer getServerIdByServeriP(String serverIp) {
-        ServerDetails serverDetails = serverDetailsService.getServerDetailByIp(serverIp);
+        ServerBean serverDetails = serverDetailsService.getServerDetailByIp(serverIp);
         return (serverDetails != null ? serverDetails.getId().intValue() : 0);
     }
 
@@ -117,6 +116,7 @@ public class CronLogParserServiceImpl implements CronLogParserService {
                     if (cronLogBean1.getCronId().equals(cronLogBean2.getCronId())) {
                         if (cronLogBean2.getEndTime() != null) {
                             cronLogBean1.setEndTime(cronLogBean2.getEndTime());
+                            cronLogBean1.setRunTime(cronLogBean1.getEndTime().getTime() - cronLogBean1.getStartTime().getTime());
                         } else {
                             iterator.previous();
                         }
