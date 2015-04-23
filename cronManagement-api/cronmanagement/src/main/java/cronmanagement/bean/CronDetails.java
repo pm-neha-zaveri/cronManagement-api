@@ -1,55 +1,51 @@
 package cronmanagement.bean;
 
-import java.io.Serializable;
+public class CronDetails {
 
-import com.pubmatic.coreutils.commoninterfaces.PubmaticEntity;
-import com.pubmatic.coreutils.commoninterfaces.Visitor;
+	private String command;
+	private String serverId;
+	private String comments;
+	private String status;
+	private Long id;
 
-public class CronDetails implements PubmaticEntity<Serializable>{
-	
-	
-	
-
-	@Override
-	public Serializable getId() {
-		// TODO Auto-generated method stub
-		return null;
+	public Long getId() {
+		return id;
 	}
 
-	@Override
-	public String getName() {
-		// TODO Auto-generated method stub
-		return null;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
-	@Override
-	public void setId(Serializable id) {
-		// TODO Auto-generated method stub
-		
+	public String getCommand() {
+		return command;
 	}
 
-	@Override
-	public void setName(String name) {
-		// TODO Auto-generated method stub
-		
+	public void setCommand(String command) {
+		this.command = command;
 	}
 
-	@Override
-	public String getUrl() {
-		// TODO Auto-generated method stub
-		return null;
+	public String getServerId() {
+		return serverId;
 	}
 
-	@Override
-	public void setUrl(String url) {
-		// TODO Auto-generated method stub
-		
+	public void setServerId(String serverId) {
+		this.serverId = serverId;
 	}
 
-	@Override
-	public Object accept(Visitor visitor) {
-		// TODO Auto-generated method stub
-		return null;
+	public String getComments() {
+		return comments;
+	}
+
+	public void setComments(String comments) {
+		this.comments = comments;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 }

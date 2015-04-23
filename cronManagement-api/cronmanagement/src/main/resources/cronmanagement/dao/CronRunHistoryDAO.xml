@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cronmanagement.dao.CronRunHistoryDAO">
+	<select id="getCronRunHistory" resultType="cronmanagement.bean.CronRunHistory">
+		SELECT id,cron_id as cronId,start_time as startTime,end_time as endTime,status FROM cron_run_history;
+	</select>
+</mapper>
