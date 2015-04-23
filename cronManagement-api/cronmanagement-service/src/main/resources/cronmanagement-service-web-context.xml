@@ -56,7 +56,5 @@
 	<bean id="jacksonProvider" class="org.codehaus.jackson.jaxrs.JacksonJsonProvider">
 		<property name="mapper" ref="jacksonMapper"></property>
 	</bean>
-	<bean id="serverDetailsResource" class="cronmanagement.webservices.ServerDetailsResource" />
-	<bean id="cronDetailsResource" class="cronmanagement.webservices.CronJobDetailsResource" />
-	<bean id="cronRunHistoryResource" class="cronmanagement.webservices.CronLogHistoryResource" />
+	
 </beans>

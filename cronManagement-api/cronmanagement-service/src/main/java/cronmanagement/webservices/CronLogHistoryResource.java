@@ -2,7 +2,6 @@ package cronmanagement.webservices;
 
 import java.util.List;
 
-import javax.annotation.Resource;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -11,11 +10,12 @@ import javax.ws.rs.QueryParam;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import cronmanagement.bean.CronLogBean;
 import cronmanagement.services.CronLogHistoryService;
 
-@Resource
+@Component
 @Path("/cronLogHistory")
 public class CronLogHistoryResource {
 

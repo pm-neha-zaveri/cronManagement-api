@@ -2,7 +2,6 @@ package cronmanagement.webservices;
 
 import java.util.List;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -12,11 +11,12 @@ import javax.ws.rs.QueryParam;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import cronmanagement.bean.CronAlert;
 import cronmanagement.services.CronAlertDetailsService;
 
-@Resource
+@Component
 @Path("/cronAlertDetails")
 public class CronAlertDetailsResource {
 
