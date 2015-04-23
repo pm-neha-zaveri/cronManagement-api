@@ -19,9 +19,12 @@
 
 	<jaxrs:server id="cronmanagement-service-rest" address="/">
 		<jaxrs:serviceBeans>
+			<ref bean="cronAlertDetailsResource" />
+			<ref bean="cronJobDetailsResource" />
+			<ref bean="cronLogHistoryResource" />
+			<ref bean="cronRunningStatusResource" />
+			<ref bean="dataCenterDtailsResource" />
 			<ref bean="serverDetailsResource" />
-			<ref bean="cronDetailsResource" />
-			<ref bean="cronRunHistoryResource" />
 		</jaxrs:serviceBeans>
 		<jaxrs:providers>
 			<ref bean="jacksonProvider" />
@@ -54,6 +57,6 @@
 		<property name="mapper" ref="jacksonMapper"></property>
 	</bean>
 	<bean id="serverDetailsResource" class="cronmanagement.webservices.ServerDetailsResource" />
-	<bean id="cronDetailsResource" class="cronmanagement.webservices.CronDetailsResource" />
-	<bean id="cronRunHistoryResource" class="cronmanagement.webservices.CronRunHistoryResource" />
+	<bean id="cronDetailsResource" class="cronmanagement.webservices.CronJobDetailsResource" />
+	<bean id="cronRunHistoryResource" class="cronmanagement.webservices.CronLogHistoryResource" />
 </beans>
