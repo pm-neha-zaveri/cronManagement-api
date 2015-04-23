@@ -17,9 +17,9 @@ import cronmanagement.services.DataCenterDetailsService;
 
 @Component
 @Path("/dataCenterDetails")
-public class DataCenterDtailsResource {
+public class DataCenterDetailsResource {
 
-    public final static Log LOGGER = LogFactory.getLog(DataCenterDtailsResource.class);
+    public final static Log LOGGER = LogFactory.getLog(DataCenterDetailsResource.class);
 
     @Autowired
     DataCenterDetailsService dataCenterDetailsService;

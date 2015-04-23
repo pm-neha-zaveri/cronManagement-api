@@ -23,7 +23,7 @@
 			<ref bean="cronJobDetailsResource" />
 			<ref bean="cronLogHistoryResource" />
 			<ref bean="cronRunningStatusResource" />
-			<ref bean="dataCenterDtailsResource" />
+			<ref bean="dataCenterDetailsResource" />
 			<ref bean="serverDetailsResource" />
 		</jaxrs:serviceBeans>
 		<jaxrs:providers>

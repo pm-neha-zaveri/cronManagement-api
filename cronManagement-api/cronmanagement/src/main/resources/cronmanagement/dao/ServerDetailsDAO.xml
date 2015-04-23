@@ -16,7 +16,7 @@
 		id as id,
 		serverIp as serverIP,
 		dcId as dcId,
-		description as description where id=#{serverId};
+		description as description FROM server where id=#{serverId};
 	</select>
 	
 	<select id="getServerDetailsByDCId" resultType="cronmanagement.bean.ServerBean">
@@ -24,7 +24,7 @@
 		id as id,
 		serverIp as serverIP,
 		dcId as dcId,
-		description as description where dcId=#{dcId};
+		description as description FROM server where dcId=#{dcId};
 	</select>
 	
 </mapper>
