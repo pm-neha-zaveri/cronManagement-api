@@ -47,7 +47,7 @@ public class ServerDetailsServiceImpl implements ServerDetailsService {
     }
 
     @Override
-    public ServerBean getServerDetailsByDCId(Integer dcId) {
+    public List<ServerBean> getServerDetailsByDCId(Integer dcId) {
         return serverDetailsDAO.getServerDetailsByDCId(dcId);
     }
 

@@ -4,8 +4,8 @@ import java.util.List;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -32,7 +32,8 @@ public class DataCenterDtailsResource {
 
     @GET
     @Produces("application/json")
-    DataCenterBean getDataCenterById(@QueryParam("dcId") Integer dcId) {
+    @Path("/dc/{dcId}")
+    DataCenterBean getDataCenterById(@PathParam("dcId") Integer dcId) {
         return dataCenterDetailsService.getDataCenterById(dcId);
     }
 

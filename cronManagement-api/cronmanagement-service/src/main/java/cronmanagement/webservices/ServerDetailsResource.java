@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 
@@ -32,18 +33,21 @@ public class ServerDetailsResource {
 
     @GET
     @Produces("application/json")
-    public ServerBean getServerDetailsByServerId(@QueryParam("serverId") Integer serverId) {
+    @Path("/server/{serverId}")
+    public ServerBean getServerDetailsByServerId(@PathParam("serverId") Integer serverId) {
         return serverDetailsService.getServerDetailsByServerId(serverId);
     }
 
     @GET
     @Produces("application/json")
-    public ServerBean getServerDetailsByDCId(@QueryParam("dcId") Integer dcId) {
+    @Path("/dc/{dcId}")
+    public List<ServerBean> getServerDetailsByDCId(@PathParam("dcId") Integer dcId) {
         return serverDetailsService.getServerDetailsByDCId(dcId);
     }
 
     @GET
     @Produces("application/json")
+    @Path("/ipaddress/")
     public ServerBean getServerDetailByIp(@QueryParam("ipAddress") String ipAddress) {
         return serverDetailsService.getServerDetailByIp(ipAddress);
     }

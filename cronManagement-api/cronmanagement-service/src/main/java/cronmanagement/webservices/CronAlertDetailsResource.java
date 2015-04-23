@@ -5,8 +5,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -33,24 +33,28 @@ public class CronAlertDetailsResource {
 
     @GET
     @Produces("application/json")
-    List<CronAlert> getAllCronAlertByServerId(@QueryParam("serverId") Integer serverId) {
+    @Path("/server/{serverId}")
+    List<CronAlert> getAllCronAlertByServerId(@PathParam("serverId") Integer serverId) {
         return cronAlertDetailsService.getAllCronAlertByServerId(serverId);
     }
 
     @GET
     @Produces("application/json")
-    List<CronAlert> getAllCronAlertByDCId(@QueryParam("dcId") Integer dcId) {
+    @Path("/dc/{dcId}")
+    List<CronAlert> getAllCronAlertByDCId(@PathParam("dcId") Integer dcId) {
         return cronAlertDetailsService.getAllCronAlertByDCId(dcId);
     }
 
     @GET
     @Produces("application/json")
-    List<CronAlert> getAllCronAlertByCronId(@QueryParam("cronId") Integer cronId) {
+    @Path("/cron/{cronId}")
+    List<CronAlert> getAllCronAlertByCronId(@PathParam("cronId") Integer cronId) {
         return cronAlertDetailsService.getAllCronAlertByCronId(cronId);
     }
 
     @GET
     @Produces("application/json")
+    @Path("/savealert/")
     void saveCronAlert(HttpServletRequest request) {
         CronAlert cronAlert = new CronAlert();
         cronAlertDetailsService.saveCronAlert(cronAlert);

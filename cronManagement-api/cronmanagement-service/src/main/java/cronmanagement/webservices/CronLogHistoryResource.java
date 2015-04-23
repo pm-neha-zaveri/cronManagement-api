@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 
@@ -32,12 +33,14 @@ public class CronLogHistoryResource {
 
     @GET
     @Produces("application/json")
-    public List<CronLogBean> getCronLogHistoryByCronId(@QueryParam("cronId") Integer cronId) {
+    @Path("/cron/{cronId}")
+    public List<CronLogBean> getCronLogHistoryByCronId(@PathParam("cronId") Integer cronId) {
         return cronLogHistoryService.getCronLogHistoryByCronId(cronId);
     }
 
     @GET
     @Produces("application/json")
+    @Path("/server/{serverId}")
     public List<CronLogBean> getCronLogHistoryByServerId(@QueryParam("serverId") Integer serverId) {
         return cronLogHistoryService.getCronLogHistoryByServerId(serverId);
     }

@@ -15,7 +15,7 @@
 		destroy-method="close">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
 		<property name="url"
-			value="jdbc:mysql://${db.cronManagement.ConnectionUrl}/cronManagement?useUnicode=true&amp;characterEncoding=UTF-8&amp;autoReconnect=true" />
+			value="jdbc:mysql://${db.cronManagement.ConnectionUrl}/cronmanagement?useUnicode=true&amp;characterEncoding=UTF-8&amp;autoReconnect=true" />
 		<property name="username" value="kdbuser" />
 		<property name="password" value="KdBuSeR12!" />
 		<property name="initialSize" value="5" />

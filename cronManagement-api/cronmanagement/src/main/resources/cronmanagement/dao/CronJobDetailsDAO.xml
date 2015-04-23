@@ -3,7 +3,7 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cronmanagement.dao.CronJobDetailsDAO">
-	<select id="getCronDetails" resultType="cronmanagement.bean.CronJob">
+	<select id="getCronJobDetails" resultType="cronmanagement.bean.CronJob">
 		SELECT id as cronId,
 		serverId as serverId,
 		comment as cronComment,
@@ -13,7 +13,7 @@
 		FROM cronjob;
 	</select>
 
-	<select id="getCronDetailsByServerId" resultType="cronmanagement.bean.CronJob">
+	<select id="getCronJobDetailsByServerId" resultType="cronmanagement.bean.CronJob">
 		SELECT id as cronId,
 		serverId as serverId,
 		comment as cronComment,
@@ -23,14 +23,14 @@
 		FROM cronjob where serverId = #{serverId}
 	</select>
 
-	<select id="getCronDetailsByCronId" resultType="cronmanagement.bean.CronJob">
+	<select id="getCronJobDetailsByCronId" resultType="cronmanagement.bean.CronJob">
 		SELECT id as cronId,
 		serverId as serverId,
 		comment as cronComment,
 		status as cronStatus,
 		name as cronName,
 		scheduleexpr as cronExpression
-		FROM cronjob where serverId = #{cronId};
+		FROM cronjob where id = #{cronId};
 	</select>
 	
 	<insert id="saveAllCronJobs">

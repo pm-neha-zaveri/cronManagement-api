@@ -11,7 +11,7 @@ public interface ServerDetailsService {
 
     public ServerBean getServerDetailsByServerId(Integer serverId);
 
-    public ServerBean getServerDetailsByDCId(Integer dcId);
+    public List<ServerBean> getServerDetailsByDCId(Integer dcId);
     
     public ServerBean getServerDetailByIp(String ipAddress);
 

@@ -31,7 +31,7 @@ public class CronJobDetailsServiceImpl implements CronJobDetailsService {
         CronJob cronJob = null;
         if (cronJobs != null && cronJobs.size() > 0) {
             for (CronJob temCronJob : cronJobs) {
-                if (temCronJob.getCronName() != null && temCronJob.getCronName().trim().equals(cronName)) {
+                if (temCronJob.getCronName() != null && temCronJob.getCronName().trim().equals(cronName.trim())) {
                     cronJob = temCronJob;
                     break;
                 }

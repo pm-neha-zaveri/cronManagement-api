@@ -14,6 +14,6 @@ public interface ServerDetailsDAO {
 
     public ServerBean getServerDetailsByServerId(@Param("serverId") Integer serverId);
 
-    public ServerBean getServerDetailsByDCId(@Param("dcId") Integer dcId);
+    public List<ServerBean> getServerDetailsByDCId(@Param("dcId") Integer dcId);
 
 }
