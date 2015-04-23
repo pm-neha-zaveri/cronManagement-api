@@ -1,7 +1,6 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-	xmlns:jaxrs="http://cxf.apache.org/jaxrs"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jaxrs="http://cxf.apache.org/jaxrs"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
 	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
 	http://cxf.apache.org/jaxrs 
@@ -11,25 +10,26 @@
 
 	<import resource="classpath:common-context.xml" />
 
-        <import resource="classpath:api-utils-context.xml" />
-	
-	<!-- Core business service Context-->
-	<import resource="classpath:cronmanagement-context.xml" />	
-	<context:component-scan base-package="cronmanagement.webservices" />
-	
-	
+	<import resource="classpath:api-utils-context.xml" />
+
+	<!-- Core business service Context -->
+	<import resource="classpath:cronmanagement-context.xml" />
+	<context:component-scan base-package="cronmanagement" />
+
+
 	<jaxrs:server id="cronmanagement-service-rest" address="/">
 		<jaxrs:serviceBeans>
-			<ref bean="serverDetailsResource"/>
+			<ref bean="serverDetailsResource" />
+			<ref bean="cronDetailsResource" />
+			<ref bean="cronRunHistoryResource" />
 		</jaxrs:serviceBeans>
 		<jaxrs:providers>
 			<ref bean="jacksonProvider" />
-			<!-- Uncomment this line for enabling the authentication.
-				<ref bean="authenticationHandler" /> 
-			-->
+			<!-- Uncomment this line for enabling the authentication. <ref bean="authenticationHandler" 
+				/> -->
 			<ref bean="abstractRunTimeExceptionMapper" />
 		</jaxrs:providers>
-				
+
 		<jaxrs:outFaultInterceptors>
 			<ref bean="customFaultInterceptor" />
 		</jaxrs:outFaultInterceptors>
@@ -40,8 +40,8 @@
 
 	<import resource="classpath:META-INF/cxf/cxf.xml" />
 	<import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
-	
-	
+
+
 	<bean id="jacksonMapper" class="org.codehaus.jackson.map.ObjectMapper">
 		<property name="serializationConfig.dateFormat">
 			<bean class="java.text.SimpleDateFormat">
@@ -49,10 +49,11 @@
 			</bean>
 		</property>
 	</bean>
-	
+
 	<bean id="jacksonProvider" class="org.codehaus.jackson.jaxrs.JacksonJsonProvider">
 		<property name="mapper" ref="jacksonMapper"></property>
 	</bean>
-	<bean id="serverDetailsResource" class="cronmanagement.webservices.ServerDetailsResource"/>
-	
+	<bean id="serverDetailsResource" class="cronmanagement.webservices.ServerDetailsResource" />
+	<bean id="cronDetailsResource" class="cronmanagement.webservices.CronDetailsResource" />
+	<bean id="cronRunHistoryResource" class="cronmanagement.webservices.CronRunHistoryResource" />
 </beans>
