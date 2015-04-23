@@ -2,6 +2,7 @@ package cronmanagement.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 
 import cronmanagement.bean.ServerDetails;
@@ -9,6 +10,8 @@ import cronmanagement.bean.ServerDetails;
 @Service
 public interface ServerDetailsDAO {
 
-	public List<ServerDetails> getServerDetails();
+    public List<ServerDetails> getServerDetails();
+
+    public ServerDetails getServerDetailsByServerId(@Param("serverId")Integer serverId);
 
 }

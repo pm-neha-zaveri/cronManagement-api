@@ -8,7 +8,7 @@ public class CronJob implements Serializable {
 	private Integer cronId;
 	private Integer serverId;
 	private String cronExpression;
-	private String completeCron;
+	private String cronName;
 	private String cronCommand;
 	private String cronStatus;
 	private String cronComment;
@@ -37,12 +37,12 @@ public class CronJob implements Serializable {
 		this.cronExpression = cronExpression;
 	}
 
-	public String getCompleteCron() {
-		return completeCron;
+	public String getCronName() {
+		return cronName;
 	}
 
-	public void setCompleteCron(String completeCron) {
-		this.completeCron = completeCron;
+	public void setCronName(String completeCron) {
+		this.cronName = completeCron;
 	}
 
 	public String getCronCommand() {
@@ -73,7 +73,7 @@ public class CronJob implements Serializable {
 	public String toString() {
 		return "CronJob [cronId=" + cronId + ", serverId=" + serverId
 				+ ", cronExpression=" + cronExpression + ", completeCron="
-				+ completeCron + ", cronCommand=" + cronCommand
+				+ cronName + ", cronCommand=" + cronCommand
 				+ ", cronStatus=" + cronStatus + ", cronComment=" + cronComment
 				+ "]\n";
 	}

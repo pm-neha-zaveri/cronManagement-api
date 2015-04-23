@@ -5,58 +5,57 @@ import java.util.Date;
 
 public class CronLogBean implements Serializable {
 
-	private static final long serialVersionUID = 1L;
-	private Date startTime;
-	private Date endTime;
-	private String cronName;
-	private String serverIp;
-	private Integer processId;
+    private static final long serialVersionUID = 1L;
+    private Date startTime;
+    private Date endTime;
+    private Integer cronId;
+    private Integer serverId;
+    private Integer processId;
 
-	public String getServerIp() {
-		return serverIp;
-	}
+    public Integer getProcessId() {
+        return processId;
+    }
 
-	public void setServerIp(String serverIp) {
-		this.serverIp = serverIp;
-	}
+    public void setProcessId(Integer processId) {
+        this.processId = processId;
+    }
 
-	public Integer getProcessId() {
-		return processId;
-	}
+    public Date getStartTime() {
+        return startTime;
+    }
 
-	public void setProcessId(Integer processId) {
-		this.processId = processId;
-	}
+    public void setStartTime(Date startTime) {
+        this.startTime = startTime;
+    }
 
-	public Date getStartTime() {
-		return startTime;
-	}
+    public Date getEndTime() {
+        return endTime;
+    }
 
-	public void setStartTime(Date startTime) {
-		this.startTime = startTime;
-	}
+    public void setEndTime(Date endTime) {
+        this.endTime = endTime;
+    }
 
-	public Date getEndTime() {
-		return endTime;
-	}
+    public Integer getCronId() {
+        return cronId;
+    }
 
-	public void setEndTime(Date endTime) {
-		this.endTime = endTime;
-	}
+    public void setCronId(Integer cronId) {
+        this.cronId = cronId;
+    }
 
-	public String getCronName() {
-		return cronName;
-	}
+    public Integer getServerId() {
+        return serverId;
+    }
 
-	public void setCronName(String cronName) {
-		this.cronName = cronName;
-	}
+    public void setServerId(Integer serverId) {
+        this.serverId = serverId;
+    }
 
-	@Override
-	public String toString() {
-		return "CronLogBean [startTime=" + startTime + ", endTime=" + endTime
-				+ ", cronName=" + cronName + ", serverIp=" + serverIp
-				+ ", processId=" + processId + "]\n";
-	}
+    @Override
+    public String toString() {
+        return "CronLogBean [startTime=" + startTime + ", endTime=" + endTime + ", cronId=" + cronId + ", serverId="
+                + serverId + ", processId=" + processId + "]\n";
+    }
 
 }

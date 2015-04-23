@@ -1,0 +1,150 @@
+CRONTAB FOR SERVER:localhost:DATE:20150422:
+
+spawn ssh pashay@localhost
+Welcome to Ubuntu 14.04.2 LTS (GNU/Linux 3.13.0-48-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com/
+
+Last login: Wed Apr 22 15:14:53 2015 from localhost
+
+]0;pashay@pashay-L466: ~pashay@pashay-L466:~$ pub123
+pub123: command not found
+]0;pashay@pashay-L466: ~pashay@pashay-L466:~$ sudo su
+pub123
+[sudo] password for pashay: 
+]0;root@pashay-L466: /home/pashayroot@pashay-L466:/home/pashay# crontab -l
+
+40 * * * * /usr/bin/php test.php >> file.txt
+* * * * 2015 date > /home/pasaha/demo.txt
+* * * * * date > /home/pasaha/demo.txt
+#Ashaysasyaasyasya
+* * * * * date > /home/pasaha/demo.txt
+]0;root@pashay-L466: /home/pashayroot@pashay-L466:/home/pashay# clear
+exit
+]0;pashay@pashay-L466: ~pashay@pashay-L466:~$ 
+CRONTAB FOR SERVER:localhost:DATE:20150422:
+
+spawn ssh pashay@localhost
+Welcome to Ubuntu 14.04.2 LTS (GNU/Linux 3.13.0-48-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com/
+
+Last login: Wed Apr 22 15:14:53 2015 from localhost
+
+]0;pashay@pashay-L466: ~pashay@pashay-L466:~$ pub123
+pub123: command not found
+]0;pashay@pashay-L466: ~pashay@pashay-L466:~$ sudo su
+pub123
+[sudo] password for pashay: 
+]0;root@pashay-L466: /home/pashayroot@pashay-L466:/home/pashay# crontab -l
+
+* * * * * date > /home/pasaha/demo.txt
+* * * * * date > /home/pasaha/demo.txt
+* * * * * date > /home/pasaha/demo.txt
+#Ashaysasyaasyasya
+* * * * * date > /home/pasaha/demo.txt
+
+]0;root@pashay-L466: /home/pashayroot@pashay-L466:/home/pashay# clear
+exit
+]0;pashay@pashay-L466: ~pashay@pashay-L466:~$ 
+CRONTAB FOR SERVER:localhost:DATE:20150422:
+
+spawn ssh pashay@localhost
+Welcome to Ubuntu 14.04.2 LTS (GNU/Linux 3.13.0-48-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com/
+
+Last login: Wed Apr 22 15:22:56 2015 from localhost
+
+]0;pashay@pashay-L466: ~pashay@pashay-L466:~$ pub123
+pub123: command not found
+]0;pashay@pashay-L466: ~pashay@pashay-L466:~$ sudo su
+pub123
+[sudo] password for pashay: 
+]0;root@pashay-L466: /home/pashayroot@pashay-L466:/home/pashay# crontab -l
+
+* * * * * date > /home/pasaha/demo.txt
+* * * * * date > /home/pasaha/demo.txt
+* * * * * date > /home/pasaha/demo.txt
+#Ashaysasyaasyasya
+* * * * * date > /home/pasaha/demo.txt
+
+]0;root@pashay-L466: /home/pashayroot@pashay-L466:/home/pashay# clear
+[H[2J]0;root@pashay-L466: /home/pashayroot@pashay-L466:/home/pashay# exit
+exit
+]0;pashay@pashay-L466: ~pashay@pashay-L466:~$ 
+CRONTAB FOR SERVER:localhost:DATE:20150422:
+
+spawn ssh pashay@localhost
+Welcome to Ubuntu 14.04.2 LTS (GNU/Linux 3.13.0-48-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com/
+
+Last login: Wed Apr 22 15:14:53 2015 from localhost
+
+]0;pashay@pashay-L466: ~pashay@pashay-L466:~$ pub123
+pub123: command not found
+]0;pashay@pashay-L466: ~pashay@pashay-L466:~$ sudo su
+pub123
+[sudo] password for pashay: 
+]0;root@pashay-L466: /home/pashayroot@pashay-L466:/home/pashay# crontab -l
+
+* * * * * date > /home/pasaha/demo.txt
+* * * * * date > /home/pasaha/demo.txt
+* * * * * date > /home/pasaha/demo.txt
+#Ashaysasyaasyasya
+* * * * * date > /home/pasaha/demo.txt
+]0;root@pashay-L466: /home/pashayroot@pashay-L466:/home/pashay# clear
+exit
+]0;pashay@pashay-L466: ~pashay@pashay-L466:~$ 
+CRONTAB FOR SERVER:localhost:DATE:20150422:
+
+spawn ssh pashay@localhost
+Welcome to Ubuntu 14.04.2 LTS (GNU/Linux 3.13.0-48-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com/
+
+Last login: Wed Apr 22 15:14:53 2015 from localhost
+
+]0;pashay@pashay-L466: ~pashay@pashay-L466:~$ pub123
+pub123: command not found
+]0;pashay@pashay-L466: ~pashay@pashay-L466:~$ sudo su
+pub123
+[sudo] password for pashay: 
+]0;root@pashay-L466: /home/pashayroot@pashay-L466:/home/pashay# crontab -l
+
+* * * * * date > /home/pasaha/demo.txt
+* * * * * date > /home/pasaha/demo.txt
+* * * * * date > /home/pasaha/demo.txt
+#Ashaysasyaasyasya
+* * * * * date > /home/pasaha/demo.txt
+
+]0;root@pashay-L466: /home/pashayroot@pashay-L466:/home/pashay# clear
+exit
+]0;pashay@pashay-L466: ~pashay@pashay-L466:~$ 
+CRONTAB FOR SERVER:localhost:DATE:20150422:
+
+spawn ssh pashay@localhost
+Welcome to Ubuntu 14.04.2 LTS (GNU/Linux 3.13.0-48-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com/
+
+Last login: Wed Apr 22 15:22:56 2015 from localhost
+
+]0;pashay@pashay-L466: ~pashay@pashay-L466:~$ pub123
+pub123: command not found
+]0;pashay@pashay-L466: ~pashay@pashay-L466:~$ sudo su
+pub123
+[sudo] password for pashay: 
+]0;root@pashay-L466: /home/pashayroot@pashay-L466:/home/pashay# crontab -l
+
+* * * * * date > /home/pasaha/demo.txt
+* * * * * date > /home/pasaha/demo.txt
+* * * * * date > /home/pasaha/demo.txt
+#Ashaysasyaasyasya
+* * * * * date > /home/pasaha/demo.txt
+
+]0;root@pashay-L466: /home/pashayroot@pashay-L466:/home/pashay# clear
+[H[2J]0;root@pashay-L466: /home/pashayroot@pashay-L466:/home/pashay# exit
+exit
+]0;pashay@pashay-L466: ~pashay@pashay-L466:~$ 

@@ -27,7 +27,7 @@ public class CronJobParserServiceImpl implements CronJobParserService {
 
     @Autowired
     ServerDetailsService serverDetailsService;
-
+    
     public List<CronJob> parse(InputStream inputStream) {
         List<CronJob> cronJobList = new ArrayList<CronJob>();
         BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
@@ -86,7 +86,7 @@ public class CronJobParserServiceImpl implements CronJobParserService {
             cronJobInfo = cronJobInfo.trim();
             cronJob = new CronJob();
             cronJob.setCronComment(cronComment);
-            cronJob.setCompleteCron(cronJobInfo);
+            cronJob.setCronName(cronJobInfo);
             cronJob.setCronStatus(cronJobInfo.startsWith(HASH) ? "inactive" : "active");
             cronJob.setServerId(serverId);
             int index = cronJobInfo.indexOf(" /");

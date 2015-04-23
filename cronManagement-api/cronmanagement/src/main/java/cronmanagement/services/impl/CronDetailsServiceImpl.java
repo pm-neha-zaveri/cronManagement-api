@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
 
-import cronmanagement.bean.CronDetails;
+import cronmanagement.bean.CronJob;
 import cronmanagement.dao.CronDetailsDAO;
 import cronmanagement.services.CronDetailsService;
 
@@ -27,8 +27,33 @@ public class CronDetailsServiceImpl implements CronDetailsService {
 	CronDetailsDAO cronDetailsDAO;
 
 	@Override
-	public List<CronDetails> getCronDetails() {
+	public List<CronJob> getCronDetails() {
 		return cronDetailsDAO.getCronDetails();
 
 	}
+
+    @Override
+    public List<CronJob> getCronDetailsByServerId(Integer serverId) {
+        return cronDetailsDAO.getCronDetailsByServerId(serverId);
+    }
+
+    @Override
+    public CronJob getCronDetailsByCronId(Integer cronId) {
+        return cronDetailsDAO.getCronDetailsByCronId(cronId);
+    }
+
+    @Override
+    public CronJob getCronDetailsByCronName(String cronName) {
+        List<CronJob> cronJobs = cronDetailsDAO.getCronDetails();
+        CronJob cronJob = null;
+        if(cronJobs != null && cronJobs.size() > 0){
+            for(CronJob temCronJob : cronJobs){
+                if(temCronJob.getCronName() != null && temCronJob.getCronName().trim().equals(cronName)){
+                    cronJob = temCronJob;
+                    break;
+                }
+            }
+        }
+        return cronJob;
+    }
 }

@@ -12,4 +12,5 @@ public interface CronLogParserService {
     public CronLogBean getCronLogBean(String logInfo);
 
     public List<CronLogBean> updateCronLogs(List<CronLogBean> cronLogList);
+
 }
