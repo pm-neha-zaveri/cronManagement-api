@@ -9,7 +9,7 @@ import javax.ws.rs.Produces;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import cronmanagement.bean.ServerDetails;
+import cronmanagement.bean.ServerBean;
 import cronmanagement.services.ServerDetailsService;
 
 @Resource
@@ -21,7 +21,7 @@ public class ServerDetailsResource {
 
 	@GET
 	@Produces("application/json")
-	public List<ServerDetails> getServerList() {
+	public List<ServerBean> getServerList() {
 		return serverDetailsService.getServerList();
 	}
 

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cronmanagement.dao.CronAlertDetailsDAO">
+	<select id="getCronDetails" resultType="cronmanagement.bean.CronAlert">
+		SELECT id as id,
+		cron_id as cronId,
+		server_id as serverId,
+		dc_id as dcId,
+		description as alertDescription,
+		start_time as startTime,
+		end_time as endTime,
+		run_time as runTime,
+		threshold as threshold,
+		FROM cron_alert;
+	</select>
+
+	<select id="getCronDetailsByServerId" resultType="cronmanagement.bean.CronAlert">
+		SELECT id as id,
+		cron_id as cronId,
+		server_id as serverId,
+		dc_id as dcId,
+		description as alertDescription,
+		start_time as startTime,
+		end_time as endTime,
+		run_time as runTime,
+		threshold as threshold,
+		FROM cron_alert server_id = #{serverId};
+	</select>
+
+	<select id="getCronDetailsByCronId" resultType="cronmanagement.bean.CronAlert">
+		SELECT id as id,
+		cron_id as cronId,
+		server_id as serverId,
+		dc_id as dcId,
+		description as alertDescription,
+		start_time as startTime,
+		end_time as endTime,
+		run_time as runTime,
+		threshold as threshold,
+		FROM cron_alert where cron_id = #{cronId};
+	</select>
+	
+	<select id="getAllCronAlertByDCId" resultType="cronmanagement.bean.CronAlert">
+		SELECT id as id,
+		cron_id as cronId,
+		server_id as serverId,
+		dc_id as dcId,
+		description as alertDescription,
+		start_time as startTime,
+		end_time as endTime,
+		run_time as runTime,
+		threshold as threshold,
+		FROM cron_alert where dc_id = #{dcId};
+	</select>
+	
+	<insert id="saveAllCronJobs">
+		INSERT INTO cronalert(cron_id,server_id,dc_id,description,start_time,end_time,run_time,threshold)
+		VALUES (
+			#{cronAlert.cronId}, #{cronAlert.serverId}, #{cronAlert.dcId}, #{cronAlert.alertDescription},#{cronAlert.startTime}, #{cronAlert.endTime},#{cronAlert.runTime},#{cronAlert.threshold},
+		)
+	</insert>
+
+</mapper>

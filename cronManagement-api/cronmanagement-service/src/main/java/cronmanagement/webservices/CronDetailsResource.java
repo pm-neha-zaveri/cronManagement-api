@@ -10,14 +10,14 @@ import javax.ws.rs.Produces;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import cronmanagement.bean.CronJob;
-import cronmanagement.services.CronDetailsService;
+import cronmanagement.services.CronJobDetailsService;
 
 @Resource
 @Path("/cronDetails")
 public class CronDetailsResource {
 
 	@Autowired 
-	CronDetailsService cronDetailsService;
+	CronJobDetailsService cronDetailsService;
 	
 	@GET
 	@Produces("application/json")

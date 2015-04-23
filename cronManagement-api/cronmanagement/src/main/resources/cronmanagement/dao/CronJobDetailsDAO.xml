@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cronmanagement.dao.CronJobDetailsDAO">
+	<select id="getCronDetails" resultType="cronmanagement.bean.CronJob">
+		SELECT id as cronId,
+		serverId as serverId,
+		comment as cronComment,
+		status as cronStatus,
+		name as cronName,
+		scheduleexpr as cronExpression
+		FROM cronjob;
+	</select>
+
+	<select id="getCronDetailsByServerId" resultType="cronmanagement.bean.CronJob">
+		SELECT id as cronId,
+		serverId as serverId,
+		comment as cronComment,
+		status as cronStatus,
+		name as cronName,
+		scheduleexpr as cronExpression
+		FROM cronjob where serverId = #{serverId}
+	</select>
+
+	<select id="getCronDetailsByCronId" resultType="cronmanagement.bean.CronJob">
+		SELECT id as cronId,
+		serverId as serverId,
+		comment as cronComment,
+		status as cronStatus,
+		name as cronName,
+		scheduleexpr as cronExpression
+		FROM cronjob where serverId = #{cronId};
+	</select>
+	
+	<insert id="saveAllCronJobs">
+		INSERT INTO cronjob(serverId,comment,status,name,scheduleexpr)
+		VALUES (
+		<foreach item="cronJob" index="index" collection="cronJobs"
+			open="" close="" separator="),(">
+			#{cronLog.serverId}, #{cronLog.cronComment}, #{cronLog.cronStatus},#{cronLog.cronName}, #{cronLog.cronExpression},
+		</foreach>
+		)
+	</insert>
+	
+	<update id="updateAllCronJobs">
+		UPDATE cronjob
+		set status='INACTIVE' where id in  (
+		<foreach item="cronJob" index="index" collection="cronJobs"
+			open="" close="" separator=",">
+			#{cronJob.cronId}
+		</foreach>
+		)
+	</update>
+
+</mapper>
