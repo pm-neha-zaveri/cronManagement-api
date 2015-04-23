@@ -27,35 +27,35 @@ public class CronAlertDetailsResource {
 
     @GET
     @Produces("application/json")
-    List<CronAlert> getAllCronAlert() {
+    public List<CronAlert> getAllCronAlert() {
         return cronAlertDetailsService.getAllCronAlert();
     }
 
     @GET
     @Produces("application/json")
     @Path("/server/{serverId}")
-    List<CronAlert> getAllCronAlertByServerId(@PathParam("serverId") Integer serverId) {
+    public List<CronAlert> getAllCronAlertByServerId(@PathParam("serverId") Integer serverId) {
         return cronAlertDetailsService.getAllCronAlertByServerId(serverId);
     }
 
     @GET
     @Produces("application/json")
     @Path("/dc/{dcId}")
-    List<CronAlert> getAllCronAlertByDCId(@PathParam("dcId") Integer dcId) {
+    public List<CronAlert> getAllCronAlertByDCId(@PathParam("dcId") Integer dcId) {
         return cronAlertDetailsService.getAllCronAlertByDCId(dcId);
     }
 
     @GET
     @Produces("application/json")
     @Path("/cron/{cronId}")
-    List<CronAlert> getAllCronAlertByCronId(@PathParam("cronId") Integer cronId) {
+    public List<CronAlert> getAllCronAlertByCronId(@PathParam("cronId") Integer cronId) {
         return cronAlertDetailsService.getAllCronAlertByCronId(cronId);
     }
 
     @GET
     @Produces("application/json")
     @Path("/savealert/")
-    void saveCronAlert(HttpServletRequest request) {
+    public void saveCronAlert(HttpServletRequest request) {
         CronAlert cronAlert = new CronAlert();
         cronAlertDetailsService.saveCronAlert(cronAlert);
     }

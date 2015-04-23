@@ -115,7 +115,7 @@ CREATE TABLE `datacenter` (
   `dcName` varchar(255) DEFAULT NULL,
   `latitude` varchar(45) DEFAULT NULL,
   `longitude` varchar(45) DEFAULT NULL,
-  `dcHealth` varchar(45) DEFAULT '100',
+  `dcHealth` int(3) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -126,7 +126,7 @@ CREATE TABLE `datacenter` (
 
 LOCK TABLES `datacenter` WRITE;
 /*!40000 ALTER TABLE `datacenter` DISABLE KEYS */;
-INSERT INTO `datacenter` VALUES (1,'INDIA','18.5203° N','73.8567° E','89%'),(2,'UK','28.5203° N','89.8567° E','19%'),(3,'US','8.5203° N','73.8567° E','93%');
+INSERT INTO `datacenter` VALUES (1,'INDIA','18.5203° N','73.8567° E',20),(2,'UK','28.5203° N','89.8567° E',20),(3,'US','8.5203° N','73.8567° E',20);
 /*!40000 ALTER TABLE `datacenter` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -165,4 +165,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-04-23 22:05:08
+-- Dump completed on 2015-04-24  4:09:57

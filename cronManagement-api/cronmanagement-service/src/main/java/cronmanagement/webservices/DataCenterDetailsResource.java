@@ -26,14 +26,14 @@ public class DataCenterDetailsResource {
 
     @GET
     @Produces("application/json")
-    List<DataCenterBean> getAllDataCenters() {
+    public List<DataCenterBean> getAllDataCenters() {
         return dataCenterDetailsService.getAllDataCenters();
     }
 
     @GET
     @Produces("application/json")
     @Path("/dc/{dcId}")
-    DataCenterBean getDataCenterById(@PathParam("dcId") Integer dcId) {
+    public DataCenterBean getDataCenterById(@PathParam("dcId") Integer dcId) {
         return dataCenterDetailsService.getDataCenterById(dcId);
     }
 
