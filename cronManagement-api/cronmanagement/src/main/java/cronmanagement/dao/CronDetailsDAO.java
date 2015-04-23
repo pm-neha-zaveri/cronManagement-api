@@ -15,4 +15,6 @@ public interface CronDetailsDAO {
     public List<CronJob> getCronDetailsByServerId(@Param("serverId")Integer serverId);
 
     public CronJob getCronDetailsByCronId(@Param("cronId")Integer cronId);
+
+    public void saveAll(@Param("cronJobs") List<CronJob> cronJobs);
 }

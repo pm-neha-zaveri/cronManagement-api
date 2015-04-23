@@ -41,4 +41,5 @@
 		cronExpression
 		FROM cron_details where serverId = #cronId;
 	</select>
+
 </mapper>

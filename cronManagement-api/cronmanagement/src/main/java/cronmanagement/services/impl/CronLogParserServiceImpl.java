@@ -48,11 +48,7 @@ public class CronLogParserServiceImpl implements CronLogParserService {
         String logInfo = null;
         try {
             while ((logInfo = reader.readLine()) != null) {
-                while (logInfo != null && logInfo.indexOf(CRON_JOB_NAME) == -1) {
-                    logInfo = reader.readLine();
-                }
-                logInfo = reader.readLine();
-                while (logInfo != null) {
+                while (logInfo != null && logInfo.trim().length() > 0) {
                     cronLogList.add(getCronLogBean(logInfo));
                     logInfo = reader.readLine();
                     if (logInfo != null && logInfo.indexOf(CRONJOB_LOG) != -1) {

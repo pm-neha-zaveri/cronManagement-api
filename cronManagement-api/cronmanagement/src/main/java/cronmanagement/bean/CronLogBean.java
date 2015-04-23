@@ -6,11 +6,29 @@ import java.util.Date;
 public class CronLogBean implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    private Integer id;
     private Date startTime;
     private Date endTime;
     private Integer cronId;
     private Integer serverId;
     private Integer processId;
+    private String status;
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public Integer getProcessId() {
         return processId;
@@ -54,8 +72,8 @@ public class CronLogBean implements Serializable {
 
     @Override
     public String toString() {
-        return "CronLogBean [startTime=" + startTime + ", endTime=" + endTime + ", cronId=" + cronId + ", serverId="
-                + serverId + ", processId=" + processId + "]\n";
+        return "CronLogBean [id=" + id + ", startTime=" + startTime + ", endTime=" + endTime + ", cronId=" + cronId
+                + ", serverId=" + serverId + ", processId=" + processId + ", status=" + status + "]\n";
     }
 
 }

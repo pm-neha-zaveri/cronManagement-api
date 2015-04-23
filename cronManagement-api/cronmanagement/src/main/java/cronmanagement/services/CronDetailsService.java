@@ -12,4 +12,6 @@ public interface CronDetailsService {
     public CronJob getCronDetailsByCronId(Integer cronId);
     
     public CronJob getCronDetailsByCronName(String cronName);
+
+    public void saveAll(List<CronJob> cronJobs);
 }

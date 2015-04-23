@@ -56,4 +56,10 @@ public class CronDetailsServiceImpl implements CronDetailsService {
         }
         return cronJob;
     }
+
+    @Override
+    public void saveAll(List<CronJob> cronJobs) {
+        if(cronJobs != null && cronJobs.size() > 0)
+            cronDetailsDAO.saveAll(cronJobs);
+    }
 }

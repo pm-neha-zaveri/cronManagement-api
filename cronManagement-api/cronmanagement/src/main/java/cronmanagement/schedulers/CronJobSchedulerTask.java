@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import cronmanagement.bean.CronJob;
+import cronmanagement.services.CronDetailsService;
 import cronmanagement.services.CronJobParserService;
 
 @Service
@@ -28,6 +29,9 @@ public class CronJobSchedulerTask {
 
 	@Autowired
 	CronJobParserService cronJobParserService;
+	
+	@Autowired
+	CronDetailsService cronDetailsService;
 
 	public void fetchAndSaveCronDetails() {
 		executeCommand();
