@@ -11,6 +11,7 @@ import cronmanagement.services.ServerDetailsService;
 
 @Service
 public class ServerDetailsServiceImpl implements ServerDetailsService {
+    
 	@Autowired
 	ServerDetailsDAO serverDetailsDAO;
 
@@ -18,5 +19,23 @@ public class ServerDetailsServiceImpl implements ServerDetailsService {
 	public List<ServerDetails> getServerList() {
 		return serverDetailsDAO.getServerDetails();
 	}
+
+    @Override
+    public ServerDetails getServerDetailByIp(String ipAddress) {
+        ServerDetails serverDetail = null;
+        if(ipAddress != null && ipAddress.trim().length() > 0){
+            List<ServerDetails> serverDetailsList = serverDetailsDAO.getServerDetails();
+            if(serverDetailsList != null ){
+                for(ServerDetails serverDetails : serverDetailsList){
+                    if(serverDetails.getServerIP() != null && serverDetails.getServerIP().trim().equals(ipAddress.trim())){
+                        return serverDetail;
+                    }
+                }
+            }
+        }
+        return serverDetail;
+    }
+	
+	
 
 }

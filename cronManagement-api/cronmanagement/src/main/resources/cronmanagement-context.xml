@@ -1,12 +1,15 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:util="http://www.springframework.org/schema/util" xmlns:task="http://www.springframework.org/schema/task"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
                 http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
         http://www.springframework.org/schema/context
                 http://www.springframework.org/schema/context/spring-context-3.0.xsd
         http://www.springframework.org/schema/aop 
-                http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+                http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+                http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+                http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.0.xsd">
 	<context:annotation-config />
 	<context:component-scan base-package="cronmanagement" />
 
@@ -22,4 +25,24 @@
 	<import resource="cronmanagement-spring-mybatis.xml" />
 	<import resource="cronmanagement-dao-context.xml" />
 	<context:component-scan base-package="cronmanagement" />
+
+	<!-- Cron Scheduler and Parsing reltaed beans -->
+	<context:component-scan base-package="cronmanagement.schedulers" />
+
+	<util:properties id="cronProperties" location="cron.properties" />
+	<context:property-placeholder
+		properties-ref="cronProperties" />
+
+	<context:property-placeholder location="classpath:file-config.properties"
+		order="-1" ignore-unresolvable="true" ignore-resource-not-found="true" />
+
+	<task:scheduled-tasks>
+		<task:scheduled ref="cronJobSchedulerTask" method="fetchAndSaveCronDetails"
+			cron="#{cronProperties['cron.job.expression']}" />
+	</task:scheduled-tasks>
+	
+	<task:scheduled-tasks>
+		<task:scheduled ref="cronLogSchedulerTask" method="fetchAndSaveCronLogs"
+			cron="#{cronProperties['cron.log.expression']}" />
+	</task:scheduled-tasks>
 </beans>
