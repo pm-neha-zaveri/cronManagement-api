@@ -3,12 +3,11 @@ package cronmanagement.webservices;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.GET;
-import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -66,61 +65,51 @@ public class CronAlertDetailsResource {
         return cronAlertDetailsService.getAllCronAlertByCronId(cronId);
     }
 
-    @POST
-    @Produces("application/json")
+    @GET
     @Path("/savealert/")
-    public void saveCronAlert(HttpServletRequest request) {
+    // 24-04-2015_18:39:16
+    public void saveCronAlert(@QueryParam("cronServerIp") String cronServerIp,
+            @QueryParam("cronStartTime") String cronStartTime, @QueryParam("cronEndTime") String cronEndTime,
+            @QueryParam("threshold") String threshold, @QueryParam("cronName") String cronName,
+            @QueryParam("actualRunTimeSec") String actualRunTimeSec) {
         try {
-            LOGGER.info("saveCronAlert : " + request.getParameterMap());
-            String cronName = request.getParameter("cronName");
-            String cronServerIp = request.getParameter("cronServerIp");
-            String cronStartTime = request.getParameter("cronStartTime");
-            String cronEndTime = request.getParameter("cronEndTime");
-            String threshold = request.getParameter("threshold");
-            String actualRunTimeSec = request.getParameter("actualRunTimeSec");
-            boolean isValidData = true;
+            boolean isValidData = false;
             CronAlert cronAlert = new CronAlert();
-            if (cronName != null && cronName.trim().length() > 0) {
-                CronJob cronJob = cronJobDetailsService.getCronDetailsByCronName(cronName == null ? "" : cronName
-                        .trim());
-                if (cronJob != null) {
-                    cronAlert.setCronId(cronJob.getCronId());
-                    ServerBean serverBean = serverDetailsService.getServerDetailByIp(cronServerIp == null ? ""
-                            : cronServerIp.trim());
-                    if (serverBean != null) {
-                        cronAlert.setServerId(serverBean.getId());
-                        if(!cronJob.getServerId().equals(serverBean.getId())){
-                            isValidData = false;
-                        }else{
+            ServerBean serverBean = serverDetailsService.getServerDetailByIp(cronServerIp == null ? "" : cronServerIp
+                    .trim());
+            if (serverBean != null && cronName != null && cronName.trim().length() > 0) {
+                List<CronJob> cronJobList = cronJobDetailsService.getCronJobDetailsByServerId(serverBean.getId());
+                cronAlert.setServerId(serverBean.getId());
+                if (cronJobList != null && cronJobList.size() > 0) {
+                    for (CronJob cronJob : cronJobList) {
+                        if (cronJob.getCronName() != null
+                                && cronJob.getCronName().trim().indexOf(cronName.trim()) != -1) {
+                            cronAlert.setCronId(cronJob.getCronId());
                             if (cronStartTime != null && cronStartTime.trim().length() > 0)
-                                cronAlert.setStartTime(cronStartTime);
+                                cronAlert.setStartTime(cronStartTime.replace('_', ' '));
                             if (cronEndTime != null && cronEndTime.trim().length() > 0)
-                                cronAlert.setEndTime(cronEndTime);
-                            if(actualRunTimeSec != null && actualRunTimeSec.trim().length() > 0)
-                                cronAlert.setRunTime(Integer.parseInt(actualRunTimeSec)*1000);
-                            if(actualRunTimeSec != null && actualRunTimeSec.trim().length() > 0)
+                                cronAlert.setEndTime(cronEndTime.replace('_', ' '));
+                            if (actualRunTimeSec != null && actualRunTimeSec.trim().length() > 0)
+                                cronAlert.setRunTime(Integer.parseInt(actualRunTimeSec) * 1000);
+                            if (actualRunTimeSec != null && actualRunTimeSec.trim().length() > 0)
                                 cronAlert.setRunTime(Integer.parseInt(actualRunTimeSec));
-                            if(threshold != null && threshold.trim().length() > 0)
+                            if (threshold != null && threshold.trim().length() > 0)
                                 cronAlert.setThreshold(Integer.parseInt(threshold));
+                            cronAlert.setAlertDescription("Unexpected Behaviour Observed");
+                            isValidData = true;
+                            break;
                         }
-                    }else{
-                        isValidData = false;
                     }
-                }else{
-                    isValidData = false;
                 }
-                LOGGER.info("cronAlert : "+cronAlert+" isValidData : "+isValidData);
-            }else{
-                isValidData = false;
             }
-            if(isValidData)
+            LOGGER.info("cronAlert : " + cronAlert + " isValidData : " + isValidData);
+            if (isValidData)
                 cronAlertDetailsService.saveCronAlert(cronAlert);
             else
                 LOGGER.info("Invalid Data");
         } catch (Exception exception) {
             LOGGER.error("saveCronAlert : " + exception.getMessage(), exception);
         }
-        
     }
 
 }
