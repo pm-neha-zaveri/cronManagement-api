@@ -33,13 +33,13 @@
 	<context:property-placeholder location="classpath:file-config.properties"
 		order="-1" ignore-unresolvable="true" ignore-resource-not-found="true" />
 
-	<!-- <task:scheduled-tasks>
+	 <task:scheduled-tasks>
 		<task:scheduled ref="cronJobSchedulerTask" method="fetchAndSaveCronDetails"
 			cron="*/20 * * * * ?" />
-	</task:scheduled-tasks> -->
+	</task:scheduled-tasks> 
 
-	 <!-- <task:scheduled-tasks>
+	 <task:scheduled-tasks>
 		<task:scheduled ref="cronLogSchedulerTask" method="fetchAndSaveCronLogs"
 			cron="*/20 * * * * ?" />
-	</task:scheduled-tasks> --> 
+	</task:scheduled-tasks>  
 </beans>
