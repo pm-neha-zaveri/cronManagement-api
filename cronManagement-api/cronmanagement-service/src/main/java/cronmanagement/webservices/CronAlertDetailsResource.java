@@ -18,7 +18,6 @@ import org.springframework.stereotype.Component;
 import cronmanagement.bean.CronAlert;
 import cronmanagement.bean.CronJob;
 import cronmanagement.bean.ServerBean;
-import cronmanagement.schedulers.CronJobSchedulerTask;
 import cronmanagement.schedulers.CronLogSchedulerTask;
 import cronmanagement.services.CronAlertDetailsService;
 import cronmanagement.services.CronJobDetailsService;
@@ -28,11 +27,10 @@ import cronmanagement.services.ServerDetailsService;
 @Path("/cronAlertDetails")
 public class CronAlertDetailsResource {
 
-
     public final static Log LOGGER = LogFactory.getLog(CronAlertDetailsResource.class);
 
-    SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy kk:mm:ss");
-    SimpleDateFormat sql_formatter = new SimpleDateFormat("yyyy-MM-dd kk:mm:ss");
+    SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
+    SimpleDateFormat sql_formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 
     @Autowired
     CronAlertDetailsService cronAlertDetailsService;
@@ -84,7 +82,7 @@ public class CronAlertDetailsResource {
                     .trim());
             if (serverBean != null && cronName != null && cronName.trim().length() > 0) {
                 List<CronJob> cronJobList = cronJobDetailsService.getCronJobByServerIdAndCronName(serverBean.getId(),
-                        new String("%"+cronName+"%"));
+                        new String("%" + cronName + "%"));
                 CronJob cronJob = (cronJobList != null && cronJobList.size() > 0 ? cronJobList.get(0) : null);
                 cronAlert.setServerId(serverBean.getId());
                 cronAlert.setDcId(serverBean.getDcId());
@@ -113,11 +111,5 @@ public class CronAlertDetailsResource {
             LOGGER.error("saveCronAlert : " + exception.getMessage(), exception);
         }
     }
-	@GET
-	// @Produces("application/json")
-	@Path("/cron/cronLogSave")
-	public void getAllCronAlertByCronSave() throws IOException {
-		cronSchedulerTask.executeCommand();
-	}
 
 }

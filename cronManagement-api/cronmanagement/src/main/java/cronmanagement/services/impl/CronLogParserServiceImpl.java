@@ -37,8 +37,8 @@ public class CronLogParserServiceImpl implements CronLogParserService {
     @Autowired
     ServerDetailsService serverDetailsService;
 
-    SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy kk:mm:ss");
-    SimpleDateFormat sql_formatter = new SimpleDateFormat("yyyy-MM-dd kk:mm:ss");
+    SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
+    SimpleDateFormat sql_formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 
     @Override
     public List<CronLogBean> getCronLogs(InputStream inputStream) {
