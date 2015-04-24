@@ -9,8 +9,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.core.io.ClassPathResource;
 
-import com.pubmatic.castrum.exceptions.APIException;
-
 public class FileUtility {
 
 	public final static Log LOGGER = LogFactory.getLog(FileUtility.class);
@@ -38,12 +36,12 @@ public class FileUtility {
 			if (cronManangementProperties == null) {
 				cronManangementProperties = new Properties();
 				InputStream inputStream = new ClassPathResource(
-						"cronManagement.properties").getInputStream();
+						"cronmanagement.properties").getInputStream();
 				cronManangementProperties.load(inputStream);
 				inputStream.close();
 			}
 		} catch (Exception exp) {
-			LOGGER.error("Error in loading " + "cronManagement.properties");
+			LOGGER.error("Error in loading " + "cronmanagement.properties");
 			exp.printStackTrace();
 		}
 		return cronManangementProperties.getProperty(propKey);

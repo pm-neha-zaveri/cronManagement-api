@@ -25,20 +25,18 @@ public class ServerDetailsServiceImpl implements ServerDetailsService {
 
     @Override
     public ServerBean getServerDetailByIp(String ipAddress) {
-        ServerBean serverDetail = null;
         if (ipAddress != null && ipAddress.trim().length() > 0) {
             List<ServerBean> serverDetailsList = serverDetailsDAO.getServerDetails();
             if (serverDetailsList != null) {
                 for (ServerBean serverDetails : serverDetailsList) {
                     if (serverDetails.getServerIP() != null
                             && serverDetails.getServerIP().trim().equals(ipAddress.trim())) {
-                        serverDetail = serverDetails;
-                        break;
+                        return serverDetails;
                     }
                 }
             }
         }
-        return serverDetail;
+        return null;
     }
 
     @Override

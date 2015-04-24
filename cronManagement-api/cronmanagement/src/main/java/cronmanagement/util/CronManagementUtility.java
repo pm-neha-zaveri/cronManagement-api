@@ -1,16 +1,23 @@
 package cronmanagement.util;
 
-import java.io.InputStream;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class CronManagementUtility {
-	public static InputStream runBashCommand(String command) {
+	public static String runBashCommand(String command) throws IOException {
 
 		Process proc = null;
+		StringBuilder stringResponse = new StringBuilder();
 		try {
 			Runtime rt = Runtime.getRuntime();
+			// System.out.println("command :: " + command);
 			proc = rt.exec(command);
-			if (proc != null) {
-				return proc.getInputStream();
+			BufferedReader reader = new BufferedReader(new InputStreamReader(
+					proc.getInputStream()));
+			String s;
+			while ((s = reader.readLine()) != null) {
+				stringResponse.append(s).append("\n");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -20,7 +27,8 @@ public class CronManagementUtility {
 				proc.destroy();
 			}
 		}
-		return null;
+
+		return stringResponse.toString();
 	}
 
 }
