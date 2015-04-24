@@ -10,39 +10,41 @@ import java.util.Map;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import cronmanagement.bean.CronJob;
 import cronmanagement.services.CronJobDetailsService;
 import cronmanagement.services.CronJobParserService;
+import cronmanagement.util.CronManagementUtility;
+import cronmanagement.utility.FileUtility;
 
 @Service
 public class CronJobSchedulerTask {
-    
-    public final static Log LOGGER = LogFactory.getLog(CronJobSchedulerTask.class);
+
+	public final static Log LOGGER = LogFactory
+			.getLog(CronJobSchedulerTask.class);
 
 	@Autowired
 	CronJobParserService cronJobParserService;
-	
+
 	@Autowired
 	CronJobDetailsService cronDetailsService;
-	
-	@Value("${cron.job.script.path}")
-    private String cronjobfilepath;
 
 	public void fetchAndSaveCronDetails() {
 		executeCommand();
 	}
 
 	public void executeCommand() {
-	    LOGGER.error("Executing..."+cronjobfilepath);
-//		readFile(null);
+		String cronListsh = FileUtility
+				.getPropertyValue("REMOTE_CRON_LIST_SCRIPT");
+		InputStream shResponse = CronManagementUtility
+				.runBashCommand(cronListsh);
+		readFile(shResponse);
 	}
 
 	public void readFile(InputStream inputStream) {
 		List<CronJob> cronJobs = cronJobParserService.parse(inputStream);
-        updateCronDetails(createServerCronJobMap(cronJobs));
+		updateCronDetails(createServerCronJobMap(cronJobs));
 	}
 
 	public Map<Integer, List<CronJob>> createServerCronJobMap(
@@ -64,12 +66,12 @@ public class CronJobSchedulerTask {
 				serverCronJobMap.put(tempCronJob.getServerId(), cronJobList);
 			}
 		}
-		LOGGER.info("serverCronJobMap : "+serverCronJobMap);
+		LOGGER.info("serverCronJobMap : " + serverCronJobMap);
 		return serverCronJobMap;
 	}
 
 	private void updateCronDetails(Map<Integer, List<CronJob>> latestCronJobs) {
-		Map<Integer, List<CronJob>> existingCronJobs = latestCronJobs; 
+		Map<Integer, List<CronJob>> existingCronJobs = latestCronJobs;
 		if (existingCronJobs == null) {
 			// TODO Save JObs to DB
 		} else {
