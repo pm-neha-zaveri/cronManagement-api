@@ -12,6 +12,15 @@ public class CronJob implements Serializable {
     private String cronCommand;
     private String cronStatus;
     private String cronComment;
+    private String cronType;
+    public String getCronType() {
+        return cronType;
+    }
+
+    public void setCronType(String cronType) {
+        this.cronType = cronType;
+    }
+
 
     public String getCronComment() {
         return cronComment;
@@ -72,8 +81,8 @@ public class CronJob implements Serializable {
     @Override
     public String toString() {
         return "CronJob [cronId=" + cronId + ", serverId=" + serverId + ", cronExpression=" + cronExpression
-                + ", completeCron=" + cronName + ", cronCommand=" + cronCommand + ", cronStatus=" + cronStatus
-                + ", cronComment=" + cronComment + "]\n";
+                + ", cronName=" + cronName + ", cronCommand=" + cronCommand + ", cronStatus=" + cronStatus
+                + ", cronComment=" + cronComment + ", cronType=" + cronType + "]\n";
     }
 
 }

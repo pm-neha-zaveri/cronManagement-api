@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 
 import cronmanagement.bean.CronJob;
 import cronmanagement.bean.ServerBean;
+import cronmanagement.constant.CronTypeEnum;
 import cronmanagement.services.CronJobParserService;
 import cronmanagement.services.ServerDetailsService;
 
@@ -92,6 +93,7 @@ public class CronJobParserServiceImpl implements CronJobParserService {
             cronJob.setCronName(cronJobInfo);
             cronJob.setCronStatus(cronJobInfo.startsWith(HASH) ? "inactive" : "active");
             cronJob.setServerId(serverId);
+            cronJob.setCronType((serverId%2==0?CronTypeEnum.ApplicationCron.name():CronTypeEnum.ReportingCron.name()));
             int index = cronJobInfo.indexOf(" /");
             while (cronJobInfo.charAt(index) != '*' && cronJobInfo.charAt(index) != '?'
                     && !(cronJobInfo.charAt(index) >= '0' && cronJobInfo.charAt(index) <= '9')) {

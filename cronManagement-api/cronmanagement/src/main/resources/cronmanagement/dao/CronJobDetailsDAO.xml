@@ -9,7 +9,8 @@
 		comment as cronComment,
 		status as cronStatus,
 		name as cronName,
-		scheduleexpr as cronExpression
+		scheduleexpr as cronExpression,
+		cronType as cronType
 		FROM cronjob;
 	</select>
 
@@ -19,7 +20,8 @@
 		comment as cronComment,
 		status as cronStatus,
 		name as cronName,
-		scheduleexpr as cronExpression
+		scheduleexpr as cronExpression,
+		cronType as cronType
 		FROM cronjob where serverId = #{serverId}
 	</select>
 
@@ -29,16 +31,17 @@
 		comment as cronComment,
 		status as cronStatus,
 		name as cronName,
-		scheduleexpr as cronExpression
+		scheduleexpr as cronExpression,
+		cronType as cronType
 		FROM cronjob where id = #{cronId};
 	</select>
 	
 	<insert id="saveAllCronJobs">
-		INSERT INTO cronjob(serverId,comment,status,name,scheduleexpr)
+		INSERT INTO cronjob(serverId,comment,status,name,scheduleexpr,cronType)
 		VALUES (
 		<foreach item="cronJob" index="index" collection="cronJobs"
 			open="" close="" separator="),(">
-			#{cronLog.serverId}, #{cronLog.cronComment}, #{cronLog.cronStatus},#{cronLog.cronName}, #{cronLog.cronExpression},
+			#{cronJob.serverId}, #{cronJob.cronComment}, #{cronJob.cronStatus},#{cronJob.cronName}, #{cronJob.cronExpression}, #{cronJob.cronType}
 		</foreach>
 		)
 	</insert>
