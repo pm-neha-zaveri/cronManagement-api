@@ -1,3 +1,4 @@
+
 -- MySQL dump 10.13  Distrib 5.5.41, for debian-linux-gnu (x86_64)
 --
 -- Host: localhost    Database: cronmanagement
@@ -167,3 +168,49 @@ UNLOCK TABLES;
 
 -- Dump completed on 2015-04-24  4:09:57
 ALTER TABLE `cronmanagement`.`server` ADD COLUMN `server_health` VARCHAR(45) NULL  AFTER `description` ;
+
+UPDATE `cronmanagement`.`server` SET `server_health`='20' WHERE `id`='1';
+UPDATE `cronmanagement`.`server` SET `server_health`='100' WHERE `id`='2';
+UPDATE `cronmanagement`.`server` SET `server_health`='56' WHERE `id`='3';
+UPDATE `cronmanagement`.`server` SET `server_health`='34' WHERE `id`='4';
+UPDATE `cronmanagement`.`server` SET `server_health`='60' WHERE `id`='5';
+UPDATE `cronmanagement`.`server` SET `server_health`='0' WHERE `id`='6';
+UPDATE `cronmanagement`.`server` SET `server_health`='90' WHERE `id`='7';
+UPDATE `cronmanagement`.`server` SET `server_health`='65' WHERE `id`='8';
+
+UPDATE `cronmanagement`.`datacenter` SET `latitude`='18.5203', `longitude`='73.8567' WHERE `id`='1';
+UPDATE `cronmanagement`.`datacenter` SET `latitude`='28.5203', `longitude`='89.8567', `dcHealth`=40 WHERE `id`='2';
+UPDATE `cronmanagement`.`datacenter` SET `latitude`='8.5203', `longitude`='73.8567' WHERE `id`='3';
+
+UPDATE `cronmanagement`.`datacenter` SET `dcName`='Bagdad', `latitude`='33.33333333' WHERE `id`='3';
+UPDATE `cronmanagement`.`datacenter` SET `dcName`='Kathmandu', `longitude`='85.316667' WHERE `id`='2';
+UPDATE `cronmanagement`.`datacenter` SET `latitude`='48.86666667', `longitude`='2.333333' WHERE `id`='1';
+
+
+ALTER TABLE `cronmanagement`.`cronjob` ADD COLUMN `cronType` VARCHAR(45) NULL  AFTER `status` ;
+
+
+UPDATE `cronmanagement`.`cronjob` SET `cronType`='DBCron' WHERE `id`='6';
+UPDATE `cronmanagement`.`cronjob` SET `cronType`='AudienceCron' WHERE `id`='7';
+UPDATE `cronmanagement`.`cronjob` SET `cronType`='PMPCron' WHERE `id`='8';
+UPDATE `cronmanagement`.`cronjob` SET `cronType`='WorkFlowCron' WHERE `id`='9';
+UPDATE `cronmanagement`.`cronjob` SET `cronType`='WorkFlowCron' WHERE `id`='10';
+UPDATE `cronmanagement`.`cronjob` SET `cronType`='WorkFlowCron' WHERE `id`='11';
+UPDATE `cronmanagement`.`cronjob` SET `cronType`='WorkFlowCron' WHERE `id`='12';
+UPDATE `cronmanagement`.`cronjob` SET `cronType`='WorkFlowCron' WHERE `id`='14';
+UPDATE `cronmanagement`.`cronjob` SET `cronType`='WorkFlowCron' WHERE `id`='15';
+UPDATE `cronmanagement`.`cronjob` SET `cronType`='WorkFlowCron' WHERE `id`='16';
+UPDATE `cronmanagement`.`cronjob` SET `cronType`='WorkFlowCron' WHERE `id`='13';
+UPDATE `cronmanagement`.`cronjob` SET `cronType`='WorkFlowCron' WHERE `id`='17';
+UPDATE `cronmanagement`.`cronjob` SET `cronType`='WorkFlowCron' WHERE `id`='18';
+UPDATE `cronmanagement`.`cronjob` SET `cronType`='WorkFlowCron' WHERE `id`='19';
+UPDATE `cronmanagement`.`cronjob` SET `cronType`='' WHERE `id`='20';
+
+UPDATE cronjob SET cronType="WorkFlowCron" WHERE cronType is null;
+
+UPDATE `cronmanagement`.`datacenter` SET `dcName`='Paris' WHERE `id`='1';
+
+UPDATE `cronmanagement`.`datacenter` SET `longitude`='44.44' WHERE `id`='3';
+
+
+
