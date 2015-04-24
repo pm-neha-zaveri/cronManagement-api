@@ -6,6 +6,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -42,6 +43,13 @@ public class CronJobDetailsResource {
     @Path("/cron/{cronId}")
     public CronJob getCronByCronId(@PathParam("cronId") Integer cronId) {
         return cronJobDetailsService.getCronJobDetailsByCronId(cronId);
+    }
+    
+    @GET
+    @Produces("application/json")
+    @Path("/cronType")
+    public List<CronJob> getCronListByCronType(@QueryParam("cronType") String cronType) {
+        return cronJobDetailsService.getCronJobDetailsByCronType(cronType);
     }
 
 }
