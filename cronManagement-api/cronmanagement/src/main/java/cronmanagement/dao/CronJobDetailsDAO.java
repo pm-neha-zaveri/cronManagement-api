@@ -12,14 +12,17 @@ public interface CronJobDetailsDAO {
 
     public List<CronJob> getCronJobDetails();
 
-    public List<CronJob> getCronJobDetailsByServerId(@Param("serverId")Integer serverId);
+    public List<CronJob> getCronJobDetailsByServerId(@Param("serverId") Integer serverId);
 
-    public CronJob getCronJobDetailsByCronId(@Param("cronId")Integer cronId);
+    public CronJob getCronJobDetailsByCronId(@Param("cronId") Integer cronId);
 
     public void saveAllCronJobs(@Param("cronJobs") List<CronJob> cronJobs);
-    
+
     public void updateAllCronJobs(@Param("cronJobs") List<CronJob> cronJobs);
-    
-    public List<CronJob> getCronJobDetailsByCronType(@Param("cronType")String cronType);
-    
+
+    public List<CronJob> getCronJobDetailsByCronType(@Param("cronType") String cronType);
+
+    public List<CronJob> getCronJobByServerIdAndCronName(@Param("serverId") Integer serverId,
+            @Param("cronName") String cronName);
+
 }

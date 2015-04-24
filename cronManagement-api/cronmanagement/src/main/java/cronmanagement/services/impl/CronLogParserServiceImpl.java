@@ -32,7 +32,7 @@ public class CronLogParserServiceImpl implements CronLogParserService {
     private final static String CRONJOB_LOG = "CRONJOB LOG";
 
     @Autowired
-    CronJobDetailsService cronDetailsService;
+    CronJobDetailsService cronJobDetailsService;
 
     @Autowired
     ServerDetailsService serverDetailsService;
@@ -45,10 +45,13 @@ public class CronLogParserServiceImpl implements CronLogParserService {
         List<CronLogBean> cronLogList = new ArrayList<CronLogBean>();
         BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
         String logInfo = null;
+        CronLogBean cronLogBean = null;
         try {
             while ((logInfo = reader.readLine()) != null) {
                 while (logInfo != null && logInfo.trim().length() > 0) {
-                    cronLogList.add(getCronLogBean(logInfo));
+                    cronLogBean = getCronLogBean(logInfo);
+                    if (cronLogBean != null)
+                        cronLogList.add(getCronLogBean(logInfo));
                     logInfo = reader.readLine();
                     if (logInfo != null && logInfo.indexOf(CRONJOB_LOG) != -1) {
                         break;
@@ -67,7 +70,7 @@ public class CronLogParserServiceImpl implements CronLogParserService {
             }
         }
         Collections.sort(cronLogList, new CronLogComparator());
-        LOGGER.info("cronLogList  : "+cronLogList);
+        LOGGER.info("cronLogList  : " + cronLogList);
         return updateCronLogs(cronLogList);
     }
 
@@ -75,17 +78,24 @@ public class CronLogParserServiceImpl implements CronLogParserService {
     public CronLogBean getCronLogBean(String logInfo) {
         CronLogBean cronLogBean = null;
         String tokens[] = logInfo.trim().split("\\|");
-        cronLogBean = new CronLogBean();
-        cronLogBean.setCronId(getCronIdByCronName(tokens[0]));
         try {
-            if (tokens.length > 1 && tokens[1].trim().length() > 0)
-                cronLogBean.setServerId(getServerIdByServeriP(tokens[1].trim()));
-            if (tokens.length > 2 && tokens[2].trim().length() > 0)
-                cronLogBean.setStartTime(sql_formatter.format(formatter.parse(tokens[2].trim())));
-            if (tokens.length > 3 && tokens[3].trim().length() > 0)
-                cronLogBean.setEndTime(sql_formatter.format(formatter.parse(tokens[3].trim())));
-            if (tokens.length > 4 && tokens[4].trim().length() > 0)
-                cronLogBean.setProcessId(Integer.parseInt(tokens[4].trim()));
+            Integer serverId = getServerIdByServeriP(tokens[1].trim());
+            if (serverId != null) {
+                List<CronJob> cronJobList = cronJobDetailsService.getCronJobByServerIdAndCronName(serverId, new String(
+                        "%" + tokens[0] + "%"));
+                CronJob cronJob = (cronJobList != null && cronJobList.size() > 0 ? cronJobList.get(0) : null);
+                if (cronJob != null) {
+                    cronLogBean = new CronLogBean();
+                    cronLogBean.setServerId(serverId);
+                    cronLogBean.setCronId(cronJob.getCronId());
+                    if (tokens.length > 2 && tokens[2].trim().length() > 0)
+                        cronLogBean.setStartTime(sql_formatter.format(formatter.parse(tokens[2].trim())));
+                    if (tokens.length > 3 && tokens[3].trim().length() > 0)
+                        cronLogBean.setEndTime(sql_formatter.format(formatter.parse(tokens[3].trim())));
+                    if (tokens.length > 4 && tokens[4].trim().length() > 0)
+                        cronLogBean.setProcessId(Integer.parseInt(tokens[4].trim()));
+                }
+            }
         } catch (ParseException e) {
             LOGGER.error("Exception occured : " + e.getMessage(), e);
         }
@@ -95,11 +105,6 @@ public class CronLogParserServiceImpl implements CronLogParserService {
     private Integer getServerIdByServeriP(String serverIp) {
         ServerBean serverDetails = serverDetailsService.getServerDetailByIp(serverIp);
         return (serverDetails != null ? serverDetails.getId().intValue() : 0);
-    }
-
-    private Integer getCronIdByCronName(String cronName) {
-        CronJob cronJob = cronDetailsService.getCronDetailsByCronName(cronName);
-        return (cronJob != null ? cronJob.getCronId() : 0);
     }
 
     @Override
@@ -117,9 +122,11 @@ public class CronLogParserServiceImpl implements CronLogParserService {
                         if (cronLogBean2.getEndTime() != null) {
                             cronLogBean1.setEndTime(cronLogBean2.getEndTime());
                             try {
-                                cronLogBean1.setRunTime(sql_formatter.parse(cronLogBean1.getEndTime()).getTime() - sql_formatter.parse(cronLogBean1.getStartTime()).getTime());
+                                cronLogBean1.setRunTime(sql_formatter.parse(cronLogBean1.getEndTime()).getTime()
+                                        - sql_formatter.parse(cronLogBean1.getStartTime()).getTime());
                             } catch (ParseException e) {
-                                LOGGER.error("Exception occured while setting runtime : End Time "+cronLogBean1.getEndTime()+" Start Time "+cronLogBean1.getStartTime());
+                                LOGGER.error("Exception occured while setting runtime : End Time "
+                                        + cronLogBean1.getEndTime() + " Start Time " + cronLogBean1.getStartTime());
                             }
                         } else {
                             iterator.previous();

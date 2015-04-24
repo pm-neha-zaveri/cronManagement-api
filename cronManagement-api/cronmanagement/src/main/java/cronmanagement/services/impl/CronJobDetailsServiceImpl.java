@@ -70,4 +70,9 @@ public class CronJobDetailsServiceImpl implements CronJobDetailsService {
         return cronDetailsDAO.getCronJobDetailsByCronType(cronType);
     }
 
+    @Override
+    public List<CronJob> getCronJobByServerIdAndCronName(Integer serverId, String cronName) {
+        return cronDetailsDAO.getCronJobByServerIdAndCronName(serverId, cronName);
+    }
+
 }

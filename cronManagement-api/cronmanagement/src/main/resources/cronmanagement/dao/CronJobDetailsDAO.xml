@@ -66,5 +66,16 @@
 		cronType as cronType
 		FROM cronjob where cronType like #{cronType}
 	</select>
+	
+	<select id="getCronJobByServerIdAndCronName" resultType="cronmanagement.bean.CronJob">
+		SELECT id as cronId,
+		serverId as serverId,
+		comment as cronComment,
+		status as cronStatus,
+		name as cronName,
+		scheduleexpr as cronExpression,
+		cronType as cronType
+		FROM cronjob where serverId = #{serverId} and name like #{cronName}
+	</select>
 
 </mapper>
