@@ -28,6 +28,7 @@ public class CronAlertDetailsResource {
     public final static Log LOGGER = LogFactory.getLog(CronAlertDetailsResource.class);
 
     SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy kk:mm:ss");
+    SimpleDateFormat sql_formatter = new SimpleDateFormat("yyyy-MM-dd kk:mm:ss");
 
     @Autowired
     CronAlertDetailsService cronAlertDetailsService;
@@ -80,15 +81,18 @@ public class CronAlertDetailsResource {
             if (serverBean != null && cronName != null && cronName.trim().length() > 0) {
                 List<CronJob> cronJobList = cronJobDetailsService.getCronJobDetailsByServerId(serverBean.getId());
                 cronAlert.setServerId(serverBean.getId());
+                cronAlert.setDcId(serverBean.getDcId());
                 if (cronJobList != null && cronJobList.size() > 0) {
                     for (CronJob cronJob : cronJobList) {
                         if (cronJob.getCronName() != null
                                 && cronJob.getCronName().trim().indexOf(cronName.trim()) != -1) {
                             cronAlert.setCronId(cronJob.getCronId());
                             if (cronStartTime != null && cronStartTime.trim().length() > 0)
-                                cronAlert.setStartTime(cronStartTime.replace('_', ' '));
+                                cronAlert.setStartTime(sql_formatter.format(formatter.parse(cronStartTime.replace('_',
+                                        ' '))));
                             if (cronEndTime != null && cronEndTime.trim().length() > 0)
-                                cronAlert.setEndTime(cronEndTime.replace('_', ' '));
+                                cronAlert
+                                        .setEndTime(sql_formatter.format(formatter.parse(cronEndTime.replace('_', ' '))));
                             if (actualRunTimeSec != null && actualRunTimeSec.trim().length() > 0)
                                 cronAlert.setRunTime(Integer.parseInt(actualRunTimeSec) * 1000);
                             if (actualRunTimeSec != null && actualRunTimeSec.trim().length() > 0)

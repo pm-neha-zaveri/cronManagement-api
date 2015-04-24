@@ -1,7 +1,6 @@
 package cronmanagement.bean;
 
 import java.io.Serializable;
-import java.util.Date;
 
 public class CronLogBean implements Serializable {
 
@@ -9,8 +8,8 @@ public class CronLogBean implements Serializable {
     private Integer id;
     private Integer cronId;
     private Integer serverId;
-    private Date startTime;
-    private Date endTime;
+    private String startTime;
+    private String endTime;
     private Integer processId;
     private Integer threshold;
     private Long runTime = -1l;
@@ -47,22 +46,6 @@ public class CronLogBean implements Serializable {
         this.processId = processId;
     }
 
-    public Date getStartTime() {
-        return startTime;
-    }
-
-    public void setStartTime(Date startTime) {
-        this.startTime = startTime;
-    }
-
-    public Date getEndTime() {
-        return endTime;
-    }
-
-    public void setEndTime(Date endTime) {
-        this.endTime = endTime;
-    }
-
     public Integer getCronId() {
         return cronId;
     }
@@ -77,6 +60,22 @@ public class CronLogBean implements Serializable {
 
     public void setServerId(Integer serverId) {
         this.serverId = serverId;
+    }
+
+    public String getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(String startTime) {
+        this.startTime = startTime;
+    }
+
+    public String getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(String endTime) {
+        this.endTime = endTime;
     }
 
     @Override

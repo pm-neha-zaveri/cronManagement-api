@@ -37,8 +37,8 @@ public class CronLogParserServiceImpl implements CronLogParserService {
     @Autowired
     ServerDetailsService serverDetailsService;
 
-    // SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd kk:mm:ss");
     SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy kk:mm:ss");
+    SimpleDateFormat sql_formatter = new SimpleDateFormat("yyyy-MM-dd kk:mm:ss");
 
     @Override
     public List<CronLogBean> getCronLogs(InputStream inputStream) {
@@ -81,9 +81,9 @@ public class CronLogParserServiceImpl implements CronLogParserService {
             if (tokens.length > 1 && tokens[1].trim().length() > 0)
                 cronLogBean.setServerId(getServerIdByServeriP(tokens[1].trim()));
             if (tokens.length > 2 && tokens[2].trim().length() > 0)
-                cronLogBean.setStartTime(formatter.parse(tokens[2].trim()));
+                cronLogBean.setStartTime(sql_formatter.format(formatter.parse(tokens[2].trim())));
             if (tokens.length > 3 && tokens[3].trim().length() > 0)
-                cronLogBean.setEndTime(formatter.parse(tokens[3].trim()));
+                cronLogBean.setEndTime(sql_formatter.format(formatter.parse(tokens[3].trim())));
             if (tokens.length > 4 && tokens[4].trim().length() > 0)
                 cronLogBean.setProcessId(Integer.parseInt(tokens[4].trim()));
         } catch (ParseException e) {
@@ -116,7 +116,11 @@ public class CronLogParserServiceImpl implements CronLogParserService {
                     if (cronLogBean1.getCronId().equals(cronLogBean2.getCronId())) {
                         if (cronLogBean2.getEndTime() != null) {
                             cronLogBean1.setEndTime(cronLogBean2.getEndTime());
-                            cronLogBean1.setRunTime(cronLogBean1.getEndTime().getTime() - cronLogBean1.getStartTime().getTime());
+                            try {
+                                cronLogBean1.setRunTime(sql_formatter.parse(cronLogBean1.getEndTime()).getTime() - sql_formatter.parse(cronLogBean1.getStartTime()).getTime());
+                            } catch (ParseException e) {
+                                LOGGER.error("Exception occured while setting runtime : End Time "+cronLogBean1.getEndTime()+" Start Time "+cronLogBean1.getStartTime());
+                            }
                         } else {
                             iterator.previous();
                         }

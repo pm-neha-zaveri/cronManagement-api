@@ -32,7 +32,8 @@ public class ServerDetailsServiceImpl implements ServerDetailsService {
                 for (ServerBean serverDetails : serverDetailsList) {
                     if (serverDetails.getServerIP() != null
                             && serverDetails.getServerIP().trim().equals(ipAddress.trim())) {
-                        return serverDetail;
+                        serverDetail = serverDetails;
+                        break;
                     }
                 }
             }

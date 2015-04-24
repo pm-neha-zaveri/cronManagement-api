@@ -56,9 +56,9 @@
 	</select>
 	
 	<insert id="saveCronAlert">
-		INSERT INTO cronalert(cron_id,server_id,dc_id,description,start_time,end_time,run_time,threshold)
+		INSERT INTO cron_alert(cron_id,server_id,dc_id,description,start_time,end_time,run_time,threshold)
 		VALUES (
-			#{cronAlert.cronId}, #{cronAlert.serverId}, #{cronAlert.dcId}, #{cronAlert.alertDescription},#{cronAlert.startTime}, #{cronAlert.endTime},#{cronAlert.runTime},#{cronAlert.threshold},
+			#{cronAlert.cronId}, #{cronAlert.serverId}, #{cronAlert.dcId}, #{cronAlert.alertDescription},#{cronAlert.startTime}, #{cronAlert.endTime},#{cronAlert.runTime},#{cronAlert.threshold}
 		)
 	</insert>
 
