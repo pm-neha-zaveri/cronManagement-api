@@ -36,10 +36,9 @@ public class CronLogSchedulerTask {
     }
 
     public void readFile(InputStream inputStream) {
-        List<CronLogBean> cronJobs = cronLogParserService.getCronLogs(inputStream);
-        LOGGER.info("cronJobs : "+cronJobs);
-        // TODO save to DB
-        cronLogHistoryService.saveCronLogHistory(cronJobs);
+        List<CronLogBean> cronLogs = cronLogParserService.getCronLogs(inputStream);
+        LOGGER.info("cronJobs : "+cronLogs);
+        cronLogHistoryService.saveCronLogHistory(cronLogs);
     }
 
 }

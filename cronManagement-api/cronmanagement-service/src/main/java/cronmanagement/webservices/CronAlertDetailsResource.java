@@ -7,6 +7,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -55,7 +56,7 @@ public class CronAlertDetailsResource {
     @GET
     @Produces("application/json")
     @Path("/savealert/")
-    public void saveCronAlert(HttpServletRequest request) {
+    public void saveCronAlert(@QueryParam("cronName")String cronName,HttpServletRequest request) {
         CronAlert cronAlert = new CronAlert();
         cronAlertDetailsService.saveCronAlert(cronAlert);
     }

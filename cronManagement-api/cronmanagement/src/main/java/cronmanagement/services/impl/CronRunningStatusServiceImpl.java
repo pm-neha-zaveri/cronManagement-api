@@ -16,10 +16,11 @@ public class CronRunningStatusServiceImpl implements CronRunningStatusService {
     private String cronjobstatusfilepath;
 
     @Override
-    public String getCronRunningStatus(Integer cronId) {
+    public String getCronRunningStatus(String server,String cronName) {
         LOGGER.error("cronjobstatusfilepath : " + cronjobstatusfilepath);
         boolean isRunning = true;
         String result = new String("Not Running");
+        
         if (isRunning) {
             result = new String("Running");
         }
