@@ -1,6 +1,9 @@
 package cronmanagement.schedulers;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.Charset;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -26,19 +29,21 @@ public class CronLogSchedulerTask {
 	@Autowired
 	CronLogHistoryService cronLogHistoryService;
 
-	public void fetchAndSaveCronLogs() {
+	public void fetchAndSaveCronLogs() throws IOException {
 		executeCommand();
 	}
 
-	public void executeCommand() {
+	public void executeCommand() throws IOException {
 		String cronListsh = FileUtility
-				.getPropertyValue("REMOTE_CRON_LOG_SCRIPT");
-		InputStream shResponse = CronManagementUtility
+				.getPropertyValue("REMOTE_CRON_LOGS_SCRIPT");
+		String shResponse = CronManagementUtility
 				.runBashCommand(cronListsh);
 		readFile(shResponse);
 	}
 
-	public void readFile(InputStream inputStream) {
+	public void readFile(String inputString) {
+		InputStream inputStream = new ByteArrayInputStream(inputString.getBytes());
+		System.out.println(inputString);
 		List<CronLogBean> cronLogs = cronLogParserService
 				.getCronLogs(inputStream);
 		LOGGER.info("cronJobs : " + cronLogs);

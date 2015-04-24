@@ -1,5 +1,7 @@
 package cronmanagement.webservices;
 
+import java.io.IOException;
+
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -32,7 +34,7 @@ public class CronRunningStatusResource {
     
     @GET
     @Produces("application/json")
-    public String getCronLogHistoryByCronId(@QueryParam("cronId") Integer cronId) {
+    public String getCronLogHistoryByCronId(@QueryParam("cronId") Integer cronId) throws IOException {
         LOGGER.info("cronId : "+cronId);
         if(cronId == null)
             cronId = 0;

@@ -1,6 +1,9 @@
 package cronmanagement.schedulers;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -30,19 +33,20 @@ public class CronJobSchedulerTask {
 	@Autowired
 	CronJobDetailsService cronDetailsService;
 
-	public void fetchAndSaveCronDetails() {
+	public void fetchAndSaveCronDetails() throws IOException {
 		executeCommand();
 	}
 
-	public void executeCommand() {
+	public void executeCommand() throws IOException {
 		String cronListsh = FileUtility
 				.getPropertyValue("REMOTE_CRON_LIST_SCRIPT");
-		InputStream shResponse = CronManagementUtility
-				.runBashCommand(cronListsh);
+		String shResponse = CronManagementUtility.runBashCommand(cronListsh);
 		readFile(shResponse);
 	}
 
-	public void readFile(InputStream inputStream) {
+	public void readFile(String inputString) {
+		InputStream inputStream = new ByteArrayInputStream(
+				inputString.getBytes());
 		List<CronJob> cronJobs = cronJobParserService.parse(inputStream);
 		updateCronDetails(createServerCronJobMap(cronJobs));
 	}

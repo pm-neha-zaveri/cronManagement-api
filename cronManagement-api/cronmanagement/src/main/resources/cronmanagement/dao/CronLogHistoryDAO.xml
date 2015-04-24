@@ -40,9 +40,9 @@
 	</select>
 	
 	
-	<insert id="insertCronLogHistory">
+	<insert id="saveCronLogHistory">
 		INSERT INTO
-		cron_run_history (
+		cron_log_history (
 		cron_id,server_id,start_time,end_time,run_time,threshold,processId
 		)
 		VALUES (
