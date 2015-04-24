@@ -19,4 +19,7 @@ public interface CronJobDetailsDAO {
     public void saveAllCronJobs(@Param("cronJobs") List<CronJob> cronJobs);
     
     public void updateAllCronJobs(@Param("cronJobs") List<CronJob> cronJobs);
+    
+    public List<CronJob> getCronJobDetailsByCronType(@Param("cronType")String cronType);
+    
 }

@@ -55,5 +55,16 @@
 		</foreach>
 		)
 	</update>
+	
+	<select id="getCronJobDetailsByCronType" resultType="cronmanagement.bean.CronJob">
+		SELECT id as cronId,
+		serverId as serverId,
+		comment as cronComment,
+		status as cronStatus,
+		name as cronName,
+		scheduleexpr as cronExpression,
+		cronType as cronType
+		FROM cronjob where cronType like #{cronType}
+	</select>
 
 </mapper>

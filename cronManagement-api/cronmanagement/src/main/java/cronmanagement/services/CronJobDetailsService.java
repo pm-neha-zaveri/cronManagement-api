@@ -16,4 +16,6 @@ public interface CronJobDetailsService {
     public void updateAllCronJobs(List<CronJob> cronJobs);
     
     public CronJob getCronDetailsByCronName(String cronName);
+    
+    public List<CronJob> getCronJobDetailsByCronType(String cronType);
 }
