@@ -32,16 +32,15 @@ public class CronRunningStatusResource {
     
     @GET
     @Produces("application/json")
-    public String getCronLogHistoryByCronId(@QueryParam("cronId") Integer cronId,@QueryParam("serverId") Integer serverId) {
+    public String getCronLogHistoryByCronId(@QueryParam("cronId") Integer cronId) {
+        LOGGER.info("cronId : "+cronId);
         if(cronId == null)
             cronId = 0;
-        if(serverId == null)
-            serverId = 0;
         CronJob cronJob = cronJobDetailsResource.getCronByCronId(cronId);
-        ServerBean serverBean = serverDetailsResource.getServerDetailsByServerId(serverId);
-        
-        if(cronJob != null && serverBean != null){
-            return cronRunningStatusService.getCronRunningStatus(cronJob.getCronName(),serverBean.getServerIP());
+        if(cronJob != null){
+            ServerBean serverBean = serverDetailsResource.getServerDetailsByServerId(cronJob.getServerId());
+            if(serverBean != null)
+                return cronRunningStatusService.getCronRunningStatus(cronJob.getCronName(),serverBean.getServerIP());
         }
         return new String("Invalid Parameters.");
     }
