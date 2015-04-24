@@ -42,7 +42,7 @@ public class CronRunningStatusResource {
         if(cronJob != null){
             ServerBean serverBean = serverDetailsResource.getServerDetailsByServerId(cronJob.getServerId());
             if(serverBean != null)
-                return cronRunningStatusService.getCronRunningStatus(cronJob.getCronName(),serverBean.getServerIP());
+                return cronRunningStatusService.getCronRunningStatus(serverBean.getServerIP(),cronJob.getCronName());
         }
         return new String("Invalid Parameters.");
     }

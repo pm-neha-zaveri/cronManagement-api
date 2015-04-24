@@ -18,7 +18,7 @@ import org.springframework.stereotype.Component;
 import cronmanagement.bean.CronAlert;
 import cronmanagement.bean.CronJob;
 import cronmanagement.bean.ServerBean;
-import cronmanagement.schedulers.CronLogSchedulerTask;
+import cronmanagement.schedulers.CronJobSchedulerTask;
 import cronmanagement.services.CronAlertDetailsService;
 import cronmanagement.services.CronJobDetailsService;
 import cronmanagement.services.ServerDetailsService;
@@ -40,6 +40,9 @@ public class CronAlertDetailsResource {
 
     @Autowired
     ServerDetailsService serverDetailsService;
+    
+    @Autowired
+    CronJobSchedulerTask cronJobSchedulerTask;
 
     @GET
     @Produces("application/json")
@@ -109,6 +112,17 @@ public class CronAlertDetailsResource {
                 LOGGER.info("Invalid Data");
         } catch (Exception exception) {
             LOGGER.error("saveCronAlert : " + exception.getMessage(), exception);
+        }
+    }
+    
+    @GET
+    @Path("/cronjobs/")
+    public void addCronJobs(){
+        try {
+            cronJobSchedulerTask.executeCommand();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
     }
 

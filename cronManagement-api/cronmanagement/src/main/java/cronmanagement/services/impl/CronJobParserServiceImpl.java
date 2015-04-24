@@ -24,7 +24,7 @@ public class CronJobParserServiceImpl implements CronJobParserService {
     public final static Log LOGGER = LogFactory.getLog(CronJobParserServiceImpl.class);
 
     private static final String HASH = "#";
-    private static final String CRONTAB_START = "crontab -l";
+    private static final String CRONTAB_START = "CRONTAB FILE FOR";
 
     @Autowired
     ServerDetailsService serverDetailsService;
@@ -64,6 +64,8 @@ public class CronJobParserServiceImpl implements CronJobParserService {
                         if (comment != null && comment.indexOf(CRONTAB_START) != -1)
                             break;
                     }
+                }else{
+                    comment = reader.readLine();
                 }
             }
         } catch (IOException e) {

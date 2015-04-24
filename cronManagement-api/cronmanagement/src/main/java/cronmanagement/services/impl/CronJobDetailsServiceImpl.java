@@ -61,8 +61,8 @@ public class CronJobDetailsServiceImpl implements CronJobDetailsService {
     }
 
     @Override
-    public void updateAllCronJobs(List<CronJob> cronJobs) {
-        cronDetailsDAO.updateAllCronJobs(cronJobs);
+    public void updateAllCronJobs(CronJob cronJob) {
+        cronDetailsDAO.updateAllCronJobs(cronJob);
     }
 
     @Override
@@ -73,6 +73,11 @@ public class CronJobDetailsServiceImpl implements CronJobDetailsService {
     @Override
     public List<CronJob> getCronJobByServerIdAndCronName(Integer serverId, String cronName) {
         return cronDetailsDAO.getCronJobByServerIdAndCronName(serverId, cronName);
+    }
+
+    @Override
+    public void deleteCronJobs(List<Integer> cronIds) {
+        cronDetailsDAO.deleteCronJobs(cronIds);
     }
 
 }

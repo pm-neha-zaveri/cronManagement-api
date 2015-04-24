@@ -13,7 +13,9 @@ public interface CronJobDetailsService {
 
     public void saveAllCronJobs(List<CronJob> cronJobs);
 
-    public void updateAllCronJobs(List<CronJob> cronJobs);
+    public void updateAllCronJobs(CronJob cronJob);
+    
+    public void deleteCronJobs(List<Integer> cronIds);
 
     public CronJob getCronDetailsByCronName(String cronName);
 

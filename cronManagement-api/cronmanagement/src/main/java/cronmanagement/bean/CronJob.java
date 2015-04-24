@@ -13,6 +13,7 @@ public class CronJob implements Serializable {
     private String cronStatus;
     private String cronComment;
     private String cronType;
+
     public String getCronType() {
         return cronType;
     }
@@ -20,7 +21,6 @@ public class CronJob implements Serializable {
     public void setCronType(String cronType) {
         this.cronType = cronType;
     }
-
 
     public String getCronComment() {
         return cronComment;
@@ -83,6 +83,37 @@ public class CronJob implements Serializable {
         return "CronJob [cronId=" + cronId + ", serverId=" + serverId + ", cronExpression=" + cronExpression
                 + ", cronName=" + cronName + ", cronCommand=" + cronCommand + ", cronStatus=" + cronStatus
                 + ", cronComment=" + cronComment + ", cronType=" + cronType + "]\n";
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((cronName == null) ? 0 : cronName.replace('#', ' ').trim().hashCode());
+        result = prime * result + ((serverId == null) ? 0 : serverId.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        CronJob other = (CronJob) obj;
+        if (cronName == null) {
+            if (other.cronName != null)
+                return false;
+        } else if (!cronName.replace('#', ' ').trim().equals(other.cronName.replace('#', ' ').trim()))
+            return false;
+        if (serverId == null) {
+            if (other.serverId != null)
+                return false;
+        } else if (!serverId.equals(other.serverId))
+            return false;
+        return true;
     }
 
 }

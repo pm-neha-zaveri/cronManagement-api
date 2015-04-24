@@ -35,8 +35,9 @@ public class CronLogSchedulerTask {
 	public void executeCommand() throws IOException {
 		String cronListsh = FileUtility
 				.getPropertyValue("REMOTE_CRON_LOGS_SCRIPT");
+		String[] args = new String[]{cronListsh};
 		String shResponse = CronManagementUtility
-				.runBashCommand(cronListsh);
+				.runBashCommand(args);
 		readFile(shResponse);
 	}
 

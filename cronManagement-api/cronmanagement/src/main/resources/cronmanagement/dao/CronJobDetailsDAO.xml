@@ -8,74 +8,100 @@
 		serverId as serverId,
 		comment as cronComment,
 		status as cronStatus,
-		name as cronName,
+		name
+		as cronName,
 		scheduleexpr as cronExpression,
 		cronType as cronType
-		FROM cronjob;
+		FROM
+		cronjob where status not like 'deleted'
 	</select>
 
 	<select id="getCronJobDetailsByServerId" resultType="cronmanagement.bean.CronJob">
-		SELECT id as cronId,
+		SELECT id as
+		cronId,
 		serverId as serverId,
 		comment as cronComment,
-		status as cronStatus,
+		status as
+		cronStatus,
 		name as cronName,
 		scheduleexpr as cronExpression,
-		cronType as cronType
-		FROM cronjob where serverId = #{serverId}
+		cronType as
+		cronType
+		FROM cronjob where serverId = #{serverId} and
+		status not like 'deleted'
 	</select>
 
 	<select id="getCronJobDetailsByCronId" resultType="cronmanagement.bean.CronJob">
-		SELECT id as cronId,
+		SELECT id as
+		cronId,
 		serverId as serverId,
 		comment as cronComment,
-		status as cronStatus,
+		status as
+		cronStatus,
 		name as cronName,
 		scheduleexpr as cronExpression,
-		cronType as cronType
-		FROM cronjob where id = #{cronId};
+		cronType as
+		cronType
+		FROM cronjob where id = #{cronId} and status not like 'deleted'
 	</select>
-	
+
 	<insert id="saveAllCronJobs">
-		INSERT INTO cronjob(serverId,comment,status,name,scheduleexpr,cronType)
+		INSERT INTO
+		cronjob(serverId,comment,status,name,scheduleexpr,cronType)
 		VALUES (
 		<foreach item="cronJob" index="index" collection="cronJobs"
 			open="" close="" separator="),(">
-			#{cronJob.serverId}, #{cronJob.cronComment}, #{cronJob.cronStatus},#{cronJob.cronName}, #{cronJob.cronExpression}, #{cronJob.cronType}
+			#{cronJob.serverId},
+			#{cronJob.cronComment}, #{cronJob.cronStatus},#{cronJob.cronName},
+			#{cronJob.cronExpression}, #{cronJob.cronType}
 		</foreach>
 		)
 	</insert>
-	
+
 	<update id="updateAllCronJobs">
 		UPDATE cronjob
-		set status='INACTIVE' where id in  (
-		<foreach item="cronJob" index="index" collection="cronJobs"
-			open="" close="" separator=",">
-			#{cronJob.cronId}
-		</foreach>
+		set comment=#{cronJob.cronComment},
+		status=#{cronJob.cronStatus},name=#{cronJob.cronName}
+		WHERE id
+		= #{cronJob.cronId}
+	</update>
+
+	<update id="deleteCronJobs">
+		UPDATE cronjob
+		set status='deleted' where id In(
+		<foreach item="id" index="index" collection="cronIds" open=""
+			close="" separator=",">#{id}</foreach>
 		)
 	</update>
-	
+
 	<select id="getCronJobDetailsByCronType" resultType="cronmanagement.bean.CronJob">
-		SELECT id as cronId,
+		SELECT id as
+		cronId,
 		serverId as serverId,
 		comment as cronComment,
-		status as cronStatus,
+		status as
+		cronStatus,
 		name as cronName,
 		scheduleexpr as cronExpression,
-		cronType as cronType
-		FROM cronjob where cronType like #{cronType}
+		cronType as
+		cronType
+		FROM cronjob where cronType like #{cronType} and
+		status not like 'deleted'
 	</select>
-	
+
 	<select id="getCronJobByServerIdAndCronName" resultType="cronmanagement.bean.CronJob">
-		SELECT id as cronId,
+		SELECT
+		id as cronId,
 		serverId as serverId,
 		comment as cronComment,
-		status as cronStatus,
+		status as
+		cronStatus,
 		name as cronName,
 		scheduleexpr as cronExpression,
-		cronType as cronType
-		FROM cronjob where serverId = #{serverId} and name like #{cronName}
+		cronType as
+		cronType
+		FROM cronjob where serverId = #{serverId} and name like
+		#{cronName} and status not like 'deleted'
 	</select>
 
 </mapper>
