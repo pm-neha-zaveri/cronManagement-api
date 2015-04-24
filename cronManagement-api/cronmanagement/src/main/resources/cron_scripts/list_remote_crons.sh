@@ -30,7 +30,7 @@
 	PASSWORD=$(cat $CONFIGDIR/config.properties | grep server.password | cut -d '=' -f2)
 
 	# command which will check crons scheduled on servers
-	CMD="crontab -l"
+	CMD="sudo crontab -l"
 
 	# for each server in the configuration file execute the command
 	for HOST in $(cat $CONFIGDIR/ip.conf)
@@ -40,19 +40,12 @@
 		# get sudo access for running command
 		# run command
 		VAR=$(expect -c "
-		     spawn ssh -o StrictHostKeyChecking=no $USERNAME@$HOST
-		     match_max 1000000
-		     expect -- \"*@*\"
-	             expect \"*?assword:*\"
-		     send -- \"$PASSWORD\r\"
-		     send -- \"sudo su\r\"
-		     match_max 1000
-		     expect -- \"*sudo*\"
-		     send -- \"$PASSWORD\r\"
-		     expect -- \"*@*\"
-		     send -- \"$CMD\r\"	
-    		     send -- \"#clear\r\"
-		     expect eof
+            		spawn ssh -o StrictHostKeyChecking=no $USERNAME@$HOST $CMD
+            		match_max 100000
+            		expect \"*?assword:*\"
+            		send -- \"$PASSWORD\r\"
+            		send -- \"\r\"
+            		expect eof
 		     ")
 
 		RESULT=$RESULT"CRONTAB FILE FOR SERVER:$HOST:DATE:$DATE:\n";
