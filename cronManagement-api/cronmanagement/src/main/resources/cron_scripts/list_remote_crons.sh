@@ -48,10 +48,10 @@
             		expect eof
 		     ")
 
-		RESULT=$RESULT"CRONTAB FILE FOR SERVER:$HOST:DATE:$DATE:\n";
+		echo "CRONTAB FILE FOR SERVER:$HOST:DATE:$DATE:";
+		
 		echo "$VAR" > tempResult ;
-	        RESULT=$RESULT$(sed -n "/crontab/,/clear/p" tempResult);
+		echo "$(tail -n +3 tempResult)" > tempResult
+	        cat tempResult
 		rm tempResult;
 	done	
-echo "$RESULT";
-

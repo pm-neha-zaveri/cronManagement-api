@@ -50,9 +50,10 @@
             expect eof
             ")
 
-	    CRONLOGS=$CRONLOGS"CRONJOB LOG FOR SERVER:$HOST:DATE:$DATE:\n";
-	    CRONLOGS=$CRONLOGS"$VAR";
+	   echo "$VAR" > tempResult ;
+           echo "$(tail -n +3 tempResult)" > tempResult
+	   cat tempResult	    
+	   rm tempResult;
 	done
-echo "$CRONLOGS"
 
 
