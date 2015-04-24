@@ -9,8 +9,17 @@ public class ServerBean implements Serializable{
     private String serverIP;
     private String description;
     private Integer dcId;
+    private String serverHealth;
 
-    public Integer getId() {
+    public String getServerHealth() {
+		return serverHealth;
+	}
+
+	public void setServerHealth(String serverHealth) {
+		this.serverHealth = serverHealth;
+	}
+
+	public Integer getId() {
         return id;
     }
 
