@@ -91,9 +91,9 @@ public class CronLogParserServiceImpl implements CronLogParserService {
                     cronLogBean.setServerId(serverId);
                     cronLogBean.setCronId(cronJob.getCronId());
                     if (tokens.length > 2 && tokens[2].trim().length() > 0)
-                        cronLogBean.setStartTime(formatter.format(formatter.parse(tokens[2].trim())));
+                        cronLogBean.setStartTime(sql_formatter.format(formatter.parse(tokens[2].trim())));
                     if (tokens.length > 3 && tokens[3].trim().length() > 0)
-                        cronLogBean.setEndTime(formatter.format(formatter.parse(tokens[3].trim())));
+                        cronLogBean.setEndTime(sql_formatter.format(formatter.parse(tokens[3].trim())));
                     if (tokens.length > 4 && tokens[4].trim().length() > 0)
                         cronLogBean.setProcessId(Integer.parseInt(tokens[4].trim()));
                 }

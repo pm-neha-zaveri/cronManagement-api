@@ -40,7 +40,7 @@ public class CronJobSchedulerTask {
 
     public void executeCommand() throws IOException {
         String cronListsh = FileUtility.getPropertyValue("REMOTE_CRON_LIST_SCRIPT");
-        String args[] = new String[] {Constants.FIRST_PARAM, cronListsh };
+        String args[] = new String[] {cronListsh,Constants.FIRST_PARAM};
         String shResponse = CronManagementUtility.runBashCommand(args);
         readFile(shResponse);
     }
