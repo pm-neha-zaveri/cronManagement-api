@@ -1,9 +1,11 @@
 package cronmanagement.webservices;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
 import org.apache.commons.logging.Log;
@@ -27,7 +29,7 @@ public class CronForecastingResource {
     @Produces("application/json")
     public List<CronForecast> getCronForecastHistory() {
         LOGGER.info("Within " + getClass().getName() + " getCronForecastHistory method.");
-        List<CronForecast> cronForeCastList = null;
+        List<CronForecast> cronForeCastList = new ArrayList<CronForecast>();
         try {
             cronForeCastList = cronForeCastService.getCronForecastHistory();
         } catch (Exception exception) {
@@ -39,9 +41,9 @@ public class CronForecastingResource {
     @GET
     @Produces("application/json")
     @Path("/cron/{cronId}")
-    public List<CronForecast> getCronForecastHistoryByCronId(Integer cronId) {
+    public List<CronForecast> getCronForecastHistoryByCronId(@PathParam("cronId") Integer cronId) {
         LOGGER.info("Within " + getClass().getName() + " getCronForecastHistoryByCronId method.");
-        List<CronForecast> cronForeCastList = null;
+        List<CronForecast> cronForeCastList = new ArrayList<CronForecast>();
         try {
             cronForeCastList = cronForeCastService.getCronForecastHistoryByCronId(cronId);
         } catch (Exception exception) {
@@ -53,9 +55,9 @@ public class CronForecastingResource {
     @GET
     @Produces("application/json")
     @Path("/server/{serverId}")
-    public List<CronForecast> getCronForecastHistoryByServerId(Integer serverId) {
+    public List<CronForecast> getCronForecastHistoryByServerId(@PathParam("serverId") Integer serverId) {
         LOGGER.info("Within " + getClass().getName() + " getCronForecastHistoryByServerId method.");
-        List<CronForecast> cronForeCastList = null;
+        List<CronForecast> cronForeCastList = new ArrayList<CronForecast>();
         try {
             cronForeCastList = cronForeCastService.getCronForecastHistoryByServerId(serverId);
         } catch (Exception exception) {
