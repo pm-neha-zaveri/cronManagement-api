@@ -24,7 +24,7 @@ public class CronForeCastServiceImpl implements CronForeCastService {
     public List<CronForecast> getCronForecastHistory() {
         List<CronForecast> cronForeCastList = null;
         try {
-            LOGGER.info("Within " + getClass().getName() + " getCronForecastHistory method");
+            LOGGER.debug("Within " + getClass().getName() + " getCronForecastHistory method");
             cronForeCastList = cronForecastDAO.getCronForecastHistory();
             if(cronForeCastList != null){
                 for (CronForecast cronForecast : cronForeCastList) {
@@ -42,7 +42,7 @@ public class CronForeCastServiceImpl implements CronForeCastService {
     public List<CronForecast> getCronForecastHistoryByCronId(Integer cronId) {
         List<CronForecast> cronForeCastList = null;
         try {
-            LOGGER.info("Within " + getClass().getName() + " getCronForecastHistoryByCronId method. CronId :: "
+            LOGGER.debug("Within " + getClass().getName() + " getCronForecastHistoryByCronId method. CronId :: "
                     + cronId);
             cronForeCastList = cronForecastDAO.getCronForecastHistoryByCronId(cronId);
             if(cronForeCastList != null){
@@ -61,7 +61,7 @@ public class CronForeCastServiceImpl implements CronForeCastService {
     public List<CronForecast> getCronForecastHistoryByServerId(Integer serverId) {
         List<CronForecast> cronForeCastList = null;
         try {
-            LOGGER.info("Within " + getClass().getName() + " getCronForecastHistoryByServerId method. ServerId :: "
+            LOGGER.debug("Within " + getClass().getName() + " getCronForecastHistoryByServerId method. ServerId :: "
                     + serverId);
             cronForeCastList = cronForecastDAO.getCronForecastHistoryByServerId(serverId);
             if(cronForeCastList != null){

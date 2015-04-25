@@ -21,20 +21,20 @@ public class DataCenterDetailsServiceImpl implements DataCenterDetailsService {
 
     @Override
     public List<DataCenterBean> getAllDataCenters() {
-        LOGGER.info("Within " + getClass().getName() + "getAllDataCenters method");
+        LOGGER.debug("Within " + getClass().getName() + "getAllDataCenters method");
         return dataCenterDetailsDAO.getAllDataCenters();
     }
 
     @Override
     public DataCenterBean getDataCenterById(Integer dcId) {
-        LOGGER.info("Within " + getClass().getName() + "getDataCenterById method. DcId :: " + dcId);
+        LOGGER.debug("Within " + getClass().getName() + "getDataCenterById method. DcId :: " + dcId);
         return dataCenterDetailsDAO.getDataCenterById(dcId);
     }
 
     @Override
     public void updateServerHealth() {
         try {
-            LOGGER.info("Within " + getClass().getName() + "updateServerHealth method.");
+            LOGGER.debug("Within " + getClass().getName() + "updateServerHealth method.");
             dataCenterDetailsDAO.updateServerHealth();
         } catch (Exception exception) {
             LOGGER.error("Exception occured while updating data center health " + exception.getMessage(), exception);

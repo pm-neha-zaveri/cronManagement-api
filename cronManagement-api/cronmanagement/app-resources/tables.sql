@@ -41,11 +41,12 @@ CREATE TABLE `cronjob` (
   `comment` varchar(255) DEFAULT NULL,
   `status` varchar(255) DEFAULT 'ACTIVE',
   `cronType` varchar(55) DEFAULT 'ReportingCron',
-  `threshold` int(10) unsigned NOT NULL,
-  `noOfRuns` int(10) unsigned NOT NULL,
-  `noOfAlerts` int(10) unsigned NOT NULL,
+  `threshold` int(10) unsigned NOT NULL DEFAULT 0,
+  `noOfRuns` int(10) unsigned NOT NULL DEFAULT 0,
+  `noOfAlerts` int(10) unsigned NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`)
 ) 
+
 
 CREATE TABLE `datacenter` (
   `id` int(11) NOT NULL AUTO_INCREMENT,

@@ -45,7 +45,7 @@ public class CronAlertDetailsResource {
     @Produces("application/json")
     @Path("/server/{serverId}")
     public List<CronAlert> getAllCronAlertByServerId(@PathParam("serverId") Integer serverId) {
-        LOGGER.info("Within " + getClass().getName() + " getAllCronAlertByServerId method ServerId:: " + serverId);
+        LOGGER.debug("Within " + getClass().getName() + " getAllCronAlertByServerId method ServerId:: " + serverId);
         return cronAlertDetailsService.getAllCronAlertByServerId(serverId);
     }
 
@@ -53,7 +53,7 @@ public class CronAlertDetailsResource {
     @Produces("application/json")
     @Path("/dc/{dcId}")
     public List<CronAlert> getAllCronAlertByDCId(@PathParam("dcId") Integer dcId) {
-        LOGGER.info("Within " + getClass().getName() + " getAllCronAlertByDCId method. DcId :: " + dcId);
+        LOGGER.debug("Within " + getClass().getName() + " getAllCronAlertByDCId method. DcId :: " + dcId);
         return cronAlertDetailsService.getAllCronAlertByDCId(dcId);
     }
 
@@ -61,14 +61,14 @@ public class CronAlertDetailsResource {
     @Produces("application/json")
     @Path("/cron/{cronId}")
     public List<CronAlert> getAllCronAlertByCronId(@PathParam("cronId") Integer cronId) {
-        LOGGER.info("Within " + getClass().getName() + " getAllCronAlertByCronId method. CronId :: " + cronId);
+        LOGGER.debug("Within " + getClass().getName() + " getAllCronAlertByCronId method. CronId :: " + cronId);
         return cronAlertDetailsService.getAllCronAlertByCronId(cronId);
     }
 
     @POST
     @Consumes("application/json")
     public void saveCronAlert(CronAlert cronAlert) throws ParseException {
-        LOGGER.info("Within " + getClass().getName() + " saveCronAlert method.");
+        LOGGER.debug("Within " + getClass().getName() + " saveCronAlert method.");
         cronAlertDetailsService.saveCronAlertDataToDB(cronAlert);
     }
 

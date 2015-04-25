@@ -21,7 +21,7 @@ public class CronLogHistoryServiceImpl implements CronLogHistoryService {
 
     @Override
     public List<CronLogBean> getCronLogHistory() {
-        LOGGER.info("Within " + getClass().getName() + " getCronLogHistory method.");
+        LOGGER.debug("Within " + getClass().getName() + " getCronLogHistory method.");
         List<CronLogBean> cronList = cronLogHistoryDAO.getCronLogHistory();
         if(cronList != null){
             for (CronLogBean cronLogBean : cronList) {
@@ -37,7 +37,7 @@ public class CronLogHistoryServiceImpl implements CronLogHistoryService {
 
     @Override
     public List<CronLogBean> getCronLogHistoryByCronId(Integer cronId) {
-        LOGGER.info("Within " + getClass().getName() + " getCronLogHistoryByCronId method. CronId :: " + cronId);
+        LOGGER.debug("Within " + getClass().getName() + " getCronLogHistoryByCronId method. CronId :: " + cronId);
         List<CronLogBean> cronList = cronLogHistoryDAO.getCronLogHistoryByCronId(cronId);
         if(cronList != null){
             for (CronLogBean cronLogBean : cronList) {
@@ -51,7 +51,7 @@ public class CronLogHistoryServiceImpl implements CronLogHistoryService {
 
     @Override
     public List<CronLogBean> getCronLogHistoryByServerId(Integer serverId) {
-        LOGGER.info("Within " + getClass().getName() + " getCronLogHistoryByServerId method. ServerId :: " + serverId);
+        LOGGER.debug("Within " + getClass().getName() + " getCronLogHistoryByServerId method. ServerId :: " + serverId);
         List<CronLogBean> cronList = cronLogHistoryDAO.getCronLogHistoryByServerId(serverId);
         if(cronList != null){
             for (CronLogBean cronLogBean : cronList) {
