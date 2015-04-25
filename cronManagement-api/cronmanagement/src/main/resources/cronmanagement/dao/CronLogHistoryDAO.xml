@@ -10,7 +10,6 @@
 		start_time as startTime,
 		end_time as endTime,
 		run_time as runTime,
-		threshold as threshold,
 		processId as processId
 		FROM cron_log_history
 	</select>
@@ -23,7 +22,6 @@
 		start_time as startTime,
 		end_time as endTime,
 		run_time as runTime,
-		threshold as threshold,
 		processId as processId
 		FROM cron_log_history where cron_id=#{cronId}
 	</select>
@@ -36,7 +34,6 @@
 		start_time as startTime,
 		end_time as endTime,
 		run_time as runTime,
-		threshold as threshold,
 		processId as processId
 		FROM cron_log_history where
 		server_id=#{serverId}
@@ -46,14 +43,14 @@
 	<insert id="saveCronLogHistory">
 		INSERT INTO
 		cron_log_history (
-		cron_id,server_id,start_time,end_time,run_time,threshold,processId
+		cron_id,server_id,start_time,end_time,run_time,processId
 		)
 		VALUES (
 		<foreach item="cronLog" index="index" collection="cronLogs"
 			open="" close="" separator="),(">
 			#{cronLog.cronId},#{cronLog.serverId},
 			#{cronLog.startTime}, #{cronLog.endTime},
-			#{cronLog.runTime},#{cronLog.threshold}, #{cronLog.processId}
+			#{cronLog.runTime}, #{cronLog.processId}
 		</foreach>
 		)
 	</insert>
