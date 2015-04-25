@@ -1,57 +1,55 @@
 #!/bin/bash
 
-	# get the program execution directory.
-	PRG=$0
-	while [ -h "$PRG" ] ; do
-		LS=`ls -ld "$PRG"`
-		LINK=`expr "$LS" : '.*-> \(.*\)$'`
-		if expr "$LINK" : '.*/.*' > /dev/null; then
+# This Script is used to details of crons set in crontab file
+# The crons read by shell script are owned by root user i.e. reading crontab file of root user
+#
+# The serverips provided in ip.conf are requested for giving data of crontab in one hit
+# This script will do ssh login and reads the crontab file will sudo readonly access
+#
+# RUN : ./cron_scripts/list_remote_crons.sh >/dev/null
+
+# STEP 1 : get the program execution directory.
+PRG=$0
+while [ -h "$PRG" ] ; do
+	LS=`ls -ld "$PRG"`
+	LINK=`expr "$LS" : '.*-> \(.*\)$'`
+	if expr "$LINK" : '.*/.*' > /dev/null; then
 		PRG="$LINK"
-		else
+	else
 		PRG=`dirname "$PRG"`/"$LINK"
-		fi
-	done
+	fi
+done
 
-	#This will the Current Sh Directory
-	PRGDIR=`dirname "$PRG"`
+# STEP 2 : Saving directory locations in variable
+PRGDIR=`dirname "$PRG"`
+CONFIGDIR=$PRGDIR/config
 
-	#config directory path.
-	CONFIGDIR=$PRGDIR/config
+# Reading username and password from the config file.
+USERNAME=$(cat $CONFIGDIR/config.properties | grep server.username | cut -d '=' -f2)	
+PASSWORD=$(cat $CONFIGDIR/config.properties | grep server.password | cut -d '=' -f2)
 
-	# get current date
-	year=$(date "+%Y")
-	month=$(date "+%m")
-	day=$(date "+%d")
+# Command which will check crons scheduled on servers
+CMD="sudo crontab -l"
 
-	DATE=$year-$month-$day
+# For each server in the configuration file execute the command
+for HOST in $(cat $CONFIGDIR/ip.conf)
+do
 
-	# reading username and password from the config file.
-	USERNAME=$(cat $CONFIGDIR/config.properties | grep server.username | cut -d '=' -f2)	
-	PASSWORD=$(cat $CONFIGDIR/config.properties | grep server.password | cut -d '=' -f2)
-
-	# command which will check crons scheduled on servers
-	CMD="sudo crontab -l"
-
-	# for each server in the configuration file execute the command
-	for HOST in $(cat $CONFIGDIR/ip.conf)
-	do
-
-		# do login to server using the utility expect which takes username and password.
-		# get sudo access for running command
-		# run command
-		VAR=$(expect -c "
-            		spawn ssh -o StrictHostKeyChecking=no $USERNAME@$HOST $CMD
+	# do login to server using the utility expect which takes username and password.
+	# get sudo access for running command
+	# run command
+	VAR=$(expect -c "spawn ssh -o StrictHostKeyChecking=no $USERNAME@$HOST $CMD
             		match_max 100000
             		expect \"*?assword:*\"
             		send -- \"$PASSWORD\r\"
             		send -- \"\r\"
             		expect eof
-		     ")
+	")
 
-		echo "CRONTAB FILE FOR SERVER:$HOST:DATE:$DATE:";
-		
-		echo "$VAR" > tempResult ;
-		echo "$(tail -n +3 tempResult)" > tempResult
-	        cat tempResult
-		rm tempResult;
-	done	
+	echo "CRONTAB FILE FOR SERVER:$HOST:DATE:$DATE:";
+
+	echo "$VAR" > tempResult ;
+	echo "$(tail -n +3 tempResult)" > tempResult
+	cat tempResult
+	rm tempResult;
+done	
