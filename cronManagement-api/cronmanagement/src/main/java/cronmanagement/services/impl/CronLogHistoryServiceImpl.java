@@ -23,7 +23,7 @@ public class CronLogHistoryServiceImpl implements CronLogHistoryService {
     public List<CronLogBean> getCronLogHistory() {
         LOGGER.debug("Within " + getClass().getName() + " getCronLogHistory method.");
         List<CronLogBean> cronList = cronLogHistoryDAO.getCronLogHistory();
-        if(cronList != null){
+        if (cronList != null) {
             for (CronLogBean cronLogBean : cronList) {
                 if (cronLogBean.getStartTime() != null)
                     cronLogBean.setStartTime(cronLogBean.getStartTime().replace(".0", ""));
@@ -39,7 +39,7 @@ public class CronLogHistoryServiceImpl implements CronLogHistoryService {
     public List<CronLogBean> getCronLogHistoryByCronId(Integer cronId) {
         LOGGER.debug("Within " + getClass().getName() + " getCronLogHistoryByCronId method. CronId :: " + cronId);
         List<CronLogBean> cronList = cronLogHistoryDAO.getCronLogHistoryByCronId(cronId);
-        if(cronList != null){
+        if (cronList != null) {
             for (CronLogBean cronLogBean : cronList) {
                 cronLogBean.setStartTime(cronLogBean.getStartTime().replace(".0", ""));
                 cronLogBean.setEndTime(cronLogBean.getEndTime().replace(".0", ""));
@@ -53,7 +53,7 @@ public class CronLogHistoryServiceImpl implements CronLogHistoryService {
     public List<CronLogBean> getCronLogHistoryByServerId(Integer serverId) {
         LOGGER.debug("Within " + getClass().getName() + " getCronLogHistoryByServerId method. ServerId :: " + serverId);
         List<CronLogBean> cronList = cronLogHistoryDAO.getCronLogHistoryByServerId(serverId);
-        if(cronList != null){
+        if (cronList != null) {
             for (CronLogBean cronLogBean : cronList) {
                 cronLogBean.setStartTime(cronLogBean.getStartTime().replace(".0", ""));
                 cronLogBean.setEndTime(cronLogBean.getEndTime().replace(".0", ""));
@@ -65,7 +65,8 @@ public class CronLogHistoryServiceImpl implements CronLogHistoryService {
     @Override
     public void saveCronLogHistory(List<CronLogBean> cronLogs) {
         LOGGER.info("Within " + getClass().getName() + " saveCronLogHistory method.");
-        cronLogHistoryDAO.saveCronLogHistory(cronLogs);
+        if (cronLogs != null && cronLogs.size() > 0)
+            cronLogHistoryDAO.saveCronLogHistory(cronLogs);
     }
 
 }

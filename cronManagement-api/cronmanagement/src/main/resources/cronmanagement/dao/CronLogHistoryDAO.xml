@@ -11,7 +11,8 @@
 		end_time as endTime,
 		run_time as runTime,
 		processId as processId
-		FROM cron_log_history
+		FROM
+		cron_log_history
 	</select>
 
 	<select id="getCronLogHistoryByCronId" resultType="cronmanagement.bean.CronLogBean">
@@ -23,7 +24,8 @@
 		end_time as endTime,
 		run_time as runTime,
 		processId as processId
-		FROM cron_log_history where cron_id=#{cronId}
+		FROM
+		cron_log_history where cron_id=#{cronId}
 	</select>
 
 	<select id="getCronLogHistoryByServerId" resultType="cronmanagement.bean.CronLogBean">
@@ -35,24 +37,28 @@
 		end_time as endTime,
 		run_time as runTime,
 		processId as processId
-		FROM cron_log_history where
+		FROM
+		cron_log_history where
 		server_id=#{serverId}
 	</select>
 
 
 	<insert id="saveCronLogHistory">
-		INSERT INTO
-		cron_log_history (
-		cron_id,server_id,start_time,end_time,run_time,processId
-		)
-		VALUES (
-		<foreach item="cronLog" index="index" collection="cronLogs"
-			open="" close="" separator="),(">
-			#{cronLog.cronId},#{cronLog.serverId},
-			#{cronLog.startTime}, #{cronLog.endTime},
-			#{cronLog.runTime}, #{cronLog.processId}
-		</foreach>
-		)
+		<if test="cronLogs!=null and cronLogs.size()>0">
+			INSERT INTO
+			cron_log_history (
+			cron_id,server_id,start_time,end_time,run_time,processId
+			)
+			VALUES (
+
+			<foreach item="cronLog" index="index" collection="cronLogs"
+				open="" close="" separator="),(">
+				#{cronLog.cronId},#{cronLog.serverId},
+				#{cronLog.startTime}, #{cronLog.endTime},
+				#{cronLog.runTime}, #{cronLog.processId}
+			</foreach>
+			)
+		</if>;
 	</insert>
 
 </mapper>
