@@ -14,30 +14,30 @@
 		cronType as cronType
 		FROM
 		cronjob where
-                <if test="!requestDetails.listOfCriteriaSet.empty">
-                        <foreach item="filterSet" index="index"
-                                collection="requestDetails.listOfCriteriaSet" separator="AND">
-                                <foreach item="criteria" index="index" collection="filterSet"
-                                        open="(" close=")" separator="OR">
-                                        ${criteria.key} ${criteria.operator}
-                                        ${criteria.value}
-                                </foreach>
-                        </foreach>
-                        and
-                </if> 
+		<if test="!requestDetails.listOfCriteriaSet.empty">
+			<foreach item="filterSet" index="index"
+				collection="requestDetails.listOfCriteriaSet" separator="AND">
+				<foreach item="criteria" index="index" collection="filterSet"
+					open="(" close=")" separator="OR">
+					${criteria.key} ${criteria.operator}
+					${criteria.value}
+				</foreach>
+			</foreach>
+			and
+		</if>
 		status not like 'deleted'
-		 <if test="requestDetails.columOrders != null">
-                        ORDER BY
-                        <foreach item="columOrder" index="index" collection="requestDetails.columOrders"
-                                separator=",">
-                                ${columOrder.columName} ${columOrder.sortOrder}
-                        </foreach>
+		<if test="requestDetails.columOrders != null">
+			ORDER BY
+			<foreach item="columOrder" index="index" collection="requestDetails.columOrders"
+				separator=",">
+				${columOrder.columName} ${columOrder.sortOrder}
+			</foreach>
 
-                </if>
-                <if test="requestDetails.columOrders == null">
-                        order by cronId
-                </if>
-		
+		</if>
+		<if test="requestDetails.columOrders == null">
+			order by cronId
+		</if>
+
 	</select>
 
 	<select id="getCronJobDetailsByServerId" resultType="cronmanagement.bean.CronJob">
@@ -52,7 +52,8 @@
 		cronType as
 		cronType
 		FROM cronjob where serverId = #{serverId} and
-		status not like 'deleted'
+		status not like
+		'deleted'
 	</select>
 
 	<select id="getCronJobDetailsByCronId" resultType="cronmanagement.bean.CronJob">
@@ -66,7 +67,8 @@
 		scheduleexpr as cronExpression,
 		cronType as
 		cronType
-		FROM cronjob where id = #{cronId} and status not like 'deleted'
+		FROM cronjob where id = #{cronId} and status not like
+		'deleted'
 	</select>
 
 	<insert id="saveAllCronJobs">
@@ -87,7 +89,8 @@
 		set comment=#{cronJob.cronComment},
 		status=#{cronJob.cronStatus},name=#{cronJob.cronName}
 		WHERE id
-		= #{cronJob.cronId}
+		=
+		#{cronJob.cronId}
 	</update>
 
 	<update id="deleteCronJobs">
@@ -110,7 +113,8 @@
 		cronType as
 		cronType
 		FROM cronjob where cronType like #{cronType} and
-		status not like 'deleted'
+		status not
+		like 'deleted'
 	</select>
 
 	<select id="getCronJobByServerIdAndCronName" resultType="cronmanagement.bean.CronJob">

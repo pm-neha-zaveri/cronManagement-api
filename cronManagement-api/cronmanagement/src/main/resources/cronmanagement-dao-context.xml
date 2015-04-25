@@ -1,6 +1,5 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:tx="http://www.springframework.org/schema/tx"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
 	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
@@ -9,9 +8,9 @@
 	http://www.springframework.org/schema/aop  
 	http://www.springframework.org/schema/aop/spring-aop.xsd
 	http://www.springframework.org/schema/tx 
-	http://www.springframework.org/schema/tx/spring-tx.xsd">	
-	
-	 <bean id="cronManagementDataSource" class="org.apache.commons.dbcp.BasicDataSource"
+	http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+	<bean id="cronManagementDataSource" class="org.apache.commons.dbcp.BasicDataSource"
 		destroy-method="close">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
 		<property name="url"
@@ -26,19 +25,19 @@
 		<property name="testOnBorrow" value="true" />
 		<property name="testOnReturn" value="false" />
 	</bean>
-	
+
 	<bean id="cronManagementTransactionManager"
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="cronManagementDataSource" />
 	</bean>
-	
+
 	<bean id="cronManagementSqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="cronManagementDataSource" />
 		<property name="typeAliasesPackage" value="com.pubmatic.demand.thrift.reporting.bean" />
 	</bean>
 
-	<context:annotation-config/>
-	<tx:annotation-driven transaction-manager="cronManagementTransactionManager" /> 
+	<context:annotation-config />
+	<tx:annotation-driven transaction-manager="cronManagementTransactionManager" />
 
 
 

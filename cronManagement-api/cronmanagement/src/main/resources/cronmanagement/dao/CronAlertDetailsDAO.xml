@@ -5,28 +5,34 @@
 <mapper namespace="cronmanagement.dao.CronAlertDetailsDAO">
 	<select id="getAllCronAlert" resultType="cronmanagement.bean.CronAlert">
 		SELECT id as id,
-		cron_id as cronId,
+		cron_id
+		as cronId,
 		server_id as serverId,
 		dc_id as dcId,
-		description as alertDescription,
+		description as
+		alertDescription,
 		start_time as startTime,
 		end_time as endTime,
-		run_time as runTime,
+		run_time
+		as runTime,
 		threshold as threshold
 		FROM cron_alert;
 	</select>
 
 	<select id="getAllCronAlertByServerId" resultType="cronmanagement.bean.CronAlert">
-		SELECT id as id,
+		SELECT id as
+		id,
 		cron_id as cronId,
 		server_id as serverId,
 		dc_id as dcId,
-		description as alertDescription,
+		description
+		as alertDescription,
 		start_time as startTime,
 		end_time as endTime,
 		run_time as runTime,
 		threshold as threshold
-		FROM cron_alert where server_id = #{serverId}
+		FROM cron_alert where
+		server_id = #{serverId}
 	</select>
 
 	<select id="getAllCronAlertByCronId" resultType="cronmanagement.bean.CronAlert">
@@ -34,31 +40,40 @@
 		cron_id as cronId,
 		server_id as serverId,
 		dc_id as dcId,
-		description as alertDescription,
+		description as
+		alertDescription,
 		start_time as startTime,
 		end_time as endTime,
-		run_time as runTime,
+		run_time
+		as runTime,
 		threshold as threshold
-		FROM cron_alert where cron_id = #{cronId};
+		FROM cron_alert where cron_id =
+		#{cronId};
 	</select>
-	
+
 	<select id="getAllCronAlertByDCId" resultType="cronmanagement.bean.CronAlert">
 		SELECT id as id,
 		cron_id as cronId,
 		server_id as serverId,
 		dc_id as dcId,
-		description as alertDescription,
+		description as
+		alertDescription,
 		start_time as startTime,
 		end_time as endTime,
-		run_time as runTime,
+		run_time
+		as runTime,
 		threshold as threshold
-		FROM cron_alert where dc_id = #{dcId};
+		FROM cron_alert where dc_id =
+		#{dcId};
 	</select>
-	
+
 	<insert id="saveCronAlert">
-		INSERT INTO cron_alert(cron_id,server_id,dc_id,description,start_time,end_time,run_time,threshold)
+		INSERT INTO
+		cron_alert(cron_id,server_id,dc_id,description,start_time,end_time,run_time,threshold)
 		VALUES (
-			#{cronAlert.cronId}, #{cronAlert.serverId}, #{cronAlert.dcId}, #{cronAlert.alertDescription},#{cronAlert.startTime}, #{cronAlert.endTime},#{cronAlert.runTime},#{cronAlert.threshold}
+		#{cronAlert.cronId}, #{cronAlert.serverId}, #{cronAlert.dcId},
+		#{cronAlert.alertDescription},#{cronAlert.startTime},
+		#{cronAlert.endTime},#{cronAlert.runTime},#{cronAlert.threshold}
 		)
 	</insert>
 

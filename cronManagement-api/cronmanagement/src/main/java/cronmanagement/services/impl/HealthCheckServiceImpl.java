@@ -42,6 +42,7 @@ public class HealthCheckServiceImpl implements HealthCheckService {
      */
     @Override
     public Boolean calculateHealth() {
+    	LOGGER.info("Within "+getClass().getName()+"calculateHealth method");
         Boolean isUpdated = false;
         List<HealthCheck> cronAlertList = null;
         List<HealthCheck> cronLogList = null;

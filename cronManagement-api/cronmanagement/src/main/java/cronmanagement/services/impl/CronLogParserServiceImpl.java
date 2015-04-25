@@ -42,6 +42,7 @@ public class CronLogParserServiceImpl implements CronLogParserService {
 
     @Override
     public List<CronLogBean> getCronLogs(InputStream inputStream) {
+        LOGGER.info("Within " + getClass().getName() + " getCronLogs method.");
         List<CronLogBean> cronLogList = new ArrayList<CronLogBean>();
         BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
         String logInfo = null;
@@ -76,6 +77,7 @@ public class CronLogParserServiceImpl implements CronLogParserService {
 
     @Override
     public CronLogBean getCronLogBean(String logInfo) {
+        LOGGER.info("Within " + getClass().getName() + " getCronLogBean method.");
         CronLogBean cronLogBean = null;
         String tokens[] = logInfo.trim().split("\\|");
         try {
@@ -103,12 +105,14 @@ public class CronLogParserServiceImpl implements CronLogParserService {
     }
 
     private Integer getServerIdByServeriP(String serverIp) {
+        LOGGER.info("Within " + getClass().getName() + " getServerIdByServeriP method.");
         ServerBean serverDetails = serverDetailsService.getServerDetailByIp(serverIp);
         return (serverDetails != null ? serverDetails.getId().intValue() : 0);
     }
 
     @Override
     public List<CronLogBean> updateCronLogs(List<CronLogBean> cronLogList) {
+        LOGGER.info("Within " + getClass().getName() + " updateCronLogs method.");
         List<CronLogBean> updatedCronLogs = new ArrayList<CronLogBean>();
         ListIterator<CronLogBean> iterator = cronLogList.listIterator();
         while (iterator.hasNext()) {

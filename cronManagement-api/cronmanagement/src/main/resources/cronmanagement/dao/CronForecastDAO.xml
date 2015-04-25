@@ -12,28 +12,33 @@
 		run_time as runTime,
 		FROM cron_forecasting
 	</select>
-	
+
 	<select id="getCronForecastHistoryByCronId" resultType="cronmanagement.bean.CronLogBean">
-		SELECT id as id,
+		SELECT id
+		as id,
 		cron_id as cronId,
 		server_id as serverId,
 		start_time as startTime,
 		end_time as endTime,
 		run_time as runTime,
-		FROM cron_forecasting where cron_id=#{cronId}
+		FROM cron_forecasting where
+		cron_id=#{cronId}
 	</select>
-	
+
 	<select id="getCronForecastHistoryByServerId" resultType="cronmanagement.bean.CronLogBean">
-		SELECT id as id,
+		SELECT
+		id as id,
 		cron_id as cronId,
 		server_id as serverId,
-		start_time as startTime,
+		start_time as
+		startTime,
 		end_time as endTime,
 		run_time as runTime,
-		FROM cron_forecasting where server_id=#{serverId}
+		FROM
+		cron_forecasting where server_id=#{serverId}
 	</select>
-	
-	
+
+
 	<insert id="saveCronForecastHistory">
 		INSERT INTO
 		cron_forecasting (
@@ -42,9 +47,11 @@
 		VALUES (
 		<foreach item="CronForeCast" index="index" collection="CronForeCasts"
 			open="" close="" separator="),(">
-			#{CronForeCast.cronId},#{CronForeCast.serverId}, #{CronForeCast.startTime}, #{CronForeCast.endTime}, #{CronForeCast.runTime}
+			#{CronForeCast.cronId},#{CronForeCast.serverId},
+			#{CronForeCast.startTime}, #{CronForeCast.endTime},
+			#{CronForeCast.runTime}
 		</foreach>
 		)
 	</insert>
-	
+
 </mapper>

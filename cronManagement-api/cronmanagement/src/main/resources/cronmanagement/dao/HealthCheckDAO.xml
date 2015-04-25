@@ -7,9 +7,10 @@
 		select count(*) as
 		total, server_id as serverId from cron_log_history group by server_id;
 	</select>
-	
+
 	<select id="getCronAlertDetails" resultType="cronmanagement.bean.HealthCheck">
-		select count(*) as total,server_Id as serverId from cron_alert group by serverId
+		select count(*) as
+		total,server_Id as serverId from cron_alert group by serverId
 	</select>
 
 </mapper>

@@ -14,9 +14,10 @@
 		processId as processId
 		FROM cron_log_history
 	</select>
-	
+
 	<select id="getCronLogHistoryByCronId" resultType="cronmanagement.bean.CronLogBean">
-		SELECT id as id,
+		SELECT id as
+		id,
 		cron_id as cronId,
 		server_id as serverId,
 		start_time as startTime,
@@ -26,9 +27,10 @@
 		processId as processId
 		FROM cron_log_history where cron_id=#{cronId}
 	</select>
-	
+
 	<select id="getCronLogHistoryByServerId" resultType="cronmanagement.bean.CronLogBean">
-		SELECT id as id,
+		SELECT id as
+		id,
 		cron_id as cronId,
 		server_id as serverId,
 		start_time as startTime,
@@ -36,10 +38,11 @@
 		run_time as runTime,
 		threshold as threshold,
 		processId as processId
-		FROM cron_log_history where server_id=#{serverId}
+		FROM cron_log_history where
+		server_id=#{serverId}
 	</select>
-	
-	
+
+
 	<insert id="saveCronLogHistory">
 		INSERT INTO
 		cron_log_history (
@@ -48,9 +51,11 @@
 		VALUES (
 		<foreach item="cronLog" index="index" collection="cronLogs"
 			open="" close="" separator="),(">
-			#{cronLog.cronId},#{cronLog.serverId}, #{cronLog.startTime}, #{cronLog.endTime}, #{cronLog.runTime},#{cronLog.threshold}, #{cronLog.processId}
+			#{cronLog.cronId},#{cronLog.serverId},
+			#{cronLog.startTime}, #{cronLog.endTime},
+			#{cronLog.runTime},#{cronLog.threshold}, #{cronLog.processId}
 		</foreach>
 		)
 	</insert>
-	
+
 </mapper>

@@ -12,27 +12,27 @@
 		<property name="mapperInterface" value="cronmanagement.dao.CronJobDetailsDAO" />
 		<property name="sqlSessionFactory" ref="cronManagementSqlSessionFactory" />
 	</bean>
-	
+
 	<bean id="cronLogHistoryDAO" class="org.mybatis.spring.mapper.MapperFactoryBean">
 		<property name="mapperInterface" value="cronmanagement.dao.CronLogHistoryDAO" />
 		<property name="sqlSessionFactory" ref="cronManagementSqlSessionFactory" />
 	</bean>
-	
+
 	<bean id="cronAlertDetailsDAO" class="org.mybatis.spring.mapper.MapperFactoryBean">
 		<property name="mapperInterface" value="cronmanagement.dao.CronAlertDetailsDAO" />
 		<property name="sqlSessionFactory" ref="cronManagementSqlSessionFactory" />
 	</bean>
-	
+
 	<bean id="dataCenterDetailsDAO" class="org.mybatis.spring.mapper.MapperFactoryBean">
 		<property name="mapperInterface" value="cronmanagement.dao.DataCenterDetailsDAO" />
 		<property name="sqlSessionFactory" ref="cronManagementSqlSessionFactory" />
 	</bean>
-	
+
 	<bean id="healthCheckDAO" class="org.mybatis.spring.mapper.MapperFactoryBean">
 		<property name="mapperInterface" value="cronmanagement.dao.HealthCheckDAO" />
 		<property name="sqlSessionFactory" ref="cronManagementSqlSessionFactory" />
 	</bean>
-	
+
 	<bean id="cronForecastDAO" class="org.mybatis.spring.mapper.MapperFactoryBean">
 		<property name="mapperInterface" value="cronmanagement.dao.CronForecastDAO" />
 		<property name="sqlSessionFactory" ref="cronManagementSqlSessionFactory" />
