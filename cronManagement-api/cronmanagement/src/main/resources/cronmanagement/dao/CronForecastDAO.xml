@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cronmanagement.dao.CronForecastDAO">
+	<select id="getCronForecastHistory" resultType="cronmanagement.bean.CronForecast">
+		SELECT id as id,
+		cron_id as cronId,
+		server_id as serverId,
+		start_time as startTime,
+		end_time as endTime,
+		run_time as runTime,
+		FROM cron_forecasting
+	</select>
+	
+	<select id="getCronForecastHistoryByCronId" resultType="cronmanagement.bean.CronLogBean">
+		SELECT id as id,
+		cron_id as cronId,
+		server_id as serverId,
+		start_time as startTime,
+		end_time as endTime,
+		run_time as runTime,
+		FROM cron_forecasting where cron_id=#{cronId}
+	</select>
+	
+	<select id="getCronForecastHistoryByServerId" resultType="cronmanagement.bean.CronLogBean">
+		SELECT id as id,
+		cron_id as cronId,
+		server_id as serverId,
+		start_time as startTime,
+		end_time as endTime,
+		run_time as runTime,
+		FROM cron_forecasting where server_id=#{serverId}
+	</select>
+	
+	
+	<insert id="saveCronForecastHistory">
+		INSERT INTO
+		cron_forecasting (
+		cron_id,server_id,start_time,end_time,run_time
+		)
+		VALUES (
+		<foreach item="CronForeCast" index="index" collection="CronForeCasts"
+			open="" close="" separator="),(">
+			#{CronForeCast.cronId},#{CronForeCast.serverId}, #{CronForeCast.startTime}, #{CronForeCast.endTime}, #{CronForeCast.runTime}
+		</foreach>
+		)
+	</insert>
+	
+</mapper>

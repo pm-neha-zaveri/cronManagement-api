@@ -20,45 +20,39 @@ import cronmanagement.services.CronJobDetailsService;
 @Path("/cronDetails")
 public class CronJobDetailsResource {
 
-	public final static Log LOGGER = LogFactory
-			.getLog(CronJobDetailsResource.class);
+    public final static Log LOGGER = LogFactory.getLog(CronJobDetailsResource.class);
 
-	@Autowired
-	CronJobDetailsService cronJobDetailsService;
+    @Autowired
+    CronJobDetailsService cronJobDetailsService;
 
-	@GET
-	@Produces("application/json")
-	public List<CronJob> getCronList() {
-		return cronJobDetailsService.getCronJobDetails();
-	}
+    @GET
+    @Produces("application/json")
+    public List<CronJob> getCronList() {
+        return cronJobDetailsService.getCronJobDetails();
+    }
 
-	@GET
-	@Produces("application/json")
-	@Path("/server/{serverId}")
-    public List<CronJob> getCronListByServerId(
-			@PathParam("serverId") Integer serverId) {
-		LOGGER.info("Within " + getClass().getName()
-				+ " getCronListByServerId method. ServerId :: " + serverId);
-		return cronJobDetailsService.getCronJobDetailsByServerId(serverId);
-	}
+    @GET
+    @Produces("application/json")
+    @Path("/server/{serverId}")
+    public List<CronJob> getCronListByServerId(@PathParam("serverId") Integer serverId) {
+        LOGGER.info("Within " + getClass().getName() + " getCronListByServerId method. ServerId :: " + serverId);
+        return cronJobDetailsService.getCronJobDetailsByServerId(serverId);
+    }
 
-	@GET
-	@Produces("application/json")
-	@Path("/cron/{cronId}")
-	public CronJob getCronByCronId(@PathParam("cronId") Integer cronId) {
-		LOGGER.info("Within " + getClass().getName()
-				+ " getCronByCronId method. CronId :: " + cronId);
-		return cronJobDetailsService.getCronJobDetailsByCronId(cronId);
-	}
+    @GET
+    @Produces("application/json")
+    @Path("/cron/{cronId}")
+    public CronJob getCronByCronId(@PathParam("cronId") Integer cronId) {
+        LOGGER.info("Within " + getClass().getName() + " getCronByCronId method. CronId :: " + cronId);
+        return cronJobDetailsService.getCronJobDetailsByCronId(cronId);
+    }
 
-	@GET
-	@Produces("application/json")
-	@Path("/cronType")
-	public List<CronJob> getCronListByCronType(
-			@QueryParam("cronType") String cronType) {
-		LOGGER.info("Within " + getClass().getName()
-				+ " getCronListByCronType method. CronType :: " + cronType);
-		return cronJobDetailsService.getCronJobDetailsByCronType(cronType);
-	}
+    @GET
+    @Produces("application/json")
+    @Path("/cronType")
+    public List<CronJob> getCronListByCronType(@QueryParam("cronType") String cronType) {
+        LOGGER.info("Within " + getClass().getName() + " getCronListByCronType method. CronType :: " + cronType);
+        return cronJobDetailsService.getCronJobDetailsByCronType(cronType);
+    }
 
 }

@@ -8,4 +8,5 @@ public enum CronTypeEnum {
     CronTypeEnum(String cronType) {
         this.cronType = cronType;
     }
+    
 }
