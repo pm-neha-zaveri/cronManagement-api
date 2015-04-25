@@ -3,7 +3,9 @@ package cronmanagement.bean;
 import java.io.Serializable;
 
 public class CronAlertRequestBean implements Serializable {
-	private Long processId;
+
+    private static final long serialVersionUID = 1L;
+    private Long processId;
 	private String cronName;
 	private String cronServerIP;
 	private String cronStartTime;

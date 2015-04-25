@@ -82,10 +82,9 @@ public class CronJobDetailsServiceImpl implements CronJobDetailsService {
         cronDetailsDAO.deleteCronJobs(cronIds);
     }
 
-	@Override
-	public List<CronJob> getCronJobDetails() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    @Override
+    public void updateCronJobDetails() {
+        cronDetailsDAO.updateCronJobDetails();
+    }
 
 }

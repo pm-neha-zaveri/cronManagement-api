@@ -30,5 +30,7 @@ public interface CronJobDetailsDAO {
     public void deleteCronJobs(@Param("cronIds")List<Integer> cronIds);
 
 	public List<CronJob> getCronJobDetails(@Param("requestDetails") RequestDetails requestDetails);
+	
+	public void updateCronJobDetails();
 
 }

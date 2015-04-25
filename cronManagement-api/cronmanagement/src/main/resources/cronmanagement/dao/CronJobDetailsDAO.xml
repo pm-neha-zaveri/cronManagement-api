@@ -11,7 +11,10 @@
 		name
 		as cronName,
 		scheduleexpr as cronExpression,
-		cronType as cronType
+		cronType as cronType,
+		noOfRuns as noOfRuns,
+		threshold as threshold,
+		noOfAlerts as noOfAlerts
 		FROM
 		cronjob where
 		<if test="!requestDetails.listOfCriteriaSet.empty">
@@ -50,7 +53,10 @@
 		name as cronName,
 		scheduleexpr as cronExpression,
 		cronType as
-		cronType
+		cronType,noOfRuns as noOfRuns,
+		threshold as threshold,
+		noOfAlerts as
+		noOfAlerts
 		FROM cronjob where serverId = #{serverId} and
 		status not like
 		'deleted'
@@ -66,7 +72,10 @@
 		name as cronName,
 		scheduleexpr as cronExpression,
 		cronType as
-		cronType
+		cronType,noOfRuns as noOfRuns,
+		threshold as threshold,
+		noOfAlerts as
+		noOfAlerts
 		FROM cronjob where id = #{cronId} and status not like
 		'deleted'
 	</select>
@@ -111,7 +120,10 @@
 		name as cronName,
 		scheduleexpr as cronExpression,
 		cronType as
-		cronType
+		cronType,noOfRuns as noOfRuns,
+		threshold as threshold,
+		noOfAlerts as
+		noOfAlerts
 		FROM cronjob where cronType like #{cronType} and
 		status not
 		like 'deleted'
@@ -127,9 +139,21 @@
 		name as cronName,
 		scheduleexpr as cronExpression,
 		cronType as
-		cronType
+		cronType,noOfRuns as noOfRuns,
+		threshold as threshold,
+		noOfAlerts as
+		noOfAlerts
 		FROM cronjob where serverId = #{serverId} and name like
 		#{cronName} and status not like 'deleted'
 	</select>
+
+	<update id="updateCronJobDetails">
+		update cronjob set noOfAlerts =(select count(*) from
+		cron_alert clh where cronjob.id=clh.cron_id group by
+		clh.cron_id),noOfRuns =(select count(*) from cron_log_history clh
+		where cronjob.id=clh.cron_id group by clh.cron_id ),threshold =(select
+		Round(avg(threshold)) from cron_log_history clh where
+		cronjob.id=clh.cron_id group by clh.cron_id )
+	</update>
 
 </mapper>

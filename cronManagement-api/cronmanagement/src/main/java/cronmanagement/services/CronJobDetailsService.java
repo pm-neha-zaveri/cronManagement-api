@@ -7,8 +7,6 @@ import com.pubmatic.apiutils.bean.RequestDetails;
 import cronmanagement.bean.CronJob;
 
 public interface CronJobDetailsService {
-    public List<CronJob> getCronJobDetails();
-
     public List<CronJob> getCronJobDetailsByServerId(Integer serverId);
 
     public CronJob getCronJobDetailsByCronId(Integer cronId);
@@ -16,7 +14,7 @@ public interface CronJobDetailsService {
     public void saveAllCronJobs(List<CronJob> cronJobs);
 
     public void updateAllCronJobs(CronJob cronJob);
-    
+
     public void deleteCronJobs(List<Integer> cronIds);
 
     public CronJob getCronDetailsByCronName(String cronName);
@@ -25,5 +23,7 @@ public interface CronJobDetailsService {
 
     public List<CronJob> getCronJobByServerIdAndCronName(Integer serverId, String cronName);
 
-	List<CronJob> getCronJobDetails(RequestDetails requestDetails);
+    List<CronJob> getCronJobDetails(RequestDetails requestDetails);
+
+    void updateCronJobDetails();
 }

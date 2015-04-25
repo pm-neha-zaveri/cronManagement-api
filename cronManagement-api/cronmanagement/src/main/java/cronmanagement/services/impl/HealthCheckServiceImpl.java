@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import cronmanagement.bean.HealthCheck;
 import cronmanagement.bean.ServerBean;
 import cronmanagement.dao.HealthCheckDAO;
+import cronmanagement.services.CronJobDetailsService;
 import cronmanagement.services.DataCenterDetailsService;
 import cronmanagement.services.HealthCheckService;
 import cronmanagement.services.ServerDetailsService;
@@ -35,6 +36,9 @@ public class HealthCheckServiceImpl implements HealthCheckService {
 
     @Autowired
     DataCenterDetailsService dataCenterDetailsService;
+    
+    @Autowired
+    CronJobDetailsService cronJobDetailsService;
 
     /**
      * Method will return true if health of server and data center are successfully updated to database.
@@ -79,6 +83,7 @@ public class HealthCheckServiceImpl implements HealthCheckService {
                 }
                 serverDetailsService.updateServerHealth(healthPercentage, serverBean.getId());
                 dataCenterDetailsService.updateServerHealth();
+                cronJobDetailsService.updateCronJobDetails();
                 isUpdated = true;
             }
 

@@ -33,7 +33,7 @@ CREATE TABLE `cron_alert` (
   PRIMARY KEY (`id`)
 );
 
- CREATE TABLE `cronjob` (
+CREATE TABLE `cronjob` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `serverId` int(11) NOT NULL,
   `scheduleexpr` varchar(55) NOT NULL,
@@ -41,8 +41,11 @@ CREATE TABLE `cron_alert` (
   `comment` varchar(255) DEFAULT NULL,
   `status` varchar(255) DEFAULT 'ACTIVE',
   `cronType` varchar(55) DEFAULT 'ReportingCron',
+  `threshold` int(10) DEFAULT '0',
+  `noOfRuns` int(10) DEFAULT '0',
+  `noOfAlerts` int(10) DEFAULT '0',
   PRIMARY KEY (`id`)
-);
+)
 
 CREATE TABLE `datacenter` (
   `id` int(11) NOT NULL AUTO_INCREMENT,

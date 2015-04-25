@@ -7,17 +7,20 @@ import com.pubmatic.apiutils.annotations.Dimension;
 public class CronJob implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @Dimension(columName="id")
+    @Dimension(columName = "id")
     private Integer cronId;
-    @Dimension(columName="serverId")
+    @Dimension(columName = "serverId")
     private Integer serverId;
     private String cronExpression;
     private String cronName;
     private String cronCommand;
     private String cronStatus;
     private String cronComment;
-    @Dimension(columName="cronType")
+    @Dimension(columName = "cronType")
     private String cronType;
+    private Long noOfRuns;
+    private Integer threshold;
+    private Long noOfAlerts;
 
     public String getCronType() {
         return cronType;
@@ -83,11 +86,36 @@ public class CronJob implements Serializable {
         this.serverId = serverId;
     }
 
+    public Long getNoOfRuns() {
+        return noOfRuns;
+    }
+
+    public void setNoOfRuns(Long noOfRuns) {
+        this.noOfRuns = noOfRuns;
+    }
+
+    public Integer getThreshold() {
+        return threshold;
+    }
+
+    public void setThreshold(Integer threshold) {
+        this.threshold = threshold;
+    }
+
+    public Long getNoOfAlerts() {
+        return noOfAlerts;
+    }
+
+    public void setNoOfAlerts(Long noOfAlerts) {
+        this.noOfAlerts = noOfAlerts;
+    }
+
     @Override
     public String toString() {
         return "CronJob [cronId=" + cronId + ", serverId=" + serverId + ", cronExpression=" + cronExpression
                 + ", cronName=" + cronName + ", cronCommand=" + cronCommand + ", cronStatus=" + cronStatus
-                + ", cronComment=" + cronComment + ", cronType=" + cronType + "]\n";
+                + ", cronComment=" + cronComment + ", cronType=" + cronType + ", noOfRuns=" + noOfRuns + ", threshold="
+                + threshold + ", noOfAlerts=" + noOfAlerts + "]";
     }
 
     @Override
