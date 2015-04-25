@@ -41,11 +41,11 @@ CREATE TABLE `cronjob` (
   `comment` varchar(255) DEFAULT NULL,
   `status` varchar(255) DEFAULT 'ACTIVE',
   `cronType` varchar(55) DEFAULT 'ReportingCron',
-  `threshold` int(10) DEFAULT '0',
-  `noOfRuns` int(10) DEFAULT '0',
-  `noOfAlerts` int(10) DEFAULT '0',
+  `threshold` int(10) unsigned NOT NULL,
+  `noOfRuns` int(10) unsigned NOT NULL,
+  `noOfAlerts` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`)
-)
+) 
 
 CREATE TABLE `datacenter` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -70,3 +70,9 @@ update cron_log_history clh set clh.server_id = (select id from cronjob cj where
 update cron_forecasting cf set server_id= (select id from cronjob cj where cj.id=cf.cron_id);
 
 update cron_alert ca set server_id=(select id from cronjob cj where cj.id=ca.cron_id);
+
+alter table cronjob modify column threshold int(10) UNSIGNED NOT NULL;
+ 
+alter table cronjob modify column noOfRuns int(10) UNSIGNED NOT NULL;
+  
+alter table cronjob modify column noOfAlerts int(10) UNSIGNED NOT NULL;

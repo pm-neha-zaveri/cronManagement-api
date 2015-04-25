@@ -9,7 +9,7 @@
 		server_id as serverId,
 		start_time as startTime,
 		end_time as endTime,
-		run_time as runTime,
+		run_time as runTime
 		FROM cron_forecasting
 	</select>
 
@@ -20,7 +20,7 @@
 		server_id as serverId,
 		start_time as startTime,
 		end_time as endTime,
-		run_time as runTime,
+		run_time as runTime
 		FROM cron_forecasting where
 		cron_id=#{cronId}
 	</select>
@@ -33,7 +33,7 @@
 		start_time as
 		startTime,
 		end_time as endTime,
-		run_time as runTime,
+		run_time as runTime
 		FROM
 		cron_forecasting where server_id=#{serverId}
 	</select>
