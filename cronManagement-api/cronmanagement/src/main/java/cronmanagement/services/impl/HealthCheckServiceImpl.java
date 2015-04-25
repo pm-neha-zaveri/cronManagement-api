@@ -69,14 +69,15 @@ public class HealthCheckServiceImpl implements HealthCheckService {
                         if (cronLogParam.getTotal() < cronAlertParam.getTotal()) {
                             healthPercentage = 100;
                         } else {
-                            healthPercentage = ((int) ((cronLogParam.getTotal() - cronAlertParam.getTotal()) / cronLogParam
-                                    .getTotal()) * 100);
+                            healthPercentage =((int) (((cronLogParam.getTotal() - (cronAlertParam.getTotal()*1.0)) / cronLogParam
+                                    .getTotal()*1.0) * 100));
                         }
                     }
                 } else {
                     healthPercentage = 100;
                 }
                 serverDetailsService.updateServerHealth(healthPercentage, serverBean.getId());
+                dataCenterDetailsService.updateServerHealth();
                 isUpdated = true;
             }
 
