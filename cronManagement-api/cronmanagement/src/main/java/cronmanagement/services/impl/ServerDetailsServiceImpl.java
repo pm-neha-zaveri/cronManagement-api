@@ -25,7 +25,7 @@ public class ServerDetailsServiceImpl implements ServerDetailsService {
 
     @Override
     public ServerBean getServerDetailByIp(String ipAddress) {
-        LOGGER.info("Within " + getClass().getName() + " getServerDetailByIp method. IpAddress :: "+ipAddress);
+        LOGGER.debug("Within " + getClass().getName() + " getServerDetailByIp method. IpAddress :: "+ipAddress);
         if (ipAddress != null && ipAddress.trim().length() > 0) {
             List<ServerBean> serverDetailsList = serverDetailsDAO.getServerDetails();
             if (serverDetailsList != null) {
@@ -42,7 +42,7 @@ public class ServerDetailsServiceImpl implements ServerDetailsService {
 
     @Override
     public List<ServerBean> getServerDetails() {
-        LOGGER.info("Within " + getClass().getName() + " getServerDetails method");
+        LOGGER.debug("Within " + getClass().getName() + " getServerDetails method");
         @SuppressWarnings("unchecked")
         List<ServerBean> serverDetails = (List<ServerBean>) CacheUtil.get(serverDetailCache, serverDetailCacheKey);
         if (serverDetails == null || serverDetails.size() == 0) {
@@ -54,20 +54,20 @@ public class ServerDetailsServiceImpl implements ServerDetailsService {
 
     @Override
     public ServerBean getServerDetailsByServerId(Integer serverId) {
-        LOGGER.info("Within " + getClass().getName() + " getServerDetailsByServerId method. ServerId :: "+serverId);
+        LOGGER.debug("Within " + getClass().getName() + " getServerDetailsByServerId method. ServerId :: "+serverId);
         return serverDetailsDAO.getServerDetailsByServerId(serverId);
     }
 
     @Override
     public List<ServerBean> getServerDetailsByDCId(Integer dcId) {
-        LOGGER.info("Within " + getClass().getName() + " getServerDetailsByDCId method");
+        LOGGER.debug("Within " + getClass().getName() + " getServerDetailsByDCId method");
         return serverDetailsDAO.getServerDetailsByDCId(dcId);
     }
 
     @Override
     public void updateServerHealth(Integer healthPercenatge, Integer serverId) {
         try{
-            LOGGER.info("Within " + getClass().getName() + " updateServerHealth method");
+            LOGGER.debug("Within " + getClass().getName() + " updateServerHealth method");
             serverDetailsDAO.updateServerHealth(healthPercenatge, serverId);
         }catch(Exception exception){
             LOGGER.error("Exception occured while saving health "+exception.getMessage(),exception);

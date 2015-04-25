@@ -42,19 +42,19 @@ public class CronLogParserServiceImpl implements CronLogParserService {
 
     @Override
     public List<CronLogBean> getCronLogs(InputStream inputStream) {
-        LOGGER.info("Within " + getClass().getName() + " getCronLogs method.");
+        LOGGER.debug("Within " + getClass().getName() + " getCronLogs method.");
         List<CronLogBean> cronLogList = new ArrayList<CronLogBean>();
         BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-        String logInfo = null;
+        String logdebug = null;
         CronLogBean cronLogBean = null;
         try {
-            while ((logInfo = reader.readLine()) != null) {
-                while (logInfo != null && logInfo.trim().length() > 0) {
-                    cronLogBean = getCronLogBean(logInfo);
+            while ((logdebug = reader.readLine()) != null) {
+                while (logdebug != null && logdebug.trim().length() > 0) {
+                    cronLogBean = getCronLogBean(logdebug);
                     if (cronLogBean != null)
-                        cronLogList.add(getCronLogBean(logInfo));
-                    logInfo = reader.readLine();
-                    if (logInfo != null && logInfo.indexOf(CRONJOB_LOG) != -1) {
+                        cronLogList.add(getCronLogBean(logdebug));
+                    logdebug = reader.readLine();
+                    if (logdebug != null && logdebug.indexOf(CRONJOB_LOG) != -1) {
                         break;
                     }
                 }
@@ -71,15 +71,15 @@ public class CronLogParserServiceImpl implements CronLogParserService {
             }
         }
         Collections.sort(cronLogList, new CronLogComparator());
-        LOGGER.info("cronLogList  : " + cronLogList);
+        LOGGER.debug("cronLogList  : " + cronLogList);
         return updateCronLogs(cronLogList);
     }
 
     @Override
-    public CronLogBean getCronLogBean(String logInfo) {
-        LOGGER.info("Within " + getClass().getName() + " getCronLogBean method.");
+    public CronLogBean getCronLogBean(String logdebug) {
+        LOGGER.debug("Within " + getClass().getName() + " getCronLogBean method.");
         CronLogBean cronLogBean = null;
-        String tokens[] = logInfo.trim().split("\\|");
+        String tokens[] = logdebug.trim().split("\\|");
         try {
             Integer serverId = getServerIdByServeriP(tokens[1].trim());
             if (serverId != null) {
@@ -105,14 +105,14 @@ public class CronLogParserServiceImpl implements CronLogParserService {
     }
 
     private Integer getServerIdByServeriP(String serverIp) {
-        LOGGER.info("Within " + getClass().getName() + " getServerIdByServeriP method.");
+        LOGGER.debug("Within " + getClass().getName() + " getServerIdByServeriP method.");
         ServerBean serverDetails = serverDetailsService.getServerDetailByIp(serverIp);
         return (serverDetails != null ? serverDetails.getId().intValue() : 0);
     }
 
     @Override
     public List<CronLogBean> updateCronLogs(List<CronLogBean> cronLogList) {
-        LOGGER.info("Within " + getClass().getName() + " updateCronLogs method.");
+        LOGGER.debug("Within " + getClass().getName() + " updateCronLogs method.");
         List<CronLogBean> updatedCronLogs = new ArrayList<CronLogBean>();
         ListIterator<CronLogBean> iterator = cronLogList.listIterator();
         while (iterator.hasNext()) {

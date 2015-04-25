@@ -43,7 +43,6 @@ public class CronLogSchedulerTask {
 
 	public void readFile(String inputString) {
 		InputStream inputStream = new ByteArrayInputStream(inputString.getBytes());
-		System.out.println(inputString);
 		List<CronLogBean> cronLogs = cronLogParserService
 				.getCronLogs(inputStream);
 		LOGGER.info("cronJobs : " + cronLogs);

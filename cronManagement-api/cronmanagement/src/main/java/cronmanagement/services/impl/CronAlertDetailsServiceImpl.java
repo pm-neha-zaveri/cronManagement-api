@@ -37,35 +37,35 @@ public class CronAlertDetailsServiceImpl implements CronAlertDetailsService {
 
 	@Override
 	public List<CronAlert> getAllCronAlert() {
-		LOGGER.info("Within " + getClass().getName()
+		LOGGER.debug("Within " + getClass().getName()
 				+ " getAllCronAlert method.");
 		return cronAlertDetailsDAO.getAllCronAlert();
 	}
 
 	@Override
 	public List<CronAlert> getAllCronAlertByServerId(Integer serverId) {
-		LOGGER.info("Within " + getClass().getName()
+		LOGGER.debug("Within " + getClass().getName()
 				+ " getAllCronAlertByServerId method.");
 		return cronAlertDetailsDAO.getAllCronAlertByServerId(serverId);
 	}
 
 	@Override
 	public List<CronAlert> getAllCronAlertByDCId(Integer dcId) {
-		LOGGER.info("Within " + getClass().getName()
+        LOGGER.debug("Within " + getClass().getName()
 				+ " getAllCronAlertByDCId method.");
 		return cronAlertDetailsDAO.getAllCronAlertByDCId(dcId);
 	}
 
 	@Override
 	public List<CronAlert> getAllCronAlertByCronId(Integer cronId) {
-		LOGGER.info("Within " + getClass().getName()
+		LOGGER.debug("Within " + getClass().getName()
 				+ " getAllCronAlertByCronId method.");
 		return cronAlertDetailsDAO.getAllCronAlertByCronId(cronId);
 	}
 
 	@Override
 	public void saveCronAlert(CronAlert cronAlert) {
-		LOGGER.info("Within " + getClass().getName() + " saveCronAlert method.");
+		LOGGER.debug("Within " + getClass().getName() + " saveCronAlert method.");
 		cronAlertDetailsDAO.saveCronAlert(cronAlert);
 	}
 
@@ -115,7 +115,7 @@ public class CronAlertDetailsServiceImpl implements CronAlertDetailsService {
 		if (isValidData)
 			saveCronAlert(cronAlert);
 		else
-			LOGGER.info("Invalid Data");
+			LOGGER.debug("Invalid Data");
 	}
 
 }
