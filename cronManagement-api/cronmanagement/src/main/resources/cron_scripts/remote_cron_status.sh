@@ -7,8 +7,8 @@
 # RUN : ./cron_scripts/remote_cron_logs.sh >/dev/null hostname croncommand
 
 # Getting Parameters (Manadatory parameter)
-HOST=$2
-CronName=$3
+HOST=$1
+CronName=$2
 
 # STEP 1 : Get the program execution directory.
 PRG=$0
