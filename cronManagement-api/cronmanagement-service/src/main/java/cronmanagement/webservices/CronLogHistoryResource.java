@@ -27,6 +27,7 @@ public class CronLogHistoryResource {
     @GET
     @Produces("application/json")
     public List<CronLogBean> getCronLogHistory() {
+        LOGGER.info("Within " + getClass().getName() + " getCronLogHistory method.");
         return cronLogHistoryService.getCronLogHistory();
     }
 
@@ -34,6 +35,7 @@ public class CronLogHistoryResource {
     @Produces("application/json")
     @Path("/cron/{cronId}")
     public List<CronLogBean> getCronLogHistoryByCronId(@PathParam("cronId") Integer cronId) {
+        LOGGER.info("Within " + getClass().getName() + " getCronLogHistory method. CronId :: " + cronId);
         return cronLogHistoryService.getCronLogHistoryByCronId(cronId);
     }
 
@@ -41,6 +43,7 @@ public class CronLogHistoryResource {
     @Produces("application/json")
     @Path("/server/{serverId}")
     public List<CronLogBean> getCronLogHistoryByServerId(@PathParam("serverId") Integer serverId) {
+        LOGGER.info("Within " + getClass().getName() + " getCronLogHistory method. ServerId :: " + serverId);
         return cronLogHistoryService.getCronLogHistoryByServerId(serverId);
     }
 
