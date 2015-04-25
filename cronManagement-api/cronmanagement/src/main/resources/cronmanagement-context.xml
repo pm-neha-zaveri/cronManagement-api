@@ -33,15 +33,15 @@
 	<context:property-placeholder location="classpath:file-config.properties"
 		order="-1" ignore-unresolvable="true" ignore-resource-not-found="true" />
 
-	<!-- <task:scheduled-tasks>
+	<task:scheduled-tasks>
 		<task:scheduled ref="cronJobSchedulerTask" method="fetchAndSaveCronDetails"
-			cron="10 * * * * ?" />
+			cron="30 * * * * ?" />
 	</task:scheduled-tasks>
 
 	<task:scheduled-tasks>
 		<task:scheduled ref="cronLogSchedulerTask" method="fetchAndSaveCronLogs"
-			cron="10 * * * * ?" />
-	</task:scheduled-tasks> -->
+			cron="50 * * * * ?" />
+	</task:scheduled-tasks>
 
 	<task:scheduled-tasks>
 		<task:scheduled ref="cronHealthUpdateSchedulerTask"
