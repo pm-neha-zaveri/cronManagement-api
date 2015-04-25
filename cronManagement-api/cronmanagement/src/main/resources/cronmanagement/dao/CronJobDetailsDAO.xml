@@ -151,20 +151,29 @@
 
 	<update id="updateCronAlertCountDetails">
 		UPDATE cronjob
-			SET noOfAlerts =
-			  (SELECT count(*)
-			   FROM cron_alert ca
-			   WHERE cronjob.id=ca.cron_id
-			   GROUP BY ca.cron_id)
+		SET noOfAlerts = (if(
+                       (SELECT count(*)
+                        FROM cron_alert ca
+                        WHERE cronjob.id=ca.cron_id
+                        GROUP BY ca.cron_id)!=0,
+                       (SELECT count(*)
+                        FROM cron_alert ca
+                        WHERE cronjob.id=ca.cron_id
+                        GROUP BY ca.cron_id),0));
 	</update>
 	
 	<update id="updateCronLogCountDetails">
 		UPDATE cronjob
 		SET noOfRuns =
- 		 (SELECT count(*)
-   			FROM cron_log_history clh
-   				WHERE cronjob.id=clh.cron_id
-   					GROUP BY clh.cron_id)
+   					(if(
+                       (SELECT count(*)
+                        FROM cron_log_history ca
+                        WHERE cronjob.id=ca.cron_id
+                        GROUP BY ca.cron_id)!=0,
+                       (SELECT count(*)
+                        FROM cron_log_history ca
+                        WHERE cronjob.id=ca.cron_id
+                        GROUP BY ca.cron_id),0))
 	</update>
 	
 	<update id="updateThresholdDetails">
