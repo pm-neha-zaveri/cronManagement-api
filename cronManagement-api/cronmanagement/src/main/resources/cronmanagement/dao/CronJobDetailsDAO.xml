@@ -179,7 +179,7 @@
 	<update id="updateThresholdDetails">
 		UPDATE cronjob
 		SET threshold =
- 		 (SELECT Round(avg(threshold))
+ 		 (SELECT Round(avg(run_time))
   			 FROM cron_log_history clh
   			 WHERE cronjob.id=clh.cron_id
   			 GROUP BY clh.cron_id)
