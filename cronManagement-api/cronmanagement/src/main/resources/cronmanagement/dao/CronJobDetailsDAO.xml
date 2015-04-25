@@ -149,13 +149,31 @@
 		#{cronName} and status not like 'deleted'
 	</select>
 
-	<update id="updateCronJobDetails">
-		update cronjob set noOfAlerts =(select count(*) from
-		cron_alert clh where cronjob.id=clh.cron_id group by
-		clh.cron_id),noOfRuns =(select count(*) from cron_log_history clh
-		where cronjob.id=clh.cron_id group by clh.cron_id ),threshold =(select
-		Round(avg(threshold)) from cron_log_history clh where
-		cronjob.id=clh.cron_id group by clh.cron_id )
+	<update id="updateCronAlertCountDetails">
+		UPDATE cronjob
+			SET noOfAlerts =
+			  (SELECT count(*)
+			   FROM cron_alert ca
+			   WHERE cronjob.id=ca.cron_id
+			   GROUP BY ca.cron_id)
+	</update>
+	
+	<update id="updateCronLogCountDetails">
+		UPDATE cronjob
+		SET noOfRuns =
+ 		 (SELECT count(*)
+   			FROM cron_log_history clh
+   				WHERE cronjob.id=clh.cron_id
+   					GROUP BY clh.cron_id)
+	</update>
+	
+	<update id="updateThresholdDetails">
+		UPDATE cronjob
+		SET threshold =
+ 		 (SELECT Round(avg(threshold))
+  			 FROM cron_log_history clh
+  			 WHERE cronjob.id=clh.cron_id
+  			 GROUP BY clh.cron_id)
 	</update>
 
 </mapper>

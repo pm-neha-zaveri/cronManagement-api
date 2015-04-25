@@ -27,10 +27,14 @@ public interface CronJobDetailsDAO {
     public List<CronJob> getCronJobByServerIdAndCronName(@Param("serverId") Integer serverId,
             @Param("cronName") String cronName);
 
-    public void deleteCronJobs(@Param("cronIds")List<Integer> cronIds);
+    public void deleteCronJobs(@Param("cronIds") List<Integer> cronIds);
 
-	public List<CronJob> getCronJobDetails(@Param("requestDetails") RequestDetails requestDetails);
-	
-	public void updateCronJobDetails();
+    public List<CronJob> getCronJobDetails(@Param("requestDetails") RequestDetails requestDetails);
+
+    public void updateCronAlertCountDetails();
+
+    public void updateCronLogCountDetails();
+
+    public void updateThresholdDetails();
 
 }

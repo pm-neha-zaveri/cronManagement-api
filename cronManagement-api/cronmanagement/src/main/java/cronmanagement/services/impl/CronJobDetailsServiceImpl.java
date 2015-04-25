@@ -84,7 +84,9 @@ public class CronJobDetailsServiceImpl implements CronJobDetailsService {
 
     @Override
     public void updateCronJobDetails() {
-        cronDetailsDAO.updateCronJobDetails();
+        cronDetailsDAO.updateCronAlertCountDetails();
+        cronDetailsDAO.updateCronLogCountDetails();
+        cronDetailsDAO.updateThresholdDetails();
     }
 
 }
