@@ -60,4 +60,13 @@ public class ServerDetailsServiceImpl implements ServerDetailsService {
         return serverDetailsDAO.getServerDetailsByDCId(dcId);
     }
 
+    @Override
+    public void updateServerHealth(Integer healthPercenatge, Integer serverId) {
+        try{
+            serverDetailsDAO.updateServerHealth(healthPercenatge, serverId);
+        }catch(Exception exception){
+            LOGGER.error("Exception occured while saving health "+exception.getMessage(),exception);
+        }
+    }
+
 }

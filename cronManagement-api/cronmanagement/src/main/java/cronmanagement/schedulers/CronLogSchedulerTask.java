@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import cronmanagement.bean.CronLogBean;
+import cronmanagement.constant.Constants;
 import cronmanagement.services.CronLogHistoryService;
 import cronmanagement.services.CronLogParserService;
 import cronmanagement.util.CronManagementUtility;
@@ -35,7 +36,7 @@ public class CronLogSchedulerTask {
 	public void executeCommand() throws IOException {
 		String cronListsh = FileUtility
 				.getPropertyValue("REMOTE_CRON_LOGS_SCRIPT");
-		String[] args = new String[]{cronListsh};
+		String[] args = new String[]{Constants.FIRST_PARAM,cronListsh};
 		String shResponse = CronManagementUtility
 				.runBashCommand(args);
 		readFile(shResponse);

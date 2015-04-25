@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import cronmanagement.bean.CronJob;
+import cronmanagement.constant.Constants;
 import cronmanagement.services.CronJobDetailsService;
 import cronmanagement.services.CronJobParserService;
 import cronmanagement.util.CronManagementUtility;
@@ -39,7 +40,7 @@ public class CronJobSchedulerTask {
 
     public void executeCommand() throws IOException {
         String cronListsh = FileUtility.getPropertyValue("REMOTE_CRON_LIST_SCRIPT");
-        String args[] = new String[] { cronListsh };
+        String args[] = new String[] {Constants.FIRST_PARAM, cronListsh };
         String shResponse = CronManagementUtility.runBashCommand(args);
         readFile(shResponse);
     }

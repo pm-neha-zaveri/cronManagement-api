@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import cronmanagement.bean.DataCenterBean;
-import cronmanagement.dao.DataCenterDetailsDao;
+import cronmanagement.dao.DataCenterDetailsDAO;
 import cronmanagement.services.DataCenterDetailsService;
 
 @Service
@@ -17,16 +17,25 @@ public class DataCenterDetailsServiceImpl implements DataCenterDetailsService {
     public final static Log LOGGER = LogFactory.getLog(CronAlertDetailsServiceImpl.class);
 
     @Autowired
-    DataCenterDetailsDao dataCenterDetailsDao;
+    DataCenterDetailsDAO dataCenterDetailsDAO;
 
     @Override
     public List<DataCenterBean> getAllDataCenters() {
-        return dataCenterDetailsDao.getAllDataCenters();
+        return dataCenterDetailsDAO.getAllDataCenters();
     }
 
     @Override
     public DataCenterBean getDataCenterById(Integer dcId) {
-        return dataCenterDetailsDao.getDataCenterById(dcId);
+        return dataCenterDetailsDAO.getDataCenterById(dcId);
+    }
+
+    @Override
+    public void updateServerHealth() {
+        try{
+            dataCenterDetailsDAO.updateServerHealth();
+        }catch(Exception exception){
+            LOGGER.error("Exception occured while updating data center health "+exception.getMessage(),exception);
+        }
     }
 
 }

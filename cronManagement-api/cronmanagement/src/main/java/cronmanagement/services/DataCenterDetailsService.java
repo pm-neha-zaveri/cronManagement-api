@@ -10,4 +10,6 @@ public interface DataCenterDetailsService {
     
     DataCenterBean getDataCenterById(Integer dcId);
     
+    public void updateServerHealth();
+    
 }

@@ -14,5 +14,7 @@ public interface ServerDetailsService {
     public List<ServerBean> getServerDetailsByDCId(Integer dcId);
     
     public ServerBean getServerDetailByIp(String ipAddress);
+    
+    public void updateServerHealth(Integer healthPercenatge,Integer serverId);
 
 }

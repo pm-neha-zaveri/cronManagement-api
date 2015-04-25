@@ -25,6 +25,7 @@
 			<ref bean="cronRunningStatusResource" />
 			<ref bean="dataCenterDetailsResource" />
 			<ref bean="serverDetailsResource" />
+			<ref bean="healthCheckResource"/>
 		</jaxrs:serviceBeans>
 		<jaxrs:providers>
 			<ref bean="jacksonProvider" />

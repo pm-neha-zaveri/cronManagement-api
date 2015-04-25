@@ -16,4 +16,7 @@ public interface ServerDetailsDAO {
 
     public List<ServerBean> getServerDetailsByDCId(@Param("dcId") Integer dcId);
 
+    public void updateServerHealth(@Param("healthPercenatge") Integer healthPercenatge,
+            @Param("serverId") Integer serverId);
+
 }

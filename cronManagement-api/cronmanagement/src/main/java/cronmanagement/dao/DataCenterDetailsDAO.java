@@ -6,10 +6,12 @@ import org.apache.ibatis.annotations.Param;
 
 import cronmanagement.bean.DataCenterBean;
 
-public interface DataCenterDetailsDao {
+public interface DataCenterDetailsDAO {
 
     List<DataCenterBean> getAllDataCenters();
     
     DataCenterBean getDataCenterById(@Param("dcId") Integer dcId);
+
+    void updateServerHealth();
     
 }
