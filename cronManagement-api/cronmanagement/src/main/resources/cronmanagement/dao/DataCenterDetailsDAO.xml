@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="cronmanagement.dao.DataCenterDetailsDao">
+<mapper namespace="cronmanagement.dao.DataCenterDetailsDAO">
 	<select id="getAllDataCenters" resultType="cronmanagement.bean.DataCenterBean">
 		SELECT id as id,
 		dcName as
@@ -23,6 +23,10 @@
 		dcHealth as
 		dcHealth
 		FROM datacenter where id=#{dcId};
+	</select>
+	
+	<select id="updateServerHealth">
+		 update datacenter ds set ds.dchealth = (select ROUND(sum(server_health)/count(*)) from server where dcId=ds.id group by dcId );
 	</select>
 
 </mapper>

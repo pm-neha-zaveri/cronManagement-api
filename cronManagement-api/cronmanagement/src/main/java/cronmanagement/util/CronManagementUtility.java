@@ -16,6 +16,10 @@ public class CronManagementUtility {
             BufferedReader reader = new BufferedReader(new InputStreamReader(proc.getInputStream()));
             String s;
             while ((s = reader.readLine()) != null) {
+                if(s.indexOf("spawn") != -1){
+                    s = reader.readLine();
+                    s = reader.readLine();
+                }
                 stringResponse.append(s).append("\n");
             }
         } catch (Exception e) {

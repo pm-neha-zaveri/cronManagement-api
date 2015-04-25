@@ -27,4 +27,8 @@
 		description as description,server_health as serverHealth FROM server where dcId=#{dcId};
 	</select>
 	
+	<update id="updateServerHealth">
+		Update server set server_health=#{healthPercenatge} where id=#{serverId};
+	</update>
+	
 </mapper>

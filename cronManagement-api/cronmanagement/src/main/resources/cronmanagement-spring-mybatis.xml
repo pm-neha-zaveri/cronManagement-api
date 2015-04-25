@@ -23,8 +23,13 @@
 		<property name="sqlSessionFactory" ref="cronManagementSqlSessionFactory" />
 	</bean>
 	
-	<bean id="dataCenterDetailsDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
-		<property name="mapperInterface" value="cronmanagement.dao.DataCenterDetailsDao" />
+	<bean id="dataCenterDetailsDAO" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="cronmanagement.dao.DataCenterDetailsDAO" />
+		<property name="sqlSessionFactory" ref="cronManagementSqlSessionFactory" />
+	</bean>
+	
+	<bean id="healthCheckDAO" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="cronmanagement.dao.HealthCheckDAO" />
 		<property name="sqlSessionFactory" ref="cronManagementSqlSessionFactory" />
 	</bean>
 
