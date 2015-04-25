@@ -32,6 +32,11 @@
 		<property name="mapperInterface" value="cronmanagement.dao.HealthCheckDAO" />
 		<property name="sqlSessionFactory" ref="cronManagementSqlSessionFactory" />
 	</bean>
+	
+	<bean id="cronForecastDAO" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="cronmanagement.dao.CronForecastDAO" />
+		<property name="sqlSessionFactory" ref="cronManagementSqlSessionFactory" />
+	</bean>
 
 
 </beans>
