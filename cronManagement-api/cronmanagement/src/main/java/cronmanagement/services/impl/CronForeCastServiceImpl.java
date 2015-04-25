@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import cronmanagement.bean.CronForecast;
+import cronmanagement.bean.CronLogBean;
 import cronmanagement.dao.CronForecastDAO;
 import cronmanagement.services.CronForeCastService;
 
@@ -25,6 +26,12 @@ public class CronForeCastServiceImpl implements CronForeCastService {
         try {
             LOGGER.info("Within " + getClass().getName() + " getCronForecastHistory method");
             cronForeCastList = cronForecastDAO.getCronForecastHistory();
+            if(cronForeCastList != null){
+                for (CronForecast cronForecast : cronForeCastList) {
+                    cronForecast.setStartTime(cronForecast.getStartTime().replace(".0", ""));
+                    cronForecast.setEndTime(cronForecast.getEndTime().replace(".0", ""));
+                }
+            }
         } catch (Exception exception) {
             LOGGER.error("Exception occured while fetching forecasting details" + exception.getMessage(), exception);
         }
@@ -38,6 +45,12 @@ public class CronForeCastServiceImpl implements CronForeCastService {
             LOGGER.info("Within " + getClass().getName() + " getCronForecastHistoryByCronId method. CronId :: "
                     + cronId);
             cronForeCastList = cronForecastDAO.getCronForecastHistoryByCronId(cronId);
+            if(cronForeCastList != null){
+                for (CronForecast cronForecast : cronForeCastList) {
+                    cronForecast.setStartTime(cronForecast.getStartTime().replace(".0", ""));
+                    cronForecast.setEndTime(cronForecast.getEndTime().replace(".0", ""));
+                }
+            }
         } catch (Exception exception) {
             LOGGER.error("Exception occured while fetching forecasting details" + exception.getMessage(), exception);
         }
@@ -51,6 +64,12 @@ public class CronForeCastServiceImpl implements CronForeCastService {
             LOGGER.info("Within " + getClass().getName() + " getCronForecastHistoryByServerId method. ServerId :: "
                     + serverId);
             cronForeCastList = cronForecastDAO.getCronForecastHistoryByServerId(serverId);
+            if(cronForeCastList != null){
+                for (CronForecast cronForecast : cronForeCastList) {
+                    cronForecast.setStartTime(cronForecast.getStartTime().replace(".0", ""));
+                    cronForecast.setEndTime(cronForecast.getEndTime().replace(".0", ""));
+                }
+            }
         } catch (Exception exception) {
             LOGGER.error("Exception occured while fetching forecasting details" + exception.getMessage(), exception);
         }
