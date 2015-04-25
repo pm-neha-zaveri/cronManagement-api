@@ -14,29 +14,45 @@ import cronmanagement.services.CronLogHistoryService;
 @Service
 public class CronLogHistoryServiceImpl implements CronLogHistoryService {
 
-    public final static Log LOGGER = LogFactory.getLog(CronLogHistoryServiceImpl.class);
+	public final static Log LOGGER = LogFactory
+			.getLog(CronLogHistoryServiceImpl.class);
 
-    @Autowired
-    CronLogHistoryDAO cronLogHistoryDAO;
+	@Autowired
+	CronLogHistoryDAO cronLogHistoryDAO;
 
-    @Override
-    public List<CronLogBean> getCronLogHistory() {
-        return cronLogHistoryDAO.getCronLogHistory();
-    }
+	@Override
+	public List<CronLogBean> getCronLogHistory() {
+		List<CronLogBean> cronList = cronLogHistoryDAO.getCronLogHistory();
+		for (CronLogBean cronLogBean : cronList) {
+			cronLogBean.setStartTime(cronLogBean.getStartTime().replace(".0",
+					""));
+			cronLogBean.setEndTime(cronLogBean.getEndTime().replace(".0", ""));
+		}
 
-    @Override
-    public List<CronLogBean> getCronLogHistoryByCronId(Integer cronId) {
-        return cronLogHistoryDAO.getCronLogHistoryByCronId(cronId);
-    }
+		return cronList;
+	}
 
-    @Override
-    public List<CronLogBean> getCronLogHistoryByServerId(Integer serverId) {
-        return cronLogHistoryDAO.getCronLogHistoryByServerId(serverId);
-    }
+	@Override
+	public List<CronLogBean> getCronLogHistoryByCronId(Integer cronId) {
+		List<CronLogBean> cronList = cronLogHistoryDAO
+				.getCronLogHistoryByCronId(cronId);
+		for (CronLogBean cronLogBean : cronList) {
+			cronLogBean.setStartTime(cronLogBean.getStartTime().replace(".0",
+					""));
+			cronLogBean.setEndTime(cronLogBean.getEndTime().replace(".0", ""));
+		}
 
-    @Override
-    public void saveCronLogHistory(List<CronLogBean> cronLogs) {
-        cronLogHistoryDAO.saveCronLogHistory(cronLogs);
-    }
+		return cronList;
+	}
+
+	@Override
+	public List<CronLogBean> getCronLogHistoryByServerId(Integer serverId) {
+		return cronLogHistoryDAO.getCronLogHistoryByServerId(serverId);
+	}
+
+	@Override
+	public void saveCronLogHistory(List<CronLogBean> cronLogs) {
+		cronLogHistoryDAO.saveCronLogHistory(cronLogs);
+	}
 
 }

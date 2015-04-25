@@ -20,31 +20,35 @@ import cronmanagement.services.ServerDetailsService;
 @Component
 @Path("/cronRunningStatus")
 public class CronRunningStatusResource {
-    
-    public final static Log LOGGER = LogFactory.getLog(CronRunningStatusResource.class);
-    
-    @Autowired
-    CronRunningStatusService cronRunningStatusService;
-    
-    @Autowired
-    CronJobDetailsResource cronJobDetailsResource;
-    
-    @Autowired
-    ServerDetailsService serverDetailsResource;
-    
-    @GET
-    @Produces("application/json")
-    public String getCronLogHistoryByCronId(@QueryParam("cronId") Integer cronId) throws IOException {
-        LOGGER.info("cronId : "+cronId);
-        if(cronId == null)
-            cronId = 0;
-        CronJob cronJob = cronJobDetailsResource.getCronByCronId(cronId);
-        if(cronJob != null){
-            ServerBean serverBean = serverDetailsResource.getServerDetailsByServerId(cronJob.getServerId());
-            if(serverBean != null)
-                return cronRunningStatusService.getCronRunningStatus(serverBean.getServerIP(),cronJob.getCronName());
-        }
-        return new String("Invalid Parameters.");
-    }
-    
+
+	public final static Log LOGGER = LogFactory
+			.getLog(CronRunningStatusResource.class);
+
+	@Autowired
+	CronRunningStatusService cronRunningStatusService;
+
+	@Autowired
+	CronJobDetailsResource cronJobDetailsResource;
+
+	@Autowired
+	ServerDetailsService serverDetailsResource;
+
+	@GET
+	@Produces("application/json")
+	public String getCronLogHistoryByCronId(@QueryParam("cronId") Integer cronId)
+			throws IOException {
+        LOGGER.info("Within " + getClass().getName() + " getCronLogHistoryByCronId method. CronId :: " + cronId);
+		if (cronId == null)
+			cronId = 0;
+		CronJob cronJob = cronJobDetailsResource.getCronByCronId(cronId);
+		if (cronJob != null) {
+			ServerBean serverBean = serverDetailsResource
+					.getServerDetailsByServerId(cronJob.getServerId());
+			if (serverBean != null)
+				return cronRunningStatusService.getCronRunningStatus(
+						serverBean.getServerIP(), cronJob.getCronName());
+		}
+		return new String("Invalid Parameters.");
+	}
+
 }

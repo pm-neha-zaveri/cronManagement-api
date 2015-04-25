@@ -28,6 +28,7 @@ public class ServerDetailsResource {
     @GET
     @Produces("application/json")
     public List<ServerBean> getServerDetails() {
+        LOGGER.info("Within " + getClass().getName() + " getServerDetails method.");
         return serverDetailsService.getServerDetails();
     }
 
@@ -35,6 +36,7 @@ public class ServerDetailsResource {
     @Produces("application/json")
     @Path("/server/{serverId}")
     public ServerBean getServerDetailsByServerId(@PathParam("serverId") Integer serverId) {
+        LOGGER.info("Within " + getClass().getName() + " getServerDetailsByServerId method. ServerId :: " + serverId);
         return serverDetailsService.getServerDetailsByServerId(serverId);
     }
 
@@ -42,6 +44,7 @@ public class ServerDetailsResource {
     @Produces("application/json")
     @Path("/dc/{dcId}")
     public List<ServerBean> getServerDetailsByDCId(@PathParam("dcId") Integer dcId) {
+        LOGGER.info("Within " + getClass().getName() + " getServerDetailsByDCId method. DcId :: " + dcId);
         return serverDetailsService.getServerDetailsByDCId(dcId);
     }
 
@@ -49,6 +52,7 @@ public class ServerDetailsResource {
     @Produces("application/json")
     @Path("/ipaddress/")
     public ServerBean getServerDetailByIp(@QueryParam("ipAddress") String ipAddress) {
+        LOGGER.info("Within " + getClass().getName() + " getServerDetailByIp method. IpAddress :: " + ipAddress);
         return serverDetailsService.getServerDetailByIp(ipAddress);
     }
 

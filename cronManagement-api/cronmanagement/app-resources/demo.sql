@@ -214,3 +214,12 @@ UPDATE `cronmanagement`.`datacenter` SET `longitude`='44.44' WHERE `id`='3';
 
 
 
+INSERT INTO `cronmanagement`.`datacenter` (`dcName`, `latitude`, `longitude`, `dcHealth`) VALUES ('New York', '40.712', '74.0059', 90);
+
+
+UPDATE `cronmanagement`.`datacenter` SET `longitude`='-74.0059' WHERE `id`='4';
+UPDATE `cronmanagement`.`datacenter` SET `longitude`='-122.2361', `dcHealth`=10 WHERE `id`='3';
+UPDATE `cronmanagement`.`datacenter` SET `dcHealth`=50 WHERE `id`='2';
+
+UPDATE `cronmanagement`.`datacenter` SET `id`=1 WHERE `id`='2';
+UPDATE `cronmanagement`.`datacenter` SET `id`=2 WHERE `id`='3';
