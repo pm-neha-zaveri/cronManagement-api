@@ -16,6 +16,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import cronmanagement.bean.CronAlert;
+import cronmanagement.schedulers.CronJobSchedulerTask;
+import cronmanagement.schedulers.CronLogSchedulerTask;
 import cronmanagement.services.CronAlertDetailsService;
 
 @Component
@@ -26,6 +28,12 @@ public class CronAlertDetailsResource {
 
     @Autowired
     CronAlertDetailsService cronAlertDetailsService;
+
+    @Autowired
+    CronLogSchedulerTask cronLogSchedulerTask;
+
+    @Autowired
+    CronJobSchedulerTask cronJobSchedulerTask;
 
     @GET
     @Produces("application/json")

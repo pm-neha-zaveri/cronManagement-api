@@ -37,14 +37,14 @@
 		<task:scheduled ref="cronJobSchedulerTask" method="fetchAndSaveCronDetails"
 			cron="* 23 * * * ?" />
 	</task:scheduled-tasks>
-	
+
 	<task:scheduled-tasks>
 		<task:scheduled ref="cronLogSchedulerTask" method="fetchAndSaveCronLogs"
 			cron="* 23 * * * ?" />
 	</task:scheduled-tasks>
-	
+
 	<task:scheduled-tasks>
-		<task:scheduled ref="cronHealthUpdateSchedulerTask" method="updateHealthCheckData"
-			cron="10 * * * * ?" />
+		<task:scheduled ref="cronHealthUpdateSchedulerTask"
+			method="updateHealthCheckData" cron="10 * * * * ?" />
 	</task:scheduled-tasks>
 </beans>

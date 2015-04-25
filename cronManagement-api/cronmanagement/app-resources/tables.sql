@@ -75,4 +75,6 @@ alter table cronjob modify column threshold int(10) UNSIGNED NOT NULL Default 0;
  
 alter table cronjob modify column noOfRuns int(10) UNSIGNED NOT NULL Default 0;
   
-alter table cronjob modify column noOfAlerts int(10) UNSIGNED NOT NULL Default 0;
+alter table cronjob modify column noOfAlerts int(10) UNSIGNED NOT NULL;
+
+ALTER TABLE `cronmanagement`.`cronjob` CHANGE COLUMN `id` `id` INT(11) NOT NULL AUTO_INCREMENT  ;
