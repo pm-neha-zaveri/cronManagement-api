@@ -81,7 +81,7 @@ public class CronLogParserServiceImpl implements CronLogParserService {
         CronLogBean cronLogBean = null;
         String tokens[] = logdebug.trim().split("\\|");
         try {
-            if (tokens!=null && tokens.length > 0) {
+            if (tokens!=null && tokens.length == 4) {
                 Integer serverId = getServerIdByServeriP(tokens[1].trim());
                 if (serverId != null) {
                     List<CronJob> cronJobList = cronJobDetailsService.getCronJobByServerIdAndCronName(serverId,
