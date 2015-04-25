@@ -81,21 +81,23 @@ public class CronLogParserServiceImpl implements CronLogParserService {
         CronLogBean cronLogBean = null;
         String tokens[] = logdebug.trim().split("\\|");
         try {
-            Integer serverId = getServerIdByServeriP(tokens[1].trim());
-            if (serverId != null) {
-                List<CronJob> cronJobList = cronJobDetailsService.getCronJobByServerIdAndCronName(serverId, new String(
-                        "%" + tokens[0] + "%"));
-                CronJob cronJob = (cronJobList != null && cronJobList.size() > 0 ? cronJobList.get(0) : null);
-                if (cronJob != null) {
-                    cronLogBean = new CronLogBean();
-                    cronLogBean.setServerId(serverId);
-                    cronLogBean.setCronId(cronJob.getCronId());
-                    if (tokens.length > 2 && tokens[2].trim().length() > 0)
-                        cronLogBean.setStartTime(sql_formatter.format(formatter.parse(tokens[2].trim())));
-                    if (tokens.length > 3 && tokens[3].trim().length() > 0)
-                        cronLogBean.setEndTime(sql_formatter.format(formatter.parse(tokens[3].trim())));
-                    if (tokens.length > 4 && tokens[4].trim().length() > 0)
-                        cronLogBean.setProcessId(Integer.parseInt(tokens[4].trim()));
+            if (tokens!=null && tokens.length > 0) {
+                Integer serverId = getServerIdByServeriP(tokens[1].trim());
+                if (serverId != null) {
+                    List<CronJob> cronJobList = cronJobDetailsService.getCronJobByServerIdAndCronName(serverId,
+                            new String("%" + tokens[0] + "%"));
+                    CronJob cronJob = (cronJobList != null && cronJobList.size() > 0 ? cronJobList.get(0) : null);
+                    if (cronJob != null) {
+                        cronLogBean = new CronLogBean();
+                        cronLogBean.setServerId(serverId);
+                        cronLogBean.setCronId(cronJob.getCronId());
+                        if (tokens.length > 2 && tokens[2].trim().length() > 0)
+                            cronLogBean.setStartTime(sql_formatter.format(formatter.parse(tokens[2].trim())));
+                        if (tokens.length > 3 && tokens[3].trim().length() > 0)
+                            cronLogBean.setEndTime(sql_formatter.format(formatter.parse(tokens[3].trim())));
+                        if (tokens.length > 4 && tokens[4].trim().length() > 0)
+                            cronLogBean.setProcessId(Integer.parseInt(tokens[4].trim()));
+                    }
                 }
             }
         } catch (ParseException e) {
