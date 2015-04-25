@@ -18,6 +18,8 @@ public class CronRunningStatusServiceImpl implements CronRunningStatusService {
 
     @Override
     public String getCronRunningStatus(String server, String cronName) throws IOException {
+    	LOGGER.info("Within " + getClass().getName()
+				+ " getCronRunningStatus method. Server :: "+server+" cron name :: "+cronName);
         if(cronName != null && cronName.trim().length() > 0)
             cronName = cronName.substring(cronName.indexOf(" /"),cronName.length());
         String result = executeCommand(server, cronName);
@@ -28,6 +30,8 @@ public class CronRunningStatusServiceImpl implements CronRunningStatusService {
     }
 
     public String executeCommand(String server, String cronName) throws IOException {
+    	LOGGER.info("Within " + getClass().getName()
+				+ " executeCommand method. Server :: "+server+" cron name"+cronName);
         String cronListsh = FileUtility.getPropertyValue("REMOTE_CRON_STATUS_SCRIPT");
         String[] args = new String[] {Constants.FIRST_PARAM, cronListsh, server, cronName };
         String shResponse = CronManagementUtility.runBashCommand(args);

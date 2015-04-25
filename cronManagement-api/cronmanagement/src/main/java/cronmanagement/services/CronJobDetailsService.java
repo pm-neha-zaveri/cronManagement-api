@@ -2,6 +2,8 @@ package cronmanagement.services;
 
 import java.util.List;
 
+import com.pubmatic.apiutils.bean.RequestDetails;
+
 import cronmanagement.bean.CronJob;
 
 public interface CronJobDetailsService {
@@ -22,4 +24,6 @@ public interface CronJobDetailsService {
     public List<CronJob> getCronJobDetailsByCronType(String cronType);
 
     public List<CronJob> getCronJobByServerIdAndCronName(Integer serverId, String cronName);
+
+	List<CronJob> getCronJobDetails(RequestDetails requestDetails);
 }

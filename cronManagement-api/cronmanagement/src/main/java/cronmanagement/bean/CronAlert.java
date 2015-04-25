@@ -14,6 +14,9 @@ public class CronAlert implements Serializable {
     private String endTime;
     private Integer runTime;
     private Integer threshold;
+    private Long processId;
+    private String cronName;
+    private String serverIP;
 
     public Integer getId() {
         return id;
@@ -23,7 +26,35 @@ public class CronAlert implements Serializable {
         this.id = id;
     }
 
-    public Integer getCronId() {
+    public Long getProcessId() {
+		return processId;
+	}
+
+	public void setProcessId(Long processId) {
+		this.processId = processId;
+	}
+
+	public String getCronName() {
+		return cronName;
+	}
+
+	public void setCronName(String cronName) {
+		this.cronName = cronName;
+	}
+
+	public String getServerIP() {
+		return serverIP;
+	}
+
+	public void setServerIP(String serverIP) {
+		this.serverIP = serverIP;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	public Integer getCronId() {
         return cronId;
     }
 

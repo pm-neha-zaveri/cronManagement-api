@@ -5,6 +5,8 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 
+import com.pubmatic.apiutils.bean.RequestDetails;
+
 import cronmanagement.bean.CronJob;
 
 @Service
@@ -26,5 +28,7 @@ public interface CronJobDetailsDAO {
             @Param("cronName") String cronName);
 
     public void deleteCronJobs(@Param("cronIds")List<Integer> cronIds);
+
+	public List<CronJob> getCronJobDetails(@Param("requestDetails") RequestDetails requestDetails);
 
 }

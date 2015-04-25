@@ -4,7 +4,6 @@ import java.text.ParseException;
 import java.util.List;
 
 import cronmanagement.bean.CronAlert;
-import cronmanagement.bean.CronAlertRequestBean;
 
 public interface CronAlertDetailsService {
 
@@ -18,7 +17,6 @@ public interface CronAlertDetailsService {
 
 	void saveCronAlert(CronAlert cronAlert);
 
-	void saveCronAlertDataToDB(CronAlertRequestBean cronAlertRequestBean)
-			throws ParseException;
+	void saveCronAlertDataToDB(CronAlert cronAlert) throws ParseException;
 
 }

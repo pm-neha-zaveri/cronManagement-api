@@ -13,7 +13,31 @@
 		scheduleexpr as cronExpression,
 		cronType as cronType
 		FROM
-		cronjob where status not like 'deleted'
+		cronjob where
+                <if test="!requestDetails.listOfCriteriaSet.empty">
+                        <foreach item="filterSet" index="index"
+                                collection="requestDetails.listOfCriteriaSet" separator="AND">
+                                <foreach item="criteria" index="index" collection="filterSet"
+                                        open="(" close=")" separator="OR">
+                                        ${criteria.key} ${criteria.operator}
+                                        ${criteria.value}
+                                </foreach>
+                        </foreach>
+                        and
+                </if> 
+		status not like 'deleted'
+		 <if test="requestDetails.columOrders != null">
+                        ORDER BY
+                        <foreach item="columOrder" index="index" collection="requestDetails.columOrders"
+                                separator=",">
+                                ${columOrder.columName} ${columOrder.sortOrder}
+                        </foreach>
+
+                </if>
+                <if test="requestDetails.columOrders == null">
+                        order by cronId
+                </if>
+		
 	</select>
 
 	<select id="getCronJobDetailsByServerId" resultType="cronmanagement.bean.CronJob">

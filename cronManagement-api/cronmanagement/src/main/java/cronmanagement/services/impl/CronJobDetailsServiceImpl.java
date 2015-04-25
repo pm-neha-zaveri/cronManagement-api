@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
 
+import com.pubmatic.apiutils.bean.RequestDetails;
+
 import cronmanagement.bean.CronJob;
 import cronmanagement.dao.CronJobDetailsDAO;
 import cronmanagement.services.CronJobDetailsService;
@@ -41,8 +43,8 @@ public class CronJobDetailsServiceImpl implements CronJobDetailsService {
     }
 
     @Override
-    public List<CronJob> getCronJobDetails() {
-        return cronDetailsDAO.getCronJobDetails();
+    public List<CronJob> getCronJobDetails(RequestDetails requestDetails) {
+        return cronDetailsDAO.getCronJobDetails(requestDetails);
     }
 
     @Override
@@ -79,5 +81,11 @@ public class CronJobDetailsServiceImpl implements CronJobDetailsService {
     public void deleteCronJobs(List<Integer> cronIds) {
         cronDetailsDAO.deleteCronJobs(cronIds);
     }
+
+	@Override
+	public List<CronJob> getCronJobDetails() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

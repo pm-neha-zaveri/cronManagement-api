@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import cronmanagement.bean.CronAlert;
-import cronmanagement.bean.CronAlertRequestBean;
 import cronmanagement.bean.CronJob;
 import cronmanagement.bean.ServerBean;
 import cronmanagement.dao.CronAlertDetailsDAO;
@@ -38,76 +37,74 @@ public class CronAlertDetailsServiceImpl implements CronAlertDetailsService {
 
 	@Override
 	public List<CronAlert> getAllCronAlert() {
+		LOGGER.info("Within " + getClass().getName()
+				+ " getAllCronAlert method.");
 		return cronAlertDetailsDAO.getAllCronAlert();
 	}
 
 	@Override
 	public List<CronAlert> getAllCronAlertByServerId(Integer serverId) {
+		LOGGER.info("Within " + getClass().getName()
+				+ " getAllCronAlertByServerId method.");
 		return cronAlertDetailsDAO.getAllCronAlertByServerId(serverId);
 	}
 
 	@Override
 	public List<CronAlert> getAllCronAlertByDCId(Integer dcId) {
+		LOGGER.info("Within " + getClass().getName()
+				+ " getAllCronAlertByDCId method.");
 		return cronAlertDetailsDAO.getAllCronAlertByDCId(dcId);
 	}
 
 	@Override
 	public List<CronAlert> getAllCronAlertByCronId(Integer cronId) {
+		LOGGER.info("Within " + getClass().getName()
+				+ " getAllCronAlertByCronId method.");
 		return cronAlertDetailsDAO.getAllCronAlertByCronId(cronId);
 	}
 
 	@Override
 	public void saveCronAlert(CronAlert cronAlert) {
+		LOGGER.info("Within " + getClass().getName() + " saveCronAlert method.");
 		cronAlertDetailsDAO.saveCronAlert(cronAlert);
 	}
 
 	@Override
-	public void saveCronAlertDataToDB(CronAlertRequestBean cronAlertRequestBean)
+	public void saveCronAlertDataToDB(CronAlert cronAlert)
 			throws ParseException {
-
-		CronAlert cronAlert = new CronAlert();
+		LOGGER.info("Within " + getClass().getName()
+				+ " saveCronAlertDataToDB method.");
 		Boolean isValidData = false;
 		ServerBean serverBean = serverDetailsService
-				.getServerDetailByIp(cronAlertRequestBean.getCronServerIP() == null ? ""
-						: cronAlertRequestBean.getCronServerIP().trim());
-		if (serverBean != null && cronAlertRequestBean.getCronName() != null
-				&& cronAlertRequestBean.getCronName().trim().length() > 0) {
+				.getServerDetailByIp(cronAlert.getServerIP() == null ? ""
+						: cronAlert.getServerIP().trim());
+		if (serverBean != null && cronAlert.getCronName() != null
+				&& cronAlert.getCronName().trim().length() > 0) {
 			List<CronJob> cronJobList = cronJobDetailsService
 					.getCronJobByServerIdAndCronName(serverBean.getId(),
-							new String("%" + cronAlertRequestBean.getCronName()
-									+ "%"));
+							new String("%" + cronAlert.getCronName() + "%"));
 			CronJob cronJob = (cronJobList != null && cronJobList.size() > 0 ? cronJobList
 					.get(0) : null);
 			cronAlert.setServerId(serverBean.getId());
 			cronAlert.setDcId(serverBean.getDcId());
 			if (cronJob != null) {
 				cronAlert.setCronId(cronJob.getCronId());
-				if (cronAlertRequestBean.getCronStartTime() != null
-						&& cronAlertRequestBean.getCronStartTime().trim()
-								.length() > 0)
-					cronAlert.setStartTime(sql_formatter.format(formatter
-							.parse(cronAlertRequestBean.getCronStartTime()
-									.replace('_', ' '))));
-				if (cronAlertRequestBean.getCronEndTime() != null
-						&& cronAlertRequestBean.getCronEndTime().trim()
-								.length() > 0)
+				if (cronAlert.getStartTime() != null
+						&& cronAlert.getStartTime().trim().length() > 0)
+					cronAlert
+							.setStartTime(sql_formatter.format(formatter
+									.parse(cronAlert.getStartTime().replace(
+											'_', ' '))));
+				if (cronAlert.getEndTime() != null
+						&& cronAlert.getEndTime().trim().length() > 0)
 					cronAlert.setEndTime(sql_formatter.format(formatter
-							.parse(cronAlertRequestBean.getCronEndTime()
-									.replace('_', ' '))));
-				if (cronAlertRequestBean.getActualRunTimeSec() != null
-						&& cronAlertRequestBean.getActualRunTimeSec().trim()
-								.length() > 0)
-					cronAlert.setRunTime(Integer.parseInt(cronAlertRequestBean
-							.getActualRunTimeSec()) * 1000);
-				if (cronAlertRequestBean.getActualRunTimeSec() != null
-						&& cronAlertRequestBean.getActualRunTimeSec().trim()
-								.length() > 0)
-					cronAlert.setRunTime(Integer.parseInt(cronAlertRequestBean
-							.getActualRunTimeSec()));
-				if (cronAlertRequestBean.getThreshhold() != null
-						&& cronAlertRequestBean.getThreshhold().trim().length() > 0)
-					cronAlert.setThreshold(Integer
-							.parseInt(cronAlertRequestBean.getThreshhold()));
+							.parse(cronAlert.getEndTime().replace('_', ' '))));
+				if (cronAlert.getRunTime() != null
+						&& cronAlert.getRunTime() > 0)
+					cronAlert.setRunTime(cronAlert.getRunTime() * 1000);
+				if (cronAlert.getThreshold() != null
+						&& cronAlert.getThreshold() > 0)
+					cronAlert.setRunTime(cronAlert.getThreshold() * 1000);
 				cronAlert.setAlertDescription("Unexpected Behaviour Observed");
 				isValidData = true;
 			}

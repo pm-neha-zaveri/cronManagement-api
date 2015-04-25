@@ -2,16 +2,21 @@ package cronmanagement.bean;
 
 import java.io.Serializable;
 
+import com.pubmatic.apiutils.annotations.Dimension;
+
 public class CronJob implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    @Dimension(columName="id")
     private Integer cronId;
+    @Dimension(columName="serverId")
     private Integer serverId;
     private String cronExpression;
     private String cronName;
     private String cronCommand;
     private String cronStatus;
     private String cronComment;
+    @Dimension(columName="cronType")
     private String cronType;
 
     public String getCronType() {

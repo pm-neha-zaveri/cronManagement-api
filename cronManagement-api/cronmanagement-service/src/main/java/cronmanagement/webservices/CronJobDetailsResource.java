@@ -2,6 +2,7 @@ package cronmanagement.webservices;
 
 import java.util.List;
 
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -12,6 +13,10 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import com.pubmatic.apiutils.bean.ReportingRequest;
+import com.pubmatic.apiutils.bean.RequestDetails;
+import com.pubmatic.apiutils.utils.RequestParserUtil;
 
 import cronmanagement.bean.CronJob;
 import cronmanagement.services.CronJobDetailsService;
@@ -26,9 +31,11 @@ public class CronJobDetailsResource {
     CronJobDetailsService cronJobDetailsService;
 
     @GET
+    @Consumes("application/json")
     @Produces("application/json")
-    public List<CronJob> getCronList() {
-        return cronJobDetailsService.getCronJobDetails();
+    public List<CronJob> getCronList(@QueryParam("") ReportingRequest reportingRequest) {
+        RequestDetails requestDetails = RequestParserUtil.parseReportngRequest(reportingRequest, CronJob.class);
+        return cronJobDetailsService.getCronJobDetails(requestDetails);
     }
 
     @GET
