@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import cronmanagement.bean.CronAlert;
+import cronmanagement.bean.CronAlertRequestBean;
 import cronmanagement.bean.CronJob;
 import cronmanagement.bean.ServerBean;
 import cronmanagement.schedulers.CronJobSchedulerTask;
