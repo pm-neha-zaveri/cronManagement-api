@@ -90,7 +90,7 @@ public class HealthCheckServiceImpl implements HealthCheckService {
         } catch (Exception exception) {
             LOGGER.error("Exception occured while calculating health" + exception.getMessage(), exception);
         }
-        LOGGER.info("cronAlertList : " + cronAlertList + " cronLogList : " + cronLogList + " isUpdated : " + isUpdated);
+        LOGGER.info("cronAlertList : " + (cronAlertList==null?null:cronAlertList.size()) + " cronLogList : " + (cronLogList==null?null:cronLogList.size()) + " isUpdated : " + isUpdated);
         return isUpdated;
     }
 
