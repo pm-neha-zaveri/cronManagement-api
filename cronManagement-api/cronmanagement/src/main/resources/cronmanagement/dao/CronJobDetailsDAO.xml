@@ -82,13 +82,15 @@
 
 	<insert id="saveAllCronJobs">
 		INSERT INTO
-		cronjob(serverId,comment,status,name,scheduleexpr,cronType)
+		cronjob(serverId,comment,status,name,scheduleexpr,cronType,noOfRuns,
+		threshold,
+		noOfAlerts)
 		VALUES (
 		<foreach item="cronJob" index="index" collection="cronJobs"
 			open="" close="" separator="),(">
 			#{cronJob.serverId},
 			#{cronJob.cronComment}, #{cronJob.cronStatus},#{cronJob.cronName},
-			#{cronJob.cronExpression}, #{cronJob.cronType}
+			#{cronJob.cronExpression}, #{cronJob.cronType},0,0,0
 		</foreach>
 		)
 	</insert>

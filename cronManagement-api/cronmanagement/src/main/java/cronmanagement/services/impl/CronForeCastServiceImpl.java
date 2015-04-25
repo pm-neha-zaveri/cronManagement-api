@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import cronmanagement.bean.CronForecast;
-import cronmanagement.bean.CronLogBean;
 import cronmanagement.dao.CronForecastDAO;
 import cronmanagement.services.CronForeCastService;
 
