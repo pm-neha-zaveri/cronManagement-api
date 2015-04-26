@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.pubmatic.apiutils.bean.RequestDetails;
 
+import cronmanagement.bean.CronAlert;
 import cronmanagement.bean.CronJob;
 
 public interface CronJobDetailsService {
@@ -82,4 +83,6 @@ public interface CronJobDetailsService {
      * This method is used to update all cron job details
      */
     public void updateCronJobDetails();
+
+    
 }

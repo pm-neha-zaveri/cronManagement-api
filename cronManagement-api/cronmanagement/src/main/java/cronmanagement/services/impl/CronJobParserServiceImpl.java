@@ -97,7 +97,7 @@ public class CronJobParserServiceImpl implements CronJobParserService {
             cronJob = new CronJob();
             cronJob.setCronComment(cronComment);
             cronJob.setCronName(cronJobInfo);
-            cronJob.setCronStatus(cronJobInfo.startsWith(HASH) ? "inactive" : "active");
+            cronJob.setCronStatus(cronJobInfo.startsWith(HASH) ? "INACTIVE" : "ACTIVE");
             cronJob.setServerId(serverId);
             cronJob.setCronType((serverId%2==0?CronTypeEnum.ApplicationCron.name():CronTypeEnum.ReportingCron.name()));
             int index = cronJobInfo.indexOf(" /");

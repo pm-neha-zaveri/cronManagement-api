@@ -1,5 +1,6 @@
 package cronmanagement.services.impl;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -15,7 +16,10 @@ import cronmanagement.bean.ServerBean;
 import cronmanagement.dao.CronAlertDetailsDAO;
 import cronmanagement.services.CronAlertDetailsService;
 import cronmanagement.services.CronJobDetailsService;
+import cronmanagement.services.DataCenterDetailsService;
 import cronmanagement.services.ServerDetailsService;
+import cronmanagement.utility.FileUtility;
+
 /**
  * 
  * @author neha-zaveri
@@ -37,6 +41,9 @@ public class CronAlertDetailsServiceImpl implements CronAlertDetailsService {
 
     @Autowired
     CronJobDetailsService cronJobDetailsService;
+
+    @Autowired
+    DataCenterDetailsService dataCenterDetailsService;
 
     @Override
     public List<CronAlert> getAllCronAlert() {
@@ -68,6 +75,8 @@ public class CronAlertDetailsServiceImpl implements CronAlertDetailsService {
      * @param cronAlert
      */
     public void saveCronAlert(CronAlert cronAlert) {
+        // Send Alert
+        sendAlert(cronAlert);
         LOGGER.debug("Within " + getClass().getName() + " saveCronAlert method.");
         cronAlertDetailsDAO.saveCronAlert(cronAlert);
     }
@@ -152,4 +161,23 @@ public class CronAlertDetailsServiceImpl implements CronAlertDetailsService {
         return alertMessage;
     }
 
+    /**
+     * 
+     * @param cronAlert
+     */
+    public void sendAlert(CronAlert cronAlert) {
+
+        String alertServiceURI = FileUtility.getPropertyValue("ALERT_SERVICE_SCRIPT");
+        String dataCenterName = dataCenterDetailsService.getDataCenterById(cronAlert.getDcId()).getDcName();
+        String args[] = new String[] { alertServiceURI, cronAlert.getCronName().toString(), dataCenterName,
+                cronAlert.getServerIP(), cronAlert.getRunTime().toString(), cronAlert.getThreshold().toString() };
+        try {
+            String response = FileUtility.runBashCommand(args);
+            LOGGER.info("Mail sent successfully"+response);
+        } catch (IOException e) {
+            LOGGER.info("Unable to send alert");
+            e.printStackTrace();
+        }
+
+    }
 }

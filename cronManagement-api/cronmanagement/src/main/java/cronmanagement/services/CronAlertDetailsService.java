@@ -43,5 +43,7 @@ public interface CronAlertDetailsService {
      * 
      */
     void saveCronAlertDataToDB(CronAlert cronAlert) throws ParseException;
+    
+    public void sendAlert(CronAlert cronAlert) ;
 
 }

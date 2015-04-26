@@ -94,3 +94,4 @@ update cron_log_history set server_id=(select distinct serverId from cronjob whe
 update cron_forecasting set server_id=(select distinct serverId from cronjob where id=cron_id);
 
 delete from cronjob where serverId=0;
+update cronjob set threshold = 2400 where serverId=3;
