@@ -16,6 +16,11 @@ import org.springframework.stereotype.Component;
 import cronmanagement.bean.CronForecast;
 import cronmanagement.services.CronForeCastService;
 
+/**
+ * 
+ * @author raghunandanG
+ *
+ */
 @Component
 @Path("/cronForcasting")
 public class CronForecastingResource {
@@ -25,6 +30,11 @@ public class CronForecastingResource {
     @Autowired
     CronForeCastService cronForeCastService;
 
+    /**
+     * This method is used to get cron forecast history
+     * 
+     * @return
+     */
     @GET
     @Produces("application/json")
     public List<CronForecast> getCronForecastHistory() {
@@ -38,6 +48,12 @@ public class CronForecastingResource {
         return cronForeCastList;
     }
 
+    /**
+     * This method is used to get cron forecast history by cronId
+     * 
+     * @param cronId
+     * @return
+     */
     @GET
     @Produces("application/json")
     @Path("/cron/{cronId}")
@@ -52,6 +68,12 @@ public class CronForecastingResource {
         return cronForeCastList;
     }
 
+    /**
+     * This method is used to get cron forecast history by serverId
+     * 
+     * @param serverId
+     * @return
+     */
     @GET
     @Produces("application/json")
     @Path("/server/{serverId}")

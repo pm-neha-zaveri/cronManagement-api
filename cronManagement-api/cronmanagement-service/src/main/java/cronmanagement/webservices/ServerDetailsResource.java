@@ -15,6 +15,7 @@ import org.springframework.stereotype.Component;
 
 import cronmanagement.bean.ServerBean;
 import cronmanagement.services.ServerDetailsService;
+
 /**
  * 
  * @author neha-zaveri
@@ -29,6 +30,10 @@ public class ServerDetailsResource {
     @Autowired
     ServerDetailsService serverDetailsService;
 
+    /**
+     * This method is used to get all server Details
+     * @return
+     */
     @GET
     @Produces("application/json")
     public List<ServerBean> getServerDetails() {
@@ -36,6 +41,11 @@ public class ServerDetailsResource {
         return serverDetailsService.getServerDetails();
     }
 
+    /**
+     * This method is used to get all serverDetails by server id
+     * @param serverId
+     * @return
+     */
     @GET
     @Produces("application/json")
     @Path("/server/{serverId}")
@@ -44,6 +54,11 @@ public class ServerDetailsResource {
         return serverDetailsService.getServerDetailsByServerId(serverId);
     }
 
+    /**
+     * This method is used to get all server details by serverId
+     * @param dcId
+     * @return
+     */
     @GET
     @Produces("application/json")
     @Path("/dc/{dcId}")
@@ -52,6 +67,11 @@ public class ServerDetailsResource {
         return serverDetailsService.getServerDetailsByDCId(dcId);
     }
 
+    /**
+     * This method is used to get serverDetaisl by serverIP
+     * @param ipAddress
+     * @return
+     */
     @GET
     @Produces("application/json")
     @Path("/ipaddress/")

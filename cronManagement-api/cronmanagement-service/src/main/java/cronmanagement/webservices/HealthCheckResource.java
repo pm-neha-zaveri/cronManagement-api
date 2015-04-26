@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import cronmanagement.services.HealthCheckService;
+
 /**
  * 
  * @author raghunandanG
@@ -24,12 +25,16 @@ public class HealthCheckResource {
     @Autowired
     HealthCheckService healthCheckService;
 
+    /**
+     * This method is used to calculate health
+     * @return
+     */
     @GET
     @Path("/health")
     @Produces("application/json")
     public Boolean calculateHealth() {
         try {
-           return healthCheckService.calculateHealth();
+            return healthCheckService.calculateHealth();
         } catch (Exception exception) {
             LOGGER.error("Exception occured while calculating health : " + exception.getMessage(), exception);
         }

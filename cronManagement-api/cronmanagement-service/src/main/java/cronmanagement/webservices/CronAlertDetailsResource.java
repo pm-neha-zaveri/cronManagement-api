@@ -19,6 +19,7 @@ import cronmanagement.bean.CronAlert;
 import cronmanagement.schedulers.CronJobSchedulerTask;
 import cronmanagement.schedulers.CronLogSchedulerTask;
 import cronmanagement.services.CronAlertDetailsService;
+
 /**
  * 
  * @author neha-zaveri
@@ -39,12 +40,21 @@ public class CronAlertDetailsResource {
     @Autowired
     CronJobSchedulerTask cronJobSchedulerTask;
 
+    /**
+     * This method is used to get cron alert
+     * @return
+     */
     @GET
     @Produces("application/json")
     public List<CronAlert> getAllCronAlert() {
         return cronAlertDetailsService.getAllCronAlert();
     }
 
+    /**
+     * This method is used to get cron alert history by serverId
+     * @param serverId
+     * @return
+     */
     @GET
     @Produces("application/json")
     @Path("/server/{serverId}")
@@ -53,6 +63,11 @@ public class CronAlertDetailsResource {
         return cronAlertDetailsService.getAllCronAlertByServerId(serverId);
     }
 
+    /**
+     * This method is used to get cron alert by dcId
+     * @param dcId
+     * @return
+     */
     @GET
     @Produces("application/json")
     @Path("/dc/{dcId}")
@@ -61,6 +76,11 @@ public class CronAlertDetailsResource {
         return cronAlertDetailsService.getAllCronAlertByDCId(dcId);
     }
 
+    /**
+     * This method is used to get cron alert by cronId
+     * @param cronId
+     * @return
+     */
     @GET
     @Produces("application/json")
     @Path("/cron/{cronId}")
@@ -69,6 +89,11 @@ public class CronAlertDetailsResource {
         return cronAlertDetailsService.getAllCronAlertByCronId(cronId);
     }
 
+    /**
+     * This method is used to save cron alert
+     * @param cronAlert
+     * @throws ParseException
+     */
     @POST
     @Consumes("application/json")
     public void saveCronAlert(CronAlert cronAlert) throws ParseException {

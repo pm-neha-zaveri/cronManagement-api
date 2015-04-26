@@ -35,16 +35,16 @@
 
 	<task:scheduled-tasks>
 		<task:scheduled ref="cronJobSchedulerTask" method="fetchAndSaveCronDetails"
-			cron="30 * * * * ?" />
+			cron="${CRON_JOB_SCHEDULER_EXPRESSION}" />
 	</task:scheduled-tasks>
 
 	<task:scheduled-tasks>
 		<task:scheduled ref="cronLogSchedulerTask" method="fetchAndSaveCronLogs"
-			cron="50 * * * * ?" />
+			cron="${CRON_LOG_SCHEDULER_EXPRESSION}" />
 	</task:scheduled-tasks>
 
 	<task:scheduled-tasks>
 		<task:scheduled ref="cronHealthUpdateSchedulerTask"
-			method="updateHealthCheckData" cron="10 * * * * ?" />
+			method="updateHealthCheckData" cron="${CRON_HEALTH_SCHEDULER_EXPRESSION}" />
 	</task:scheduled-tasks>
 </beans>

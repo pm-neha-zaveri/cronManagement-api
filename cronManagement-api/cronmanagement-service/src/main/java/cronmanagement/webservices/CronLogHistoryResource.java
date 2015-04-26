@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 
 import cronmanagement.bean.CronLogBean;
 import cronmanagement.services.CronLogHistoryService;
+
 /**
  * 
  * @author neha-zaveri
@@ -28,6 +29,10 @@ public class CronLogHistoryResource {
     @Autowired
     CronLogHistoryService cronLogHistoryService;
 
+    /**
+     * This method is used to get cron log history
+     * @return
+     */
     @GET
     @Produces("application/json")
     public List<CronLogBean> getCronLogHistory() {
@@ -35,6 +40,11 @@ public class CronLogHistoryResource {
         return cronLogHistoryService.getCronLogHistory();
     }
 
+    /**
+     * This method is used to get cron log history by cronId
+     * @param cronId
+     * @return
+     */
     @GET
     @Produces("application/json")
     @Path("/cron/{cronId}")
@@ -43,6 +53,11 @@ public class CronLogHistoryResource {
         return cronLogHistoryService.getCronLogHistoryByCronId(cronId);
     }
 
+    /**
+     * This method is used to get cron log history by serverId
+     * @param serverId
+     * @return
+     */
     @GET
     @Produces("application/json")
     @Path("/server/{serverId}")

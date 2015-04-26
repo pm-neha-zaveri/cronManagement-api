@@ -27,6 +27,7 @@ import com.pubmatic.apiutils.utils.RequestParserUtil;
 
 import cronmanagement.bean.CronJob;
 import cronmanagement.services.CronJobDetailsService;
+
 /**
  * 
  * @author neha-zaveri
@@ -41,6 +42,11 @@ public class CronJobDetailsResource {
     @Autowired
     CronJobDetailsService cronJobDetailsService;
 
+    /**
+     * This method is used to getCronList
+     * @param reportingRequest
+     * @return
+     */
     @GET
     @Consumes("application/json")
     @Produces("application/json")
@@ -49,6 +55,11 @@ public class CronJobDetailsResource {
         return cronJobDetailsService.getCronJobDetails(requestDetails);
     }
 
+    /**
+     * This method is used to getCronList by serverId
+     * @param serverId
+     * @return
+     */
     @GET
     @Produces("application/json")
     @Path("/server/{serverId}")
@@ -57,6 +68,11 @@ public class CronJobDetailsResource {
         return cronJobDetailsService.getCronJobDetailsByServerId(serverId);
     }
 
+    /**
+     * This method is used to getCronList by cronId
+     * @param cronId
+     * @return
+     */
     @GET
     @Produces("application/json")
     @Path("/cron/{cronId}")
@@ -65,6 +81,11 @@ public class CronJobDetailsResource {
         return cronJobDetailsService.getCronJobDetailsByCronId(cronId);
     }
 
+    /**
+     * This method is used to getCronList by cronType
+     * @param cronType
+     * @return
+     */
     @GET
     @Produces("application/json")
     @Path("/cronType")
@@ -75,6 +96,7 @@ public class CronJobDetailsResource {
 
     /**
      * Method is not is use
+     * 
      * @param cronExp
      * @param iterations
      * @return
