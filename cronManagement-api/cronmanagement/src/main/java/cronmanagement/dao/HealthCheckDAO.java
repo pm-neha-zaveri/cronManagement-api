@@ -2,11 +2,14 @@ package cronmanagement.dao;
 
 import java.util.List;
 
-import org.springframework.stereotype.Service;
-
 import cronmanagement.bean.HealthCheck;
-
-@Service
+/**
+ * 
+ * @author raghunandanG
+ * 
+ * This will provide Health Check details.
+ *
+ */
 public interface HealthCheckDAO {
 
     /**

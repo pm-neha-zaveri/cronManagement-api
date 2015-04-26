@@ -20,7 +20,6 @@ import cronmanagement.bean.CronJob;
 import cronmanagement.constant.Constants;
 import cronmanagement.services.CronJobDetailsService;
 import cronmanagement.services.CronJobParserService;
-import cronmanagement.util.CronManagementUtility;
 import cronmanagement.utility.FileUtility;
 
 @Service
@@ -40,8 +39,8 @@ public class CronJobSchedulerTask {
 
     public void executeCommand() throws IOException {
         String cronListsh = FileUtility.getPropertyValue("REMOTE_CRON_LIST_SCRIPT");
-        String args[] = new String[] {cronListsh,Constants.FIRST_PARAM};
-        String shResponse = CronManagementUtility.runBashCommand(args);
+        String args[] = new String[] { cronListsh, Constants.FIRST_PARAM };
+        String shResponse = FileUtility.runBashCommand(args);
         readFile(shResponse);
     }
 
@@ -86,8 +85,9 @@ public class CronJobSchedulerTask {
                     CronJob cronJob = currentCronJobIterator.next();
                     if (savedCronJobByServerId.indexOf(cronJob) != -1) {
                         if (!((CronJob) savedCronJobByServerId.get(savedCronJobByServerId.indexOf(cronJob)))
-                                .getCronStatus().equals(cronJob.getCronStatus())){
-                            cronJob.setCronId(((CronJob) savedCronJobByServerId.get(savedCronJobByServerId.indexOf(cronJob))).getCronId());
+                                .getCronStatus().equals(cronJob.getCronStatus())) {
+                            cronJob.setCronId(((CronJob) savedCronJobByServerId.get(savedCronJobByServerId
+                                    .indexOf(cronJob))).getCronId());
                             toBeUpdatedCronJobs.add(cronJob);
                         }
                         currentCronJobIterator.remove();
@@ -106,18 +106,17 @@ public class CronJobSchedulerTask {
 
         LOGGER.info("newlyCronJobs : " + newlyCronJobs + " toBeUpdatedCronJobs : " + toBeUpdatedCronJobs
                 + " toBeDeletedCronJobs : " + toBeDeletedCronJobs);
-        
-       
-        if(newlyCronJobs.size() > 0 )
+
+        if (newlyCronJobs.size() > 0)
             cronDetailsService.saveAllCronJobs(newlyCronJobs);
-        
-        if(toBeUpdatedCronJobs != null){
-            for(CronJob cronJob : toBeUpdatedCronJobs){
+
+        if (toBeUpdatedCronJobs != null) {
+            for (CronJob cronJob : toBeUpdatedCronJobs) {
                 cronDetailsService.updateAllCronJobs(cronJob);
             }
         }
-        
-        if(toBeDeletedCronJobs != null && toBeDeletedCronJobs.size() > 0)
+
+        if (toBeDeletedCronJobs != null && toBeDeletedCronJobs.size() > 0)
             cronDetailsService.deleteCronJobs(toBeDeletedCronJobs);
     }
 

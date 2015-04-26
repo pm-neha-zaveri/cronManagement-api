@@ -13,40 +13,35 @@ import org.springframework.stereotype.Service;
 import cronmanagement.bean.CronLogBean;
 import cronmanagement.services.CronLogHistoryService;
 import cronmanagement.services.CronLogParserService;
-import cronmanagement.util.CronManagementUtility;
 import cronmanagement.utility.FileUtility;
 
 @Service
 public class CronLogSchedulerTask {
 
-	public final static Log LOGGER = LogFactory
-			.getLog(CronLogSchedulerTask.class);
+    public final static Log LOGGER = LogFactory.getLog(CronLogSchedulerTask.class);
 
-	@Autowired
-	CronLogParserService cronLogParserService;
+    @Autowired
+    CronLogParserService cronLogParserService;
 
-	@Autowired
-	CronLogHistoryService cronLogHistoryService;
+    @Autowired
+    CronLogHistoryService cronLogHistoryService;
 
-	public void fetchAndSaveCronLogs() throws IOException {
-		executeCommand();
-	}
+    public void fetchAndSaveCronLogs() throws IOException {
+        executeCommand();
+    }
 
-	public void executeCommand() throws IOException {
-		String cronListsh = FileUtility
-				.getPropertyValue("REMOTE_CRON_LOGS_SCRIPT");
-		String[] args = new String[]{cronListsh};
-		String shResponse = CronManagementUtility
-				.runBashCommand(args);
-		readFile(shResponse);
-	}
+    public void executeCommand() throws IOException {
+        String cronListsh = FileUtility.getPropertyValue("REMOTE_CRON_LOGS_SCRIPT");
+        String[] args = new String[] { cronListsh };
+        String shResponse = FileUtility.runBashCommand(args);
+        readFile(shResponse);
+    }
 
-	public void readFile(String inputString) {
-		InputStream inputStream = new ByteArrayInputStream(inputString.getBytes());
-		List<CronLogBean> cronLogs = cronLogParserService
-				.getCronLogs(inputStream);
-		LOGGER.info("cronJobs : " + cronLogs);
-		cronLogHistoryService.saveCronLogHistory(cronLogs);
-	}
+    public void readFile(String inputString) {
+        InputStream inputStream = new ByteArrayInputStream(inputString.getBytes());
+        List<CronLogBean> cronLogs = cronLogParserService.getCronLogs(inputStream);
+        LOGGER.info("cronJobs : " + cronLogs);
+        cronLogHistoryService.saveCronLogHistory(cronLogs);
+    }
 
 }

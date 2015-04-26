@@ -7,7 +7,6 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Service;
 
 import cronmanagement.services.CronRunningStatusService;
-import cronmanagement.util.CronManagementUtility;
 import cronmanagement.utility.FileUtility;
 
 @Service
@@ -33,7 +32,7 @@ public class CronRunningStatusServiceImpl implements CronRunningStatusService {
 				+ " executeCommand method. Server :: "+server+" cron name"+cronName);
         String cronListsh = FileUtility.getPropertyValue("REMOTE_CRON_STATUS_SCRIPT");
         String[] args = new String[] {cronListsh, server, cronName };
-        String shResponse = CronManagementUtility.runBashCommand(args);
+        String shResponse = FileUtility.runBashCommand(args);
         return shResponse;
 
     }

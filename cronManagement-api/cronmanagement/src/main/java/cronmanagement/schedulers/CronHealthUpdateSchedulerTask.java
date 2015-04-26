@@ -11,13 +11,13 @@ import cronmanagement.services.HealthCheckService;
 public class CronHealthUpdateSchedulerTask {
 
     public final static Log LOGGER = LogFactory.getLog(CronHealthUpdateSchedulerTask.class);
-    
+
     @Autowired
     HealthCheckService healthCheckService;
-    
-    public void updateHealthCheckData(){
+
+    public void updateHealthCheckData() {
         LOGGER.info("Within " + getClass().getName() + " updateHealthCheckData method.");
         healthCheckService.calculateHealth();
     }
-    
+
 }
