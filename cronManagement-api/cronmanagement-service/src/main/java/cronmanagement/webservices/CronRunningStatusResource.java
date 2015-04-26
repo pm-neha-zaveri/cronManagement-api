@@ -16,7 +16,11 @@ import cronmanagement.bean.CronJob;
 import cronmanagement.bean.ServerBean;
 import cronmanagement.services.CronRunningStatusService;
 import cronmanagement.services.ServerDetailsService;
-
+/**
+ * 
+ * @author raghunandanG
+ *
+ */
 @Component
 @Path("/cronRunningStatus")
 public class CronRunningStatusResource {

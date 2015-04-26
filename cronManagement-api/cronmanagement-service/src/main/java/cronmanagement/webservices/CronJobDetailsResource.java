@@ -27,7 +27,11 @@ import com.pubmatic.apiutils.utils.RequestParserUtil;
 
 import cronmanagement.bean.CronJob;
 import cronmanagement.services.CronJobDetailsService;
-
+/**
+ * 
+ * @author neha-zaveri
+ *
+ */
 @Component
 @Path("/cronDetails")
 public class CronJobDetailsResource {

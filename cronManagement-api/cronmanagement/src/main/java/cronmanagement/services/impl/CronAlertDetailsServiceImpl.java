@@ -16,7 +16,11 @@ import cronmanagement.dao.CronAlertDetailsDAO;
 import cronmanagement.services.CronAlertDetailsService;
 import cronmanagement.services.CronJobDetailsService;
 import cronmanagement.services.ServerDetailsService;
-
+/**
+ * 
+ * @author neha-zaveri
+ *
+ */
 @Service
 public class CronAlertDetailsServiceImpl implements CronAlertDetailsService {
 

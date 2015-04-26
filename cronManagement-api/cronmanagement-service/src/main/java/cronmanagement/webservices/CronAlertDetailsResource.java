@@ -19,7 +19,11 @@ import cronmanagement.bean.CronAlert;
 import cronmanagement.schedulers.CronJobSchedulerTask;
 import cronmanagement.schedulers.CronLogSchedulerTask;
 import cronmanagement.services.CronAlertDetailsService;
-
+/**
+ * 
+ * @author neha-zaveri
+ *
+ */
 @Component
 @Path("/cronAlertDetails")
 public class CronAlertDetailsResource {

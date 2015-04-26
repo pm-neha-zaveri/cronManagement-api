@@ -17,7 +17,11 @@ import cronmanagement.bean.ServerBean;
 import cronmanagement.constant.CronTypeEnum;
 import cronmanagement.services.CronJobParserService;
 import cronmanagement.services.ServerDetailsService;
-
+/**
+ * 
+ * @author neha-zaveri
+ *
+ */
 @Component
 public class CronJobParserServiceImpl implements CronJobParserService {
 
