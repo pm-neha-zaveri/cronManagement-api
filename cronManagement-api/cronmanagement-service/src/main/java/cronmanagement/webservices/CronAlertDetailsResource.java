@@ -42,6 +42,7 @@ public class CronAlertDetailsResource {
 
     /**
      * This method is used to get cron alert
+     * 
      * @return
      */
     @GET
@@ -52,6 +53,7 @@ public class CronAlertDetailsResource {
 
     /**
      * This method is used to get cron alert history by serverId
+     * 
      * @param serverId
      * @return
      */
@@ -65,6 +67,7 @@ public class CronAlertDetailsResource {
 
     /**
      * This method is used to get cron alert by dcId
+     * 
      * @param dcId
      * @return
      */
@@ -78,6 +81,7 @@ public class CronAlertDetailsResource {
 
     /**
      * This method is used to get cron alert by cronId
+     * 
      * @param cronId
      * @return
      */
@@ -91,6 +95,7 @@ public class CronAlertDetailsResource {
 
     /**
      * This method is used to save cron alert
+     * 
      * @param cronAlert
      * @throws ParseException
      */
@@ -101,4 +106,16 @@ public class CronAlertDetailsResource {
         cronAlertDetailsService.saveCronAlertDataToDB(cronAlert);
     }
 
+    /*@GET
+    @Path("/executePHP")
+    public void saveCronAlert1() throws ParseException {
+        LOGGER.debug("Within " + getClass().getName() + " saveCronAlert method.");
+        CronAlert cronAlert = new CronAlert();
+        cronAlert.setDcId(1);
+        cronAlert.setServerIP("172.12.12.12");
+        cronAlert.setCronName("45 * * * * /home/scripts/checkReplicationStatus.sh >> /tmp/repli.out 2>&1");
+        cronAlert.setRunTime(10);
+        cronAlert.setThreshold(5);
+        cronAlertDetailsService.sendAlert(cronAlert);
+    }*/
 }

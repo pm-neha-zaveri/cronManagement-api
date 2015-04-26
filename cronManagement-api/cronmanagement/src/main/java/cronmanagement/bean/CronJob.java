@@ -3,7 +3,11 @@ package cronmanagement.bean;
 import java.io.Serializable;
 
 import com.pubmatic.apiutils.annotations.Dimension;
-
+/**
+ * 
+ * @author raghunandanG
+ *
+ */
 public class CronJob implements Serializable {
 
     private static final long serialVersionUID = 1L;
