@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 
 import cronmanagement.bean.DataCenterBean;
 import cronmanagement.services.DataCenterDetailsService;
+
 /**
  * 
  * @author neha-zaveri
@@ -23,26 +24,33 @@ import cronmanagement.services.DataCenterDetailsService;
 @Path("/dataCenterDetails")
 public class DataCenterDetailsResource {
 
-	public final static Log LOGGER = LogFactory
-			.getLog(DataCenterDetailsResource.class);
+    public final static Log LOGGER = LogFactory.getLog(DataCenterDetailsResource.class);
 
-	@Autowired
-	DataCenterDetailsService dataCenterDetailsService;
+    @Autowired
+    DataCenterDetailsService dataCenterDetailsService;
 
-	@GET
-	@Produces("application/json")
-	public List<DataCenterBean> getAllDataCenters() {
+    /**
+     * This method is used to get all data centers
+     * @return
+     */
+    @GET
+    @Produces("application/json")
+    public List<DataCenterBean> getAllDataCenters() {
         LOGGER.info("Within " + getClass().getName() + " getAllDataCenters method.");
-		return dataCenterDetailsService.getAllDataCenters();
-	}
+        return dataCenterDetailsService.getAllDataCenters();
+    }
 
-	@GET
-	@Produces("application/json")
-	@Path("/dc/{dcId}")
-	public DataCenterBean getDataCenterById(@PathParam("dcId") Integer dcId) {
-		LOGGER.info("Within " + getClass().getName()
-				+ " getDataCenterById method. DcId :: " + dcId);
-		return dataCenterDetailsService.getDataCenterById(dcId);
-	}
+    /**
+     * This method is used to get all data centers by dcId
+     * @param dcId
+     * @return
+     */
+    @GET
+    @Produces("application/json")
+    @Path("/dc/{dcId}")
+    public DataCenterBean getDataCenterById(@PathParam("dcId") Integer dcId) {
+        LOGGER.info("Within " + getClass().getName() + " getDataCenterById method. DcId :: " + dcId);
+        return dataCenterDetailsService.getDataCenterById(dcId);
+    }
 
 }

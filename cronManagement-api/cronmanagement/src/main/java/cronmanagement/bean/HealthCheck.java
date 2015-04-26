@@ -1,7 +1,11 @@
 package cronmanagement.bean;
 
 import java.io.Serializable;
-
+/**
+ * 
+ * @author raghunandanG
+ *
+ */
 public class HealthCheck implements Serializable {
 
     private static final long serialVersionUID = 1L;
