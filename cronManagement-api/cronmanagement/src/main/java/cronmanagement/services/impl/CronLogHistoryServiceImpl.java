@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import cronmanagement.bean.CronLogBean;
 import cronmanagement.dao.CronLogHistoryDAO;
 import cronmanagement.services.CronLogHistoryService;
+
 /**
  * 
  * @author neha-zaveri
@@ -45,8 +46,10 @@ public class CronLogHistoryServiceImpl implements CronLogHistoryService {
         List<CronLogBean> cronList = cronLogHistoryDAO.getCronLogHistoryByCronId(cronId);
         if (cronList != null) {
             for (CronLogBean cronLogBean : cronList) {
-                cronLogBean.setStartTime(cronLogBean.getStartTime().replace(".0", ""));
-                cronLogBean.setEndTime(cronLogBean.getEndTime().replace(".0", ""));
+                if (cronLogBean.getStartTime() != null)
+                    cronLogBean.setStartTime(cronLogBean.getStartTime().replace(".0", ""));
+                if (cronLogBean.getEndTime() != null)
+                    cronLogBean.setEndTime(cronLogBean.getEndTime().replace(".0", ""));
             }
         }
 
@@ -59,8 +62,10 @@ public class CronLogHistoryServiceImpl implements CronLogHistoryService {
         List<CronLogBean> cronList = cronLogHistoryDAO.getCronLogHistoryByServerId(serverId);
         if (cronList != null) {
             for (CronLogBean cronLogBean : cronList) {
-                cronLogBean.setStartTime(cronLogBean.getStartTime().replace(".0", ""));
-                cronLogBean.setEndTime(cronLogBean.getEndTime().replace(".0", ""));
+                if (cronLogBean.getStartTime() != null)
+                    cronLogBean.setStartTime(cronLogBean.getStartTime().replace(".0", ""));
+                if (cronLogBean.getEndTime() != null)
+                    cronLogBean.setEndTime(cronLogBean.getEndTime().replace(".0", ""));
             }
         }
         return cronList;
