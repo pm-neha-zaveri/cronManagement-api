@@ -82,7 +82,7 @@ public class HealthCheckServiceImpl implements HealthCheckService {
                     healthPercentage = 100;
                 }
                 serverDetailsService.updateServerHealth(healthPercentage, serverBean.getId());
-                dataCenterDetailsService.updateServerHealth();
+                dataCenterDetailsService.updateDataCenterHealth();
                 cronJobDetailsService.updateCronJobDetails();
                 isUpdated = true;
             }
