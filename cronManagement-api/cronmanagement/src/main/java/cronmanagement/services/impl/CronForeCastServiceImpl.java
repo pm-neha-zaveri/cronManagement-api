@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import cronmanagement.bean.CronForecast;
 import cronmanagement.dao.CronForecastDAO;
 import cronmanagement.services.CronForeCastService;
+
 /**
  * 
  * @author neha-zaveri
@@ -29,10 +30,12 @@ public class CronForeCastServiceImpl implements CronForeCastService {
         try {
             LOGGER.debug("Within " + getClass().getName() + " getCronForecastHistory method");
             cronForeCastList = cronForecastDAO.getCronForecastHistory();
-            if(cronForeCastList != null){
+            if (cronForeCastList != null) {
                 for (CronForecast cronForecast : cronForeCastList) {
-                    cronForecast.setStartTime(cronForecast.getStartTime().replace(".0", ""));
-                    cronForecast.setEndTime(cronForecast.getEndTime().replace(".0", ""));
+                    if (cronForecast.getStartTime() != null)
+                        cronForecast.setStartTime(cronForecast.getStartTime().replace(".0", ""));
+                    if (cronForecast.getEndTime() != null)
+                        cronForecast.setEndTime(cronForecast.getEndTime().replace(".0", ""));
                 }
             }
         } catch (Exception exception) {
@@ -48,10 +51,12 @@ public class CronForeCastServiceImpl implements CronForeCastService {
             LOGGER.debug("Within " + getClass().getName() + " getCronForecastHistoryByCronId method. CronId :: "
                     + cronId);
             cronForeCastList = cronForecastDAO.getCronForecastHistoryByCronId(cronId);
-            if(cronForeCastList != null){
+            if (cronForeCastList != null) {
                 for (CronForecast cronForecast : cronForeCastList) {
-                    cronForecast.setStartTime(cronForecast.getStartTime().replace(".0", ""));
-                    cronForecast.setEndTime(cronForecast.getEndTime().replace(".0", ""));
+                    if (cronForecast.getStartTime() != null)
+                        cronForecast.setStartTime(cronForecast.getStartTime().replace(".0", ""));
+                    if (cronForecast.getEndTime() != null)
+                        cronForecast.setEndTime(cronForecast.getEndTime().replace(".0", ""));
                 }
             }
         } catch (Exception exception) {
@@ -67,10 +72,12 @@ public class CronForeCastServiceImpl implements CronForeCastService {
             LOGGER.debug("Within " + getClass().getName() + " getCronForecastHistoryByServerId method. ServerId :: "
                     + serverId);
             cronForeCastList = cronForecastDAO.getCronForecastHistoryByServerId(serverId);
-            if(cronForeCastList != null){
+            if (cronForeCastList != null) {
                 for (CronForecast cronForecast : cronForeCastList) {
-                    cronForecast.setStartTime(cronForecast.getStartTime().replace(".0", ""));
-                    cronForecast.setEndTime(cronForecast.getEndTime().replace(".0", ""));
+                    if (cronForecast.getStartTime() != null)
+                        cronForecast.setStartTime(cronForecast.getStartTime().replace(".0", ""));
+                    if (cronForecast.getEndTime() != null)
+                        cronForecast.setEndTime(cronForecast.getEndTime().replace(".0", ""));
                 }
             }
         } catch (Exception exception) {
