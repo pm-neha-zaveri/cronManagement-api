@@ -13,7 +13,7 @@
 		FROM cron_forecasting
 	</select>
 
-	<select id="getCronForecastHistoryByCronId" resultType="cronmanagement.bean.CronLogBean">
+	<select id="getCronForecastHistoryByCronId" resultType="cronmanagement.bean.CronForecast">
 		SELECT id
 		as id,
 		cron_id as cronId,
@@ -25,7 +25,7 @@
 		cron_id=#{cronId}
 	</select>
 
-	<select id="getCronForecastHistoryByServerId" resultType="cronmanagement.bean.CronLogBean">
+	<select id="getCronForecastHistoryByServerId" resultType="cronmanagement.bean.CronForecast">
 		SELECT
 		id as id,
 		cron_id as cronId,
