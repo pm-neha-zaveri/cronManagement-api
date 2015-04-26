@@ -5,7 +5,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.Cache;
 import org.springframework.cache.Cache.ValueWrapper;
 import org.springframework.cache.CacheManager;
-
+/**
+ * @author raghunandanG
+ * This will cache the data.
+ */
 public class CacheUtil {
 	
 	private static CacheManager cacheManager;

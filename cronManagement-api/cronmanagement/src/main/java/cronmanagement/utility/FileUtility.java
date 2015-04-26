@@ -11,13 +11,20 @@ import java.util.Properties;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.core.io.ClassPathResource;
-
+/**
+ * @author raghunandanG
+ * Common methods.
+ */
 public class FileUtility {
 
     public final static Log LOGGER = LogFactory.getLog(FileUtility.class);
 
     private static Properties cronManangementProperties = null;
 
+    /**
+     * This will rename a File.
+     * @param cronjobfilepath
+     */
     public static void renameFile(String cronjobfilepath) {
         File oldfile = new File(cronjobfilepath);
         String newFileName = Calendar.getInstance().getTimeInMillis() + cronjobfilepath;
@@ -47,6 +54,12 @@ public class FileUtility {
         return cronManangementProperties.getProperty(propKey);
     }
 
+    /**
+     * This will return output of Shell Scripts in String format.
+     * @param command
+     * @return
+     * @throws IOException
+     */
     public static String runBashCommand(String command[]) throws IOException {
 
         Process proc = null;
