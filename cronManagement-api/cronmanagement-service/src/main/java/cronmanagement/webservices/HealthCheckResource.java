@@ -10,7 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import cronmanagement.services.HealthCheckService;
-
+/**
+ * 
+ * @author raghunandanG
+ *
+ */
 @Component
 @Path("/calculateHealth")
 public class HealthCheckResource {

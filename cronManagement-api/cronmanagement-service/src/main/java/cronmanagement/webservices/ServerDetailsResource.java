@@ -15,7 +15,11 @@ import org.springframework.stereotype.Component;
 
 import cronmanagement.bean.ServerBean;
 import cronmanagement.services.ServerDetailsService;
-
+/**
+ * 
+ * @author neha-zaveri
+ *
+ */
 @Component
 @Path("/serverDetails")
 public class ServerDetailsResource {

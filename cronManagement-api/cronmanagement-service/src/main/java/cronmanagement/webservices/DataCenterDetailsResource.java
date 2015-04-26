@@ -14,7 +14,11 @@ import org.springframework.stereotype.Component;
 
 import cronmanagement.bean.DataCenterBean;
 import cronmanagement.services.DataCenterDetailsService;
-
+/**
+ * 
+ * @author neha-zaveri
+ *
+ */
 @Component
 @Path("/dataCenterDetails")
 public class DataCenterDetailsResource {

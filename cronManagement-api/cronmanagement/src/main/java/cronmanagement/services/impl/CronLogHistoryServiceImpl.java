@@ -10,7 +10,11 @@ import org.springframework.stereotype.Service;
 import cronmanagement.bean.CronLogBean;
 import cronmanagement.dao.CronLogHistoryDAO;
 import cronmanagement.services.CronLogHistoryService;
-
+/**
+ * 
+ * @author neha-zaveri
+ *
+ */
 @Service
 public class CronLogHistoryServiceImpl implements CronLogHistoryService {
 

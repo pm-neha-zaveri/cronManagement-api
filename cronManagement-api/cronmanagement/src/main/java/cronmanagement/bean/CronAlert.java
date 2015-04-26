@@ -1,7 +1,11 @@
 package cronmanagement.bean;
 
 import java.io.Serializable;
-
+/**
+ * 
+ * @author neha-zaveri
+ *
+ */
 public class CronAlert implements Serializable {
 
     private static final long serialVersionUID = 1L;

@@ -14,7 +14,11 @@ import org.springframework.stereotype.Component;
 
 import cronmanagement.bean.CronLogBean;
 import cronmanagement.services.CronLogHistoryService;
-
+/**
+ * 
+ * @author neha-zaveri
+ *
+ */
 @Component
 @Path("/cronLogHistory")
 public class CronLogHistoryResource {

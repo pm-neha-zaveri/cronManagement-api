@@ -15,7 +15,11 @@ import com.pubmatic.apiutils.bean.RequestDetails;
 import cronmanagement.bean.CronJob;
 import cronmanagement.dao.CronJobDetailsDAO;
 import cronmanagement.services.CronJobDetailsService;
-
+/**
+ * 
+ * @author neha-zaveri
+ *
+ */
 @Service
 public class CronJobDetailsServiceImpl implements CronJobDetailsService {
 

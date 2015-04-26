@@ -10,7 +10,11 @@ import org.springframework.stereotype.Service;
 import cronmanagement.bean.CronForecast;
 import cronmanagement.dao.CronForecastDAO;
 import cronmanagement.services.CronForeCastService;
-
+/**
+ * 
+ * @author neha-zaveri
+ *
+ */
 @Service
 public class CronForeCastServiceImpl implements CronForeCastService {
 

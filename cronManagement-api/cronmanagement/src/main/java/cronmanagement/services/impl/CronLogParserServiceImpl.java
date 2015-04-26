@@ -23,7 +23,11 @@ import cronmanagement.bean.ServerBean;
 import cronmanagement.services.CronJobDetailsService;
 import cronmanagement.services.CronLogParserService;
 import cronmanagement.services.ServerDetailsService;
-
+/**
+ * 
+ * @author raghunandanG
+ *
+ */
 @Component
 public class CronLogParserServiceImpl implements CronLogParserService {
 
