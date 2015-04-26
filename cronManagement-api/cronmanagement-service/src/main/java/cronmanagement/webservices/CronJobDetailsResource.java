@@ -69,6 +69,13 @@ public class CronJobDetailsResource {
         return cronJobDetailsService.getCronJobDetailsByCronType(cronType);
     }
 
+    /**
+     * Method is not is use
+     * @param cronExp
+     * @param iterations
+     * @return
+     */
+    @Deprecated
     @GET
     @Produces("application/json")
     @Path("/nextSchedules")
@@ -79,9 +86,14 @@ public class CronJobDetailsResource {
         List<String> futureExecutionTime = new ArrayList<String>();
         try {
             URL url = new URL("http://cron.schlitt.info/index.php?cron=" + cronExp + "&iterations=" + 10 + "&test=Test");
-            Connection con = Jsoup.connect(url.toString()).userAgent("Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/535.21 (KHTML, like Gecko) Chrome/19.0.1042.0 Safari/535.21").timeout(10000).ignoreHttpErrors(true).followRedirects(true);;
+            Connection con = Jsoup
+                    .connect(url.toString())
+                    .userAgent(
+                            "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/535.21 (KHTML, like Gecko) Chrome/19.0.1042.0 Safari/535.21")
+                    .timeout(10000).ignoreHttpErrors(true).followRedirects(true);
+            ;
             Response resp = con.execute();
-            Document doc=con.get();
+            Document doc = con.get();
             if (doc != null) {
                 for (int i = 1; i <= iterations; i++) {
                     Elements elements = doc.select("body ol li:eq(" + i + ")");
@@ -90,6 +102,7 @@ public class CronJobDetailsResource {
                     }
                 }
             }
+            LOGGER.info("resp : " + resp + "doc : " + doc);
         } catch (Exception exception) {
             LOGGER.error("Exception occured while fetching future schedules : " + exception.getMessage(), exception);
         }
