@@ -72,18 +72,20 @@ public class CronJobSchedulerTask {
      */
     public Map<Integer, List<CronJob>> createServerCronJobMap(List<CronJob> latestCronJobs) {
         Map<Integer, List<CronJob>> serverCronJobMap = new LinkedHashMap<Integer, List<CronJob>>();
-        Iterator<CronJob> iterator = latestCronJobs.iterator();
-        List<CronJob> cronJobList = null;
-        CronJob tempCronJob = null;
-        while (iterator.hasNext()) {
-            tempCronJob = iterator.next();
-            if (serverCronJobMap.get(tempCronJob.getServerId()) != null) {
-                serverCronJobMap.get(tempCronJob.getServerId()).add(tempCronJob);
-                serverCronJobMap.put(tempCronJob.getServerId(), serverCronJobMap.get(tempCronJob.getServerId()));
-            } else {
-                cronJobList = new ArrayList<CronJob>();
-                cronJobList.add(tempCronJob);
-                serverCronJobMap.put(tempCronJob.getServerId(), cronJobList);
+        if (latestCronJobs != null && latestCronJobs.size() > 0) {
+            Iterator<CronJob> iterator = latestCronJobs.iterator();
+            List<CronJob> cronJobList = null;
+            CronJob tempCronJob = null;
+            while (iterator.hasNext()) {
+                tempCronJob = iterator.next();
+                if (serverCronJobMap.get(tempCronJob.getServerId()) != null) {
+                    serverCronJobMap.get(tempCronJob.getServerId()).add(tempCronJob);
+                    serverCronJobMap.put(tempCronJob.getServerId(), serverCronJobMap.get(tempCronJob.getServerId()));
+                } else {
+                    cronJobList = new ArrayList<CronJob>();
+                    cronJobList.add(tempCronJob);
+                    serverCronJobMap.put(tempCronJob.getServerId(), cronJobList);
+                }
             }
         }
         LOGGER.info("serverCronJobMap : " + serverCronJobMap);
