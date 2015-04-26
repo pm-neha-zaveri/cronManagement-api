@@ -7,6 +7,11 @@ import org.springframework.stereotype.Service;
 
 import cronmanagement.services.HealthCheckService;
 
+/**
+ * @author raghunandanG
+ * 
+ * This Scheduler will run to update Health of Server and DataCenter
+ */
 @Service
 public class CronHealthUpdateSchedulerTask {
 
@@ -15,6 +20,9 @@ public class CronHealthUpdateSchedulerTask {
     @Autowired
     HealthCheckService healthCheckService;
 
+    /**
+     * This method will be invoked and perform updation of Server and Data Center Health.
+     */
     public void updateHealthCheckData() {
         LOGGER.info("Within " + getClass().getName() + " updateHealthCheckData method.");
         healthCheckService.calculateHealth();

@@ -15,6 +15,10 @@ import cronmanagement.services.CronLogHistoryService;
 import cronmanagement.services.CronLogParserService;
 import cronmanagement.utility.FileUtility;
 
+/**
+ * @author raghunandanG This Scheduler will fetch Cron Log details from remote
+ *         server.
+ */
 @Service
 public class CronLogSchedulerTask {
 
@@ -26,18 +30,28 @@ public class CronLogSchedulerTask {
     @Autowired
     CronLogHistoryService cronLogHistoryService;
 
+    /**
+     * Method will be invoked at the Scheduled time.
+     * 
+     * @throws IOException
+     */
     public void fetchAndSaveCronLogs() throws IOException {
-        executeCommand();
+        try {
+            String cronListsh = FileUtility.getPropertyValue("REMOTE_CRON_LOGS_SCRIPT");
+            String[] args = new String[] { cronListsh };
+            String shResponse = FileUtility.runBashCommand(args);
+            parseInputStream(shResponse);
+        } catch (Exception exception) {
+            LOGGER.error("Exception occured while fetching data " + exception.getMessage(), exception);
+        }
     }
 
-    public void executeCommand() throws IOException {
-        String cronListsh = FileUtility.getPropertyValue("REMOTE_CRON_LOGS_SCRIPT");
-        String[] args = new String[] { cronListsh };
-        String shResponse = FileUtility.runBashCommand(args);
-        readFile(shResponse);
-    }
-
-    public void readFile(String inputString) {
+    /**
+     * Method will parse input stream and save data to database.
+     * 
+     * @param inputString
+     */
+    public void parseInputStream(String inputString) {
         InputStream inputStream = new ByteArrayInputStream(inputString.getBytes());
         List<CronLogBean> cronLogs = cronLogParserService.getCronLogs(inputStream);
         LOGGER.info("cronJobs : " + cronLogs);

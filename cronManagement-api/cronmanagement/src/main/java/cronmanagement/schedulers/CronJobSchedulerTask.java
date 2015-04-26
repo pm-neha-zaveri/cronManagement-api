@@ -22,6 +22,12 @@ import cronmanagement.services.CronJobDetailsService;
 import cronmanagement.services.CronJobParserService;
 import cronmanagement.utility.FileUtility;
 
+/**
+ * @author raghunandanG
+ * 
+ *         This Scheduler will fetch Cron Logs from Remote Server via Shell
+ *         Script.
+ */
 @Service
 public class CronJobSchedulerTask {
 
@@ -33,23 +39,37 @@ public class CronJobSchedulerTask {
     @Autowired
     CronJobDetailsService cronDetailsService;
 
+    /**
+     * Method will be invoked at the Scheduled Time.
+     */
     public void fetchAndSaveCronDetails() throws IOException {
-        executeCommand();
+        try {
+            String cronListsh = FileUtility.getPropertyValue("REMOTE_CRON_LIST_SCRIPT");
+            String args[] = new String[] { cronListsh, Constants.FIRST_PARAM };
+            String shResponse = FileUtility.runBashCommand(args);
+            readFile(shResponse);
+        } catch (Exception exception) {
+            LOGGER.error("exception occured while reading from remote servers : " + exception.getMessage(), exception);
+        }
     }
 
-    public void executeCommand() throws IOException {
-        String cronListsh = FileUtility.getPropertyValue("REMOTE_CRON_LIST_SCRIPT");
-        String args[] = new String[] { cronListsh, Constants.FIRST_PARAM };
-        String shResponse = FileUtility.runBashCommand(args);
-        readFile(shResponse);
-    }
-
+    /**
+     * Will convert String to ByteArrayInputStream
+     * 
+     * @param inputString
+     */
     public void readFile(String inputString) {
         InputStream inputStream = new ByteArrayInputStream(inputString.getBytes());
         List<CronJob> cronJobs = cronJobParserService.parse(inputStream);
         updateCronDetails(createServerCronJobMap(cronJobs));
     }
 
+    /**
+     * Will create Map of server and cronJob Listed for that server.
+     * 
+     * @param latestCronJobs
+     * @return
+     */
     public Map<Integer, List<CronJob>> createServerCronJobMap(List<CronJob> latestCronJobs) {
         Map<Integer, List<CronJob>> serverCronJobMap = new LinkedHashMap<Integer, List<CronJob>>();
         Iterator<CronJob> iterator = latestCronJobs.iterator();
@@ -70,6 +90,11 @@ public class CronJobSchedulerTask {
         return serverCronJobMap;
     }
 
+    /**
+     * This will update Cron Job Details in database.
+     * 
+     * @param latestCronJobs
+     */
     private void updateCronDetails(Map<Integer, List<CronJob>> latestCronJobs) {
         List<CronJob> newlyCronJobs = new ArrayList<CronJob>();
         List<CronJob> toBeUpdatedCronJobs = new ArrayList<CronJob>();
