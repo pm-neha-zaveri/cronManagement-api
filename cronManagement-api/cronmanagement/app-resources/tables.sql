@@ -80,6 +80,17 @@ alter table cronjob modify column noOfAlerts int(10) UNSIGNED NOT NULL;
 
 ALTER TABLE `cronmanagement`.`cronjob` CHANGE COLUMN `id` `id` INT(11) NOT NULL AUTO_INCREMENT  ;
 
-insert into cron_alert(cron_id,server_id,start_time,end_time,run_time,threshold) select cron_id,server_id,start_time,end_time,run_time,threshold from cron_log_history where cron_id=1 and threshold >= run_time;
-update cron_alert ca set ca.server_id=(select distinct server_id from cronjob where id=ca.cron_id);
-update cron_alert ca set ca.dc_id=(select distinct dc_id from server where id=ca.server_id);
+select count(*) from cron_log_history clh where run_time >= (select threshold from cronjob where id=clh.cron_id) group by clh.cron_id;
+
+select count(*) from cron_log_history clh , cronjob cj where cj.id =clh.cron_id and clh.run_time >= 2700 group by cj.id;
+
+update cronjob set threshold=2700;
+truncate cron_alert;
+insert into cron_alert(cron_id,server_id,start_time,end_time,run_time) select cron_id,server_id,start_time,end_time,run_time from cron_log_history clh where run_time >= (select threshold from cronjob where id=clh.cron_id);
+alter table cron_log_history drop column threshold;
+update cron_alert set server_id=(select distinct serverId from cronjob where id=cron_id);
+update cron_alert set dc_id=(select distinct dcId from server where id=server_id);
+update cron_log_history set server_id=(select distinct serverId from cronjob where id=cron_id);
+update cron_forecasting set server_id=(select distinct serverId from cronjob where id=cron_id);
+
+delete from cronjob where serverId=0;
