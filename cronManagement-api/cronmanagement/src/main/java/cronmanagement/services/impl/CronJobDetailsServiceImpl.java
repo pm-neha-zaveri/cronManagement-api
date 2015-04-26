@@ -90,7 +90,7 @@ public class CronJobDetailsServiceImpl implements CronJobDetailsService {
     public void updateCronJobDetails() {
         cronDetailsDAO.updateCronAlertCountDetails();
         cronDetailsDAO.updateCronLogCountDetails();
-        cronDetailsDAO.updateThresholdDetails();
+//        cronDetailsDAO.updateThresholdDetails();
     }
 
 }
