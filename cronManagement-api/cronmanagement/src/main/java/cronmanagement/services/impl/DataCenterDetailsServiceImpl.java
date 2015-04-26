@@ -35,7 +35,7 @@ public class DataCenterDetailsServiceImpl implements DataCenterDetailsService {
     public void updateServerHealth() {
         try {
             LOGGER.debug("Within " + getClass().getName() + "updateServerHealth method.");
-            dataCenterDetailsDAO.updateServerHealth();
+            dataCenterDetailsDAO.updateDataCenterHealth();
         } catch (Exception exception) {
             LOGGER.error("Exception occured while updating data center health " + exception.getMessage(), exception);
         }

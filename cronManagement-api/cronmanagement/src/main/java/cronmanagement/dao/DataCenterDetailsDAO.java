@@ -31,6 +31,6 @@ public interface DataCenterDetailsDAO {
     /**
      * This will update DC health.
      */
-    void updateServerHealth();
+    void updateDataCenterHealth();
     
 }
