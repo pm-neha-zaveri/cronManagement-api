@@ -58,7 +58,11 @@ public class CronAlertDetailsServiceImpl implements CronAlertDetailsService {
         return cronAlertDetailsDAO.getAllCronAlertByCronId(cronId);
     }
 
-    @Override
+    /**
+     * Save to database
+     * 
+     * @param cronAlert
+     */
     public void saveCronAlert(CronAlert cronAlert) {
         LOGGER.debug("Within " + getClass().getName() + " saveCronAlert method.");
         cronAlertDetailsDAO.saveCronAlert(cronAlert);
@@ -100,7 +104,13 @@ public class CronAlertDetailsServiceImpl implements CronAlertDetailsService {
             LOGGER.debug("Invalid Data");
     }
 
-    public String getDescription(Integer cronId) {
+    /**
+     * Generate alert description based on conditions
+     * 
+     * @param cronId
+     * @return
+     */
+    private String getDescription(Integer cronId) {
         cronId = cronId % 10;
         String alertMessage = "";
         switch (cronId) {

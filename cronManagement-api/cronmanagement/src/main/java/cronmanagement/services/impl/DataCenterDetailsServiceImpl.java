@@ -14,7 +14,7 @@ import cronmanagement.services.DataCenterDetailsService;
 @Service
 public class DataCenterDetailsServiceImpl implements DataCenterDetailsService {
 
-    public final static Log LOGGER = LogFactory.getLog(CronAlertDetailsServiceImpl.class);
+    public final static Log LOGGER = LogFactory.getLog(DataCenterDetailsServiceImpl.class);
 
     @Autowired
     DataCenterDetailsDAO dataCenterDetailsDAO;
@@ -32,7 +32,7 @@ public class DataCenterDetailsServiceImpl implements DataCenterDetailsService {
     }
 
     @Override
-    public void updateServerHealth() {
+    public void updateDataCenterHealth() {
         try {
             LOGGER.debug("Within " + getClass().getName() + "updateServerHealth method.");
             dataCenterDetailsDAO.updateDataCenterHealth();

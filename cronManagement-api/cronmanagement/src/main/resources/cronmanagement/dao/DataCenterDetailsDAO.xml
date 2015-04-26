@@ -27,7 +27,7 @@
 		FROM datacenter where id=#{dcId};
 	</select>
 
-	<select id="updateServerHealth">
+	<select id="updateDataCenterHealth">
 		update datacenter ds set ds.dchealth = (select
 		ROUND(sum(server_health)/count(*)) from server where dcId=ds.id group
 		by dcId );
