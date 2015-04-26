@@ -17,6 +17,7 @@ import cronmanagement.bean.ServerBean;
 import cronmanagement.constant.CronTypeEnum;
 import cronmanagement.services.CronJobParserService;
 import cronmanagement.services.ServerDetailsService;
+
 /**
  * 
  * @author neha-zaveri
@@ -32,7 +33,7 @@ public class CronJobParserServiceImpl implements CronJobParserService {
 
     @Autowired
     ServerDetailsService serverDetailsService;
-    
+
     @Override
     public List<CronJob> parse(InputStream inputStream) {
         List<CronJob> cronJobList = new ArrayList<CronJob>();
@@ -68,7 +69,7 @@ public class CronJobParserServiceImpl implements CronJobParserService {
                         if (comment != null && comment.indexOf(CRONTAB_START) != -1)
                             break;
                     }
-                }else{
+                } else {
                     comment = reader.readLine();
                 }
             }
@@ -83,36 +84,39 @@ public class CronJobParserServiceImpl implements CronJobParserService {
                 }
             }
         }
-        
+
         return cronJobList;
     }
 
     @Override
     public CronJob getCronJob(String cronComment, String cronJobInfo, Integer serverId) {
         CronJob cronJob = null;
-        if (cronJobInfo == null || cronJobInfo.trim().length() == 0) {
-            return cronJob;
-        } else {
-            cronJobInfo = cronJobInfo.trim();
-            cronJob = new CronJob();
-            cronJob.setCronComment(cronComment);
-            cronJob.setCronName(cronJobInfo);
-            cronJob.setCronStatus(cronJobInfo.startsWith(HASH) ? "INACTIVE" : "ACTIVE");
-            cronJob.setServerId(serverId);
-            cronJob.setCronType((serverId%2==0?CronTypeEnum.ApplicationCron.name():CronTypeEnum.ReportingCron.name()));
-            int index = cronJobInfo.indexOf(" /");
-            while (cronJobInfo.charAt(index) != '*' && cronJobInfo.charAt(index) != '?'
-                    && !(cronJobInfo.charAt(index) >= '0' && cronJobInfo.charAt(index) <= '9')) {
-                index--;
+        if (serverId != null && serverId != 0) {
+            if (cronJobInfo == null || cronJobInfo.trim().length() == 0) {
+                return cronJob;
+            } else {
+                cronJobInfo = cronJobInfo.trim();
+                cronJob = new CronJob();
+                cronJob.setCronComment(cronComment);
+                cronJob.setCronName(cronJobInfo);
+                cronJob.setCronStatus(cronJobInfo.startsWith(HASH) ? "INACTIVE" : "ACTIVE");
+                cronJob.setServerId(serverId);
+                cronJob.setCronType((serverId % 2 == 0 ? CronTypeEnum.ApplicationCron.name()
+                        : CronTypeEnum.ReportingCron.name()));
+                int index = cronJobInfo.indexOf(" /");
+                while (cronJobInfo.charAt(index) != '*' && cronJobInfo.charAt(index) != '?'
+                        && !(cronJobInfo.charAt(index) >= '0' && cronJobInfo.charAt(index) <= '9')) {
+                    index--;
+                }
+                String cronExpression = null;
+                if (index != -1)
+                    cronExpression = cronJobInfo.substring(0, index + 1);
+                while (cronExpression.charAt(0) == '#') {
+                    cronExpression = cronExpression.substring(1, cronExpression.length());
+                }
+                cronJob.setCronExpression(cronExpression);
+                cronJob.setCronCommand(cronJobInfo.substring(index + 1, cronJobInfo.length()));
             }
-            String cronExpression = null;
-            if (index != -1)
-                cronExpression = cronJobInfo.substring(0, index+1);
-            while(cronExpression.charAt(0) == '#'){
-                cronExpression = cronExpression.substring(1,cronExpression.length());
-            }
-            cronJob.setCronExpression(cronExpression);
-            cronJob.setCronCommand(cronJobInfo.substring(index + 1, cronJobInfo.length()));
         }
         return cronJob;
     }
